@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:ploff/data/models/meal_model.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';
@@ -117,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   mealName: allMeals[index].mealName,
                                   mealPrice: allMeals[index].mealPrice,
                                   index: index,
-                                  length: 7 - 1,
+                                  length: allMeals.length,
                                   onTap: () {
                                     Navigator.push(
                                       context,

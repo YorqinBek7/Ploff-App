@@ -28,7 +28,7 @@ class MealItem extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          border: index != length
+          border: index != length - 1
               ? Border(
                   bottom: BorderSide(
                     color: PloffColors.black.withOpacity(.1),
