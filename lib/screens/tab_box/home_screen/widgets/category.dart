@@ -61,9 +61,13 @@ int selectedCategories({required int index}) {
       for (int x = 0; x < categoryIndex.length; x++) {
         if (categoryIndex[i] == categoryIndex[x]) {
           categoryIndex.remove(categoryIndex[i]);
+          categoryIndex.removeLast();
         }
       }
     }
+  }
+
+  for (int i = 0; i < categoryIndex.length; i++) {
     if (categoryIndex[i] == index) {
       return categoryIndex[i];
     }
