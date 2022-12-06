@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:ploff/data/models/meal_model.dart';
+import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/get_location_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/banner_widget.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/category.dart';
@@ -40,27 +41,37 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.symmetric(vertical: 10),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.location_on_outlined,
-                        color: PloffColors.black,
-                      ),
-                      Expanded(
-                        child: Text(
-                          "Массив Бешягач 19/30",
-                          style: PloffTextStyle.w400.copyWith(fontSize: 15),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => GetLocationScreen(),
                         ),
-                      ),
-                      Image.asset(
-                        Plofficons.arrowDown,
-                        width: 16,
-                        height: 16,
-                      ),
-                      Spacer()
-                    ],
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.location_on_outlined,
+                          color: PloffColors.black,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "Массив Бешягач 19/30",
+                            style: PloffTextStyle.w400.copyWith(fontSize: 15),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Image.asset(
+                          Plofficons.arrowDown,
+                          width: 16,
+                          height: 16,
+                        ),
+                        Spacer()
+                      ],
+                    ),
                   ),
                   SizedBox(height: 12),
                   SearchField(),
