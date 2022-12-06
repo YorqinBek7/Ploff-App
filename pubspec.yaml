@@ -17,6 +17,7 @@ dependencies:
   shared_preferences: ^2.0.15
   flutter_svg: ^1.1.6
   url_launcher: ^6.1.7
+  easy_localization: ^3.0.1
 
 dev_dependencies:
   flutter_test:
