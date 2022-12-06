@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/sub_screens/condensation_policy_screen.dart';
+import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/sub_screens/license_agreements.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/widgets/profile_subscreen_appbar.dart';
 import 'package:ploff/utils/colors/colors.dart';
 
@@ -14,7 +16,7 @@ class AboutScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: PloffColors.white,
@@ -24,15 +26,28 @@ class AboutScreen extends StatelessWidget {
                   ListTile(
                     title: Text("Condensation policy"),
                     trailing: Icon(Icons.arrow_right_outlined),
-                    onTap: () {},
-                    onLongPress: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const CondensationPolicyScreen(),
+                        ),
+                      );
+                    },
                   ),
                   const Divider(),
                   ListTile(
-                    title: Text("License agreements"),
-                    trailing: Icon(Icons.arrow_right_outlined),
-                    onTap: () {},
-                    onLongPress: () {},
+                    title: const Text("License agreements"),
+                    trailing: const Icon(Icons.arrow_right_outlined),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LicenceScreen(),
+                        ),
+                      );
+                    },
                   )
                 ],
               ),

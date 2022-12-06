@@ -14,6 +14,9 @@ class MyOrdersScreen extends StatefulWidget {
 
 class _MyOrdersScreenState extends State<MyOrdersScreen> {
   bool isCurrent = false;
+  int index = 0;
+  final PageController _pageController = PageController();
+  final PageController _pageController2 = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,10 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
               ),
               padding: const EdgeInsets.all(5),
               child: PageView(
+                controller: _pageController,
+                onPageChanged: (value) {
+                  //_pageController2.jumpToPage(value);
+                },
                 children: [
                   SelectOrderInfoButton(
                     onTap: () {
@@ -62,6 +69,10 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
           const Spacer(),
           Expanded(
             child: PageView(
+              onPageChanged: (value) {
+                //  _pageController.jumpToPage(value);
+              },
+              controller: _pageController2,
               children: [
                 Column(
                   children: [
