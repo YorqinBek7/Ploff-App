@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
-class AuthButton extends StatelessWidget {
+class GlobalButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback onTap;
-  const AuthButton({
+  const GlobalButton({
     Key? key,
     required this.buttonText,
     required this.onTap,

@@ -10,10 +10,10 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60,
-      child: ListView.builder(
+      height: 40,
+      child: ListView.separated(
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
         itemBuilder: (context, index) => GestureDetector(
           onTap: () {
             categoryIndex.add(index);
@@ -23,7 +23,7 @@ class CategoryItem extends StatelessWidget {
           },
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            margin: const EdgeInsets.symmetric(horizontal: 4),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: selectedCategories(
@@ -41,6 +41,8 @@ class CategoryItem extends StatelessWidget {
             ),
           ),
         ),
+        separatorBuilder: (context, index) => Container(),
+        itemCount: 5,
       ),
     );
   }

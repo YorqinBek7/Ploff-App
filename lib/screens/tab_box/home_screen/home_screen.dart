@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:ploff/data/models/meal_model.dart';
+import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/banner_widget.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/category.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/meal_item.dart';
@@ -18,6 +20,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<AboutMeal> allMeals = [];
+  var s = GetMeals();
+  @override
+  void initState() {
+    allMeals = s.allMeals;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Container(
               color: PloffColors.white,
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: EdgeInsets.symmetric(vertical: 10),
               child: Column(
                 children: [
                   Row(
@@ -36,16 +46,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         Icons.location_on_outlined,
                         color: PloffColors.black,
                       ),
-                      Text(
-                        "Массив Бешягач 19/30",
-                        style: PloffTextStyle.w400.copyWith(fontSize: 15),
+                      Expanded(
+                        child: Text(
+                          "Массив Бешягач 19/30",
+                          style: PloffTextStyle.w400.copyWith(fontSize: 15),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                      SizedBox(width: 5),
                       Image.asset(
                         Plofficons.arrowDown,
                         width: 16,
                         height: 16,
-                      )
+                      ),
+                      Spacer()
                     ],
                   ),
                   SizedBox(height: 12),
@@ -60,64 +74,71 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Expanded(
-              child: ListView(
-                physics: BouncingScrollPhysics(),
-                shrinkWrap: true,
-                children: [
-                  SizedBox(
-                    height: 170,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      key: GlobalKey(),
-                      scrollDirection: Axis.horizontal,
-                      physics: BouncingScrollPhysics(),
-                      itemCount: 5,
-                      itemBuilder: (context, index) => BannerWidget(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: 4,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.symmetric(vertical: 5),
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: PloffColors.white,
-                          borderRadius: BorderRadius.circular(10),
+              child: RefreshIndicator(
+                onRefresh: () async {},
+                child: CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: 170,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          key: GlobalKey(),
+                          scrollDirection: Axis.horizontal,
+                          physics: BouncingScrollPhysics(),
+                          itemCount: 5,
+                          itemBuilder: (context, index) => BannerWidget(),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Birinchi taomlar",
-                              style: PloffTextStyle.w600.copyWith(fontSize: 22),
-                            ),
-                            SizedBox(
-                              height: 500,
-                              child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: 7,
-                                itemBuilder: (context, index) => MealItem(
+                      ),
+                    ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        childCount: 5,
+                        (context, index) => Container(
+                          margin: EdgeInsets.symmetric(vertical: 5),
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: PloffColors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Birinchi taomlar",
+                                style:
+                                    PloffTextStyle.w600.copyWith(fontSize: 22),
+                              ),
+                              ...List.generate(
+                                allMeals.length,
+                                (index) => MealItem(
                                   mealDescription:
-                                      "Nimadur nimadur Nimadur nimadurNimadur nimadurNimadur nimadur",
-                                  mealName: "Go'ja",
-                                  mealPrice: '23 000',
+                                      allMeals[index].mealDescription,
+                                  mealName: allMeals[index].mealName,
+                                  mealPrice: allMeals[index].mealPrice,
+                                  index: index,
+                                  length: 7 - 1,
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MealDetailScreen(
+                                          aboutMeal: allMeals[index],
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      );
-                    },
-                  ),
-                ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
+            )
           ],
         ),
       ),

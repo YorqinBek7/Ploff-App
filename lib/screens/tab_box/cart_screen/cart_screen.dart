@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ploff/screens/auth/sign_up_screen/widgets/auth_button.dart';
+import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/screens/tab_box/widgets/custom_app_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
-import 'package:ploff/utils/style/text_style.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -32,7 +31,7 @@ class _CartScreenState extends State<CartScreen> {
               ],
             ),
             const Spacer(),
-            AuthButton(
+            GlobalButton(
               buttonText: "Mahsulot qo'shing",
               onTap: () {},
             ),

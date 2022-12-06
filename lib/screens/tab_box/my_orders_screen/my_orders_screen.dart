@@ -27,55 +27,72 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
             color: PloffColors.white,
             padding: const EdgeInsets.all(16),
             child: Container(
+              height: 50,
               decoration: BoxDecoration(
                 color: PloffColors.C_F0F0F0,
                 borderRadius: BorderRadius.circular(10),
               ),
               padding: const EdgeInsets.all(5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: PageView(
                 children: [
-                  Expanded(
-                    child: SelectOrderInfoButton(
-                      onTap: () {
-                        setState(() {
+                  SelectOrderInfoButton(
+                    onTap: () {
+                      setState(
+                        () {
                           isCurrent = !isCurrent;
-                        });
-                      },
-                      text: 'Current Orders',
-                      isCurrent: !isCurrent,
-                    ),
+                        },
+                      );
+                    },
+                    text: 'Current Orders',
+                    isCurrent: !isCurrent,
                   ),
-                  Expanded(
-                    child: SelectOrderInfoButton(
-                      onTap: () {
-                        setState(() {
-                          isCurrent = !isCurrent;
-                        });
-                      },
-                      text: 'History Orders',
-                      isCurrent: isCurrent,
-                    ),
+                  SelectOrderInfoButton(
+                    onTap: () {
+                      setState(() {
+                        isCurrent = !isCurrent;
+                      });
+                    },
+                    text: 'Current Orders',
+                    isCurrent: !isCurrent,
                   ),
                 ],
               ),
             ),
           ),
-          Spacer(),
-          Column(
-            children: [
-              Image.asset(
-                Plofficons.ploffLogo,
-                width: 100,
-                height: 100,
-              ),
-              Text(
-                "Order unavialable",
-                style: PloffTextStyle.w500,
-              ),
-            ],
+          const Spacer(),
+          Expanded(
+            child: PageView(
+              children: [
+                Column(
+                  children: [
+                    Image.asset(
+                      Plofficons.ploffLogo,
+                      width: 100,
+                      height: 100,
+                    ),
+                    const Text(
+                      "Order unavialable",
+                      style: PloffTextStyle.w500,
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Image.asset(
+                      Plofficons.ploffLogo,
+                      width: 100,
+                      height: 100,
+                    ),
+                    const Text(
+                      "Order unavialable",
+                      style: PloffTextStyle.w500,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          Spacer()
+          const Spacer()
         ],
       ),
     );

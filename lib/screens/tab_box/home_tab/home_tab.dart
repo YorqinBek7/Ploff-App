@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:ploff/main.dart';
 import 'package:ploff/screens/auth/sign_up_screen/sign_up_screen.dart';
@@ -31,14 +33,15 @@ class _HomeTabState extends State<HomeTab> {
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: PloffColors.C_FFCC00,
         currentIndex: index,
+        selectedFontSize: 12,
+        unselectedFontSize: 12,
         type: BottomNavigationBarType.fixed,
         onTap: (value) async {
           setState(() {
             index = value;
           });
-          if (index == 2 ||
-              index == 3 &&
-                  sharedPreferences?.getString("phoneNumber") == null) {
+          if ((index == 2 || index == 3) &&
+              sharedPreferences?.getString("numberPhone") == null) {
             await Navigator.push(
               context,
               MaterialPageRoute(
@@ -51,34 +54,18 @@ class _HomeTabState extends State<HomeTab> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             label: "Главная",
-            activeIcon: Icon(
-              Icons.home_outlined,
-              color: PloffColors.C_FFCC00,
-            ),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_outlined),
             label: "Корзина",
-            activeIcon: Icon(
-              Icons.shopping_cart_outlined,
-              color: PloffColors.C_FFCC00,
-            ),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.card_giftcard),
             label: "Мои заказы",
-            activeIcon: Icon(
-              Icons.card_giftcard,
-              color: PloffColors.C_FFCC00,
-            ),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: "Профиль",
-            activeIcon: Icon(
-              Icons.person,
-              color: PloffColors.C_FFCC00,
-            ),
           ),
         ],
       ),

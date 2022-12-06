@@ -18,6 +18,7 @@ class SelectOrderInfoButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: 50,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: isCurrent ? PloffColors.white : PloffColors.C_F0F0F0,

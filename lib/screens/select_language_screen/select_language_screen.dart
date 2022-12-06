@@ -41,7 +41,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
               flagImage: Plofficons.uzbFlag,
               languageText: "O'zbekcha",
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => HomeTab(),

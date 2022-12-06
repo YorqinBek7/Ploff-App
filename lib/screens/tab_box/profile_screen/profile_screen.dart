@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/edit_profile_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/widgets/profile_options_item.dart';
 import 'package:ploff/screens/tab_box/widgets/custom_app_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -45,7 +46,14 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfileScreen(),
+                      ),
+                    );
+                  },
                   icon: Icon(
                     Icons.edit,
                     color: PloffColors.black.withOpacity(.5),

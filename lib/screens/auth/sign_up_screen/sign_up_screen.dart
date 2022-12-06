@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:ploff/main.dart';
-import 'package:ploff/screens/auth/sign_up_screen/widgets/auth_button.dart';
+import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -60,7 +60,7 @@ class SignUpScreen extends StatelessWidget {
                 ],
               ),
             ),
-            AuthButton(
+            GlobalButton(
               buttonText: "Продолжить",
               onTap: () async {
                 if (phoneController.text.isNotEmpty) {
