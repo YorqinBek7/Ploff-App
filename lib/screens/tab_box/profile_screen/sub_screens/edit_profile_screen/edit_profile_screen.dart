@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ploff/main.dart';
+import 'package:ploff/screens/tab_box/profile_screen/sub_screens/widgets/profile_subscreen_appbar.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/widgets/edit_fields.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -30,16 +31,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: PloffColors.C_F0F0F0,
-      appBar: AppBar(
-        title: const Text("Edit Profile"),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back,
-          ),
-        ),
+      appBar: const ProfileSubscreensAppbar(
+        title: 'Edit profile',
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),

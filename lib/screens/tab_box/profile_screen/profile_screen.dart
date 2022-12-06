@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ploff/screens/tab_box/profile_screen/sub_screens/branches_screen/branches_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/edit_profile_screen.dart';
+import 'package:ploff/screens/tab_box/profile_screen/sub_screens/settings_screen/settings_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/widgets/profile_options_item.dart';
 import 'package:ploff/screens/tab_box/widgets/custom_app_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -50,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => EditProfileScreen(),
+                        builder: (context) => const EditProfileScreen(),
                       ),
                     );
                   },
@@ -70,12 +72,30 @@ class ProfileScreen extends StatelessWidget {
           ProfileOptionsItem(
             icon: Icons.location_pin,
             title: "Branches",
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const BranchesScreen();
+                  },
+                ),
+              );
+            },
           ),
           ProfileOptionsItem(
             icon: Icons.settings,
             title: "Settings",
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const SettingsScreen();
+                  },
+                ),
+              );
+            },
           ),
           ProfileOptionsItem(
             icon: Icons.warning,
