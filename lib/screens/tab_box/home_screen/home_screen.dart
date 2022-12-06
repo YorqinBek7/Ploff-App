@@ -1,6 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:ploff/data/models/meal_model.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';

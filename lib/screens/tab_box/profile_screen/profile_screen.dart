@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/about_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/branches_screen/branches_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/edit_profile_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/settings_screen/settings_screen.dart';
@@ -100,7 +101,14 @@ class ProfileScreen extends StatelessWidget {
           ProfileOptionsItem(
             icon: Icons.warning,
             title: "About the service",
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AboutScreen(),
+                ),
+              );
+            },
           ),
           const Spacer(),
           Text(
