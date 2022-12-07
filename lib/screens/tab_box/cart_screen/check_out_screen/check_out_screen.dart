@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/check_item.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/check_out_bottom_bar.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/enum_classes/enum_classes.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/first_screen.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/payment_select.dart';
+import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -33,7 +35,19 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
         title: const Text("CheckOut order"),
-        bottom: CheckOutBottomBar(),
+        bottom: CheckOutBottomBar(
+          isDeliver: isEnabled,
+          onTap: () {
+            setState(() {
+              isEnabled = !isEnabled;
+            });
+            if (isEnabled) {
+              controller.jumpToPage(0);
+            } else {
+              controller.jumpToPage(1);
+            }
+          },
+        ),
         surfaceTintColor: Colors.transparent,
         scrolledUnderElevation: 0,
       ),
@@ -68,7 +82,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           Column(
             children: [
               Expanded(
+                flex: 5,
                 child: CustomScrollView(
+                  physics: BouncingScrollPhysics(),
                   slivers: [
                     SliverToBoxAdapter(
                       child: Container(
@@ -148,9 +164,51 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                         paymentType: _paymentType,
                       ),
                     ),
+                    SliverToBoxAdapter(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 5),
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: PloffColors.white,
+                        ),
+                        child: Column(
+                          children: [
+                            CheckItem(
+                              item: "String",
+                              price: "2300",
+                            ),
+                            CheckItem(
+                              item: "String",
+                              price: "2300",
+                            ),
+                            CheckItem(
+                              item: "String",
+                              price: "2300",
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: PloffColors.white),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Ordeer"),
+                    GlobalButton(
+                      buttonText: "",
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+              )
             ],
           )
         ],
