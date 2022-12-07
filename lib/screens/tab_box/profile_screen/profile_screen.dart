@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/about_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/branches_screen/branches_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/edit_profile_screen.dart';
@@ -6,6 +7,7 @@ import 'package:ploff/screens/tab_box/profile_screen/sub_screens/settings_screen
 import 'package:ploff/screens/tab_box/profile_screen/widgets/profile_options_item.dart';
 import 'package:ploff/screens/tab_box/widgets/custom_app_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -15,7 +17,10 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: PloffColors.C_F0F0F0,
-      appBar: const CustomAppBar(title: "Profile"),
+      appBar: CustomAppBar(
+        title: "Profile",
+        notTabBar: true,
+      ),
       body: Column(
         children: [
           Container(
@@ -49,29 +54,25 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
                 IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const EditProfileScreen(),
-                      ),
-                    );
-                  },
-                  icon: Icon(
-                    Icons.edit,
-                    color: PloffColors.black.withOpacity(.5),
-                  ),
-                )
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const EditProfileScreen(),
+                        ),
+                      );
+                    },
+                    icon: SvgPicture.asset(Plofficons.edit))
               ],
             ),
           ),
           ProfileOptionsItem(
-            icon: Icons.location_on_outlined,
+            icon: Plofficons.my_location,
             title: 'My locations',
             onTap: () {},
           ),
           ProfileOptionsItem(
-            icon: Icons.location_pin,
+            icon: Plofficons.location,
             title: "Branches",
             onTap: () {
               Navigator.push(
@@ -85,7 +86,7 @@ class ProfileScreen extends StatelessWidget {
             },
           ),
           ProfileOptionsItem(
-            icon: Icons.settings,
+            icon: Plofficons.settings,
             title: "Settings",
             onTap: () {
               Navigator.push(
@@ -99,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
             },
           ),
           ProfileOptionsItem(
-            icon: Icons.warning,
+            icon: Plofficons.about,
             title: "About the service",
             onTap: () {
               Navigator.push(

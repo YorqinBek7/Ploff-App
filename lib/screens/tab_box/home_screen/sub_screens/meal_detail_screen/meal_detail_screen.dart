@@ -49,10 +49,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                           shape: BoxShape.circle,
                           color: Colors.white.withOpacity(.8),
                         ),
-                        child: const Icon(
-                          Icons.arrow_back,
-                          color: PloffColors.black,
-                        ),
+                        child: SvgPicture.asset(Plofficons.arrow_back),
                       ),
                     ),
                   ),

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:ploff/data/models/meal_model.dart';
@@ -65,9 +66,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: Row(
                       children: [
-                        const Icon(
-                          Icons.location_on_outlined,
-                          color: PloffColors.black,
+                        SizedBox(
+                          width: 5,
+                        ),
+                        SvgPicture.asset(Plofficons.location),
+                        SizedBox(
+                          width: 5,
                         ),
                         Expanded(
                           child: Text(
@@ -103,7 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: CustomScrollView(
                   slivers: [
                     SliverToBoxAdapter(
-                      child: SizedBox(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
                         height: 170,
                         child: ListView.builder(
                           shrinkWrap: true,

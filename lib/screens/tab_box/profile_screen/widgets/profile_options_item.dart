@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class ProfileOptionsItem extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final String icon;
   final VoidCallback onTap;
   const ProfileOptionsItem({
     Key? key,
@@ -18,15 +20,12 @@ class ProfileOptionsItem extends StatelessWidget {
     return ListTile(
       tileColor: PloffColors.white,
       onTap: onTap,
-      leading: Icon(
-        icon,
-        color: PloffColors.black,
-      ),
+      leading: SvgPicture.asset(icon),
       title: Text(
         title,
         style: PloffTextStyle.w500.copyWith(fontSize: 16),
       ),
-      trailing: const Icon(Icons.arrow_forward_ios_outlined),
+      trailing: SvgPicture.asset(Plofficons.arrow_right),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ploff/screens/select_language_screen/select_language_screen.dart';
+import 'package:ploff/utils/colors/colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -29,6 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: PloffColors.white,
       body: Center(
         child: Image.asset(
           "assets/images/ploff_logo.png",

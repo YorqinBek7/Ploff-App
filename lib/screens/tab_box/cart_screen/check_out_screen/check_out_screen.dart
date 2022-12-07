@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/check_out_bottom_bar.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/enum_classes/enum_classes.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/first_screen.dart';
+import 'package:ploff/screens/tab_box/widgets/custom_tab_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/style/text_style.dart';
 import 'check_out_screen/widgets/second_screen.dart';
 
 class CheckOutScreen extends StatefulWidget {
@@ -12,7 +16,8 @@ class CheckOutScreen extends StatefulWidget {
   State<CheckOutScreen> createState() => _CheckOutScreenState();
 }
 
-class _CheckOutScreenState extends State<CheckOutScreen> {
+class _CheckOutScreenState extends State<CheckOutScreen>
+    with SingleTickerProviderStateMixin {
   final TextEditingController podezd = TextEditingController();
 
   final TextEditingController etaj = TextEditingController();
@@ -23,6 +28,13 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   DeliveryMethod? _deliveryMethod = DeliveryMethod.Express;
   CourierCall? _courierCall = CourierCall.Yes;
   PageController controller = PageController();
+  late TabController tabController;
+  @override
+  void initState() {
+    tabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
   bool isEnabled = false;
   @override
   Widget build(BuildContext context) {
@@ -31,25 +43,14 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
         title: const Text("CheckOut order"),
-        bottom: CheckOutBottomBar(
-          isDeliver: isEnabled,
-          onTap: () {
-            setState(() {
-              isEnabled = !isEnabled;
-            });
-            if (isEnabled) {
-              controller.jumpToPage(0);
-            } else {
-              controller.jumpToPage(1);
-            }
-          },
+        bottom: CustomTabBar(
+          tabController: tabController,
+          firstTabText: 'Order',
+          secondTabText: 'Self order',
         ),
-        surfaceTintColor: Colors.transparent,
-        scrolledUnderElevation: 0,
       ),
-      body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: controller,
+      body: TabBarView(
+        controller: tabController,
         children: [
           FirstPage(
             podezd: podezd,
@@ -83,7 +84,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 () => {},
               ),
             },
-          )
+          ),
         ],
       ),
     );

@@ -4,9 +4,13 @@ import 'package:ploff/utils/style/text_style.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
   final String title;
+  final PreferredSizeWidget? bottom;
+  final bool notTabBar;
   const CustomAppBar({
     Key? key,
     required this.title,
+    required this.notTabBar,
+    this.bottom,
   }) : super(key: key);
 
   @override
@@ -19,6 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
         title,
         style: PloffTextStyle.w600.copyWith(fontSize: 18),
       ),
+      bottom: bottom,
     );
   }
 
@@ -26,5 +31,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
   Widget get child => throw UnimplementedError();
 
   @override
-  Size get preferredSize => const Size(double.infinity, 60);
+  Size get preferredSize => Size(double.infinity, notTabBar ? 69 : 120);
 }

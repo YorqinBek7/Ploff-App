@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ploff/utils/icons/icons.dart';
 
 class ProfileSubscreensAppbar extends StatelessWidget implements PreferredSize {
   final String title;
@@ -12,13 +14,10 @@ class ProfileSubscreensAppbar extends StatelessWidget implements PreferredSize {
     return AppBar(
       title: Text(title),
       leading: IconButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        icon: Icon(
-          Icons.arrow_back,
-        ),
-      ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: SvgPicture.asset(Plofficons.arrow_back)),
     );
   }
 

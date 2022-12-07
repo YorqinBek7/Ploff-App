@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:ploff/main.dart';
 import 'package:ploff/screens/auth/sign_up_screen/sign_up_screen.dart';
 import 'package:ploff/screens/tab_box/cart_screen/cart_screen.dart';
@@ -8,6 +9,7 @@ import 'package:ploff/screens/tab_box/home_screen/home_screen.dart';
 import 'package:ploff/screens/tab_box/my_orders_screen/my_orders_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/profile_screen.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/icons/icons.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -50,22 +52,38 @@ class _HomeTabState extends State<HomeTab> {
             );
           }
         },
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
+            icon: SvgPicture.asset(Plofficons.home),
             label: "Главная",
+            activeIcon: SvgPicture.asset(
+              Plofficons.home,
+              color: PloffColors.C_FFCC00,
+            ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
+            icon: SvgPicture.asset(Plofficons.cart),
             label: "Корзина",
+            activeIcon: SvgPicture.asset(
+              Plofficons.cart,
+              color: PloffColors.C_FFCC00,
+            ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.card_giftcard),
+            icon: SvgPicture.asset(Plofficons.shopping_bag),
             label: "Мои заказы",
+            activeIcon: SvgPicture.asset(
+              Plofficons.shopping_bag,
+              color: PloffColors.C_FFCC00,
+            ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: SvgPicture.asset(Plofficons.user),
             label: "Профиль",
+            activeIcon: SvgPicture.asset(
+              Plofficons.user,
+              color: PloffColors.C_FFCC00,
+            ),
           ),
         ],
       ),

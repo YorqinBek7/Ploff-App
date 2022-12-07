@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/check_item.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/enum_classes/enum_classes.dart';
@@ -8,6 +9,7 @@ import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_scree
 import 'package:ploff/screens/tab_box/widgets/address_text_fields.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class FirstPage extends StatelessWidget {
@@ -94,21 +96,20 @@ class FirstPage extends StatelessWidget {
                         height: 180,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Stack(children: [
-                            const GoogleMap(
-                              initialCameraPosition: CameraPosition(
-                                target: LatLng(69, 41),
+                          child: Stack(
+                            children: [
+                              const GoogleMap(
+                                initialCameraPosition: CameraPosition(
+                                  target: LatLng(69, 41),
+                                ),
                               ),
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Icon(
-                                Icons.keyboard_double_arrow_down_sharp,
-                                color: PloffColors.white,
-                                size: 40,
-                              ),
-                            ),
-                          ]),
+                              Align(
+                                  alignment: Alignment.topLeft,
+                                  child: SvgPicture.asset(
+                                    Plofficons.big,
+                                  )),
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(

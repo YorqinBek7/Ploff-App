@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ploff/screens/tab_box/my_orders_screen/widgets/select_orders_button.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:ploff/screens/tab_box/my_orders_screen/sub_screens/detail_order_screen.dart';
 import 'package:ploff/screens/tab_box/widgets/custom_app_bar.dart';
+import 'package:ploff/screens/tab_box/widgets/custom_tab_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -12,98 +14,126 @@ class MyOrdersScreen extends StatefulWidget {
   State<MyOrdersScreen> createState() => _MyOrdersScreenState();
 }
 
-class _MyOrdersScreenState extends State<MyOrdersScreen> {
+class _MyOrdersScreenState extends State<MyOrdersScreen>
+    with TickerProviderStateMixin {
   bool isCurrent = false;
   int index = 0;
-  final PageController _pageController = PageController();
-  final PageController _pageController2 = PageController();
+  late TabController tabController;
+
+  @override
+  void initState() {
+    tabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
+      backgroundColor: PloffColors.C_F0F0F0,
+      appBar: CustomAppBar(
         title: 'My Orders',
+        bottom: CustomTabBar(
+          firstTabText: "Active order",
+          secondTabText: 'History order',
+          tabController: tabController,
+        ),
+        notTabBar: false,
       ),
-      body: Column(
+      body: TabBarView(
+        controller: tabController,
         children: [
-          Container(
-            color: PloffColors.white,
-            padding: const EdgeInsets.all(16),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: PloffColors.C_F0F0F0,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: const EdgeInsets.all(5),
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: (value) {
-                  //_pageController2.jumpToPage(value);
+          Column(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailOrderScreen(),
+                    ),
+                  );
                 },
-                children: [
-                  SelectOrderInfoButton(
-                    onTap: () {
-                      setState(
-                        () {
-                          isCurrent = !isCurrent;
-                        },
-                      );
-                    },
-                    text: 'Current Orders',
-                    isCurrent: !isCurrent,
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 10),
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: PloffColors.white,
                   ),
-                  SelectOrderInfoButton(
-                    onTap: () {
-                      setState(() {
-                        isCurrent = !isCurrent;
-                      });
-                    },
-                    text: 'Current Orders',
-                    isCurrent: !isCurrent,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Order No:123321",
+                            style: PloffTextStyle.w600.copyWith(
+                              fontSize: 17,
+                            ),
+                          ),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              shadowColor: MaterialStateProperty.all(
+                                Colors.transparent,
+                              ),
+                            ),
+                            onPressed: () {},
+                            child: Text("Order is processed"),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: PloffColors.C_FFCC00,
+                            ),
+                            child: SvgPicture.asset(Plofficons.done),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: PloffColors.C_FFCC00,
+                            ),
+                            child: SvgPicture.asset(Plofficons.chef),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: PloffColors.C_FAFAFA,
+                            ),
+                            child: SvgPicture.asset(Plofficons.car),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: PloffColors.C_FAFAFA,
+                            ),
+                            child: SvgPicture.asset(Plofficons.flag),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-                ],
-              ),
-            ),
-          ),
-          const Spacer(),
-          Expanded(
-            child: PageView(
-              onPageChanged: (value) {
-                //  _pageController.jumpToPage(value);
-              },
-              controller: _pageController2,
-              children: [
-                Column(
-                  children: [
-                    Image.asset(
-                      Plofficons.ploffLogo,
-                      width: 100,
-                      height: 100,
-                    ),
-                    const Text(
-                      "Order unavialable",
-                      style: PloffTextStyle.w500,
-                    ),
-                  ],
                 ),
-                Column(
-                  children: [
-                    Image.asset(
-                      Plofficons.ploffLogo,
-                      width: 100,
-                      height: 100,
-                    ),
-                    const Text(
-                      "Order unavialable",
-                      style: PloffTextStyle.w500,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+              )
+            ],
           ),
-          const Spacer()
+          Column(
+            children: [],
+          )
         ],
       ),
     );

@@ -30,7 +30,7 @@ class CheckOutBottomBar extends StatelessWidget implements PreferredSize {
               child: SelectTypeOrderButton(
                 onTap: onTap,
                 textButton: 'Deliver',
-                isDeliver: isDeliver,
+                isDeliver: !isDeliver,
               ),
             ),
             SizedBox(
@@ -40,7 +40,7 @@ class CheckOutBottomBar extends StatelessWidget implements PreferredSize {
               child: SelectTypeOrderButton(
                 onTap: onTap,
                 textButton: 'Deliver',
-                isDeliver: !isDeliver,
+                isDeliver: isDeliver,
               ),
             ),
           ],

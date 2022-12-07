@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/widgets/profile_subscreen_appbar.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -27,16 +29,16 @@ class SettingsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ListTile(
-                    leading: const Icon(Icons.circle_outlined),
+                    leading: SvgPicture.asset(Plofficons.globus),
                     title: const Text("Language"),
                     trailing: IconButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.arrow_right),
+                      icon: SvgPicture.asset(Plofficons.arrow_right),
                     ),
                   ),
                   const Divider(),
                   ListTile(
-                    leading: const Icon(Icons.notifications),
+                    leading: SvgPicture.asset(Plofficons.notification),
                     title: const Text("Notification"),
                     trailing: CupertinoSwitch(
                       value: true,

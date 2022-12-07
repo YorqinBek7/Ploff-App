@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/sub_screens/condensation_policy_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/sub_screens/license_agreements.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/widgets/profile_subscreen_appbar.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/icons/icons.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -25,7 +27,7 @@ class AboutScreen extends StatelessWidget {
                 children: [
                   ListTile(
                     title: Text("Condensation policy"),
-                    trailing: Icon(Icons.arrow_right_outlined),
+                    trailing: SvgPicture.asset(Plofficons.arrow_right),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -39,7 +41,7 @@ class AboutScreen extends StatelessWidget {
                   const Divider(),
                   ListTile(
                     title: const Text("License agreements"),
-                    trailing: const Icon(Icons.arrow_right_outlined),
+                    trailing: SvgPicture.asset(Plofficons.arrow_right),
                     onTap: () {
                       Navigator.push(
                         context,

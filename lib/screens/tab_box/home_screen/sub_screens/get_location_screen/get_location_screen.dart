@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -6,6 +7,7 @@ import 'package:ploff/main.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/widgets/mini_text_fields.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class GetLocationScreen extends StatefulWidget {
@@ -58,11 +60,13 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                     zoom: 20,
                   ),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.center,
-                  child: Icon(
-                    Icons.location_on,
-                    size: 40,
+                  child: Stack(
+                    children: [
+                      SvgPicture.asset(Plofficons.oval),
+                      SvgPicture.asset(Plofficons.line),
+                    ],
                   ),
                 )
               ],

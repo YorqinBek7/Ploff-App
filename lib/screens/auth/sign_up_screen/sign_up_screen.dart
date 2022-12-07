@@ -1,11 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pinput/pinput.dart';
 import 'package:ploff/main.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -20,10 +22,7 @@ class SignUpScreen extends StatelessWidget {
       backgroundColor: PloffColors.white,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: PloffColors.black,
-          ),
+          icon: SvgPicture.asset(Plofficons.arrow_back),
           onPressed: () {
             if (index > -1) {
               index--;
