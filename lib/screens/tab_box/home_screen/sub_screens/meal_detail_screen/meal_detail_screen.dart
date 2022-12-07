@@ -11,14 +11,22 @@ import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class MealDetailScreen extends StatefulWidget {
-  const MealDetailScreen({super.key, required this.aboutMeal});
+  MealDetailScreen({
+    super.key,
+    required this.aboutMeal,
+    required this.price,
+    required this.firstlyPrice,
+  });
   final AboutMeal aboutMeal;
+  int price;
+  int firstlyPrice;
 
   @override
   State<MealDetailScreen> createState() => _MealDetailScreenState();
 }
 
 class _MealDetailScreenState extends State<MealDetailScreen> {
+  int count = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -172,23 +180,37 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                         children: [
                           IncDecButtons(
                             imagePath: "assets/svg/minus.svg",
-                            onTap: () {},
+                            onTap: () {
+                              setState(() {
+                                if (count > 1) {
+                                  count--;
+                                  widget.price -= count * widget.firstlyPrice;
+                                }
+                              });
+                            },
                           ),
                           Text(
-                            "0",
+                            "$count",
                             style: PloffTextStyle.w500.copyWith(
                               fontSize: 15,
                             ),
                           ),
                           IncDecButtons(
-                            onTap: () {},
+                            onTap: () {
+                              setState(() {
+                                if (widget.price > 0) {
+                                  widget.price += count * widget.firstlyPrice;
+                                  count++;
+                                }
+                              });
+                            },
                             imagePath: "assets/svg/plus.svg",
                           )
                         ],
                       ),
                     ),
                     Text(
-                      "${widget.aboutMeal.mealPrice} so'm",
+                      "${widget.price} so'm",
                       style: PloffTextStyle.w600.copyWith(
                         fontSize: 18,
                       ),
@@ -196,7 +218,10 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                   ],
                 ),
                 const SizedBox(height: 15),
-                GlobalButton(buttonText: "Add", onTap: () {}),
+                GlobalButton(
+                  buttonText: "To Cart",
+                  onTap: () {},
+                ),
               ],
             ),
           )

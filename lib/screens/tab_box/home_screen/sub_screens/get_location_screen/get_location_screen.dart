@@ -1,188 +1,158 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:ploff/main.dart';
+import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/widgets/mini_text_fields.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
-class GetLocationScreen extends StatelessWidget {
-  const GetLocationScreen({super.key});
+class GetLocationScreen extends StatefulWidget {
+  final Position position;
+  List<Placemark> placemark;
+  GetLocationScreen(
+      {super.key, required this.position, required this.placemark});
+
+  @override
+  State<GetLocationScreen> createState() => _GetLocationScreenState();
+}
+
+class _GetLocationScreenState extends State<GetLocationScreen> {
+  final TextEditingController entranceController = TextEditingController();
+
+  final TextEditingController floorController = TextEditingController();
+
+  final TextEditingController flatController = TextEditingController();
+
+  final TextEditingController addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: PloffColors.C_F0F0F0,
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
-            flex: 3,
-            child: CustomScrollView(
-              physics: NeverScrollableScrollPhysics(),
-              slivers: [
-                SliverAppBar(
-                  pinned: true,
-                  expandedHeight: MediaQuery.of(context).size.height * .6,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Stack(
-                      children: [
-                        GoogleMap(
-                          markers: {
-                            Marker(
-                              markerId: MarkerId(
-                                "value",
-                              ),
-                            ),
-                          },
-                          onCameraIdle: () {},
-                          initialCameraPosition: CameraPosition(
-                            target: LatLng(41, 69),
-                            zoom: 10,
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Icon(
-                            Icons.location_on_outlined,
-                            size: 40,
-                            color: PloffColors.red,
-                          ),
-                        )
-                      ],
+          SizedBox(
+            height: MediaQuery.of(context).size.height * .55,
+            child: Stack(
+              children: [
+                GoogleMap(
+                  onCameraMove: (position) async {
+                    widget.placemark = await placemarkFromCoordinates(
+                      position.target.latitude,
+                      position.target.longitude,
+                    );
+                    setState(() {});
+                  },
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: false,
+                  zoomControlsEnabled: false,
+                  onCameraIdle: () {},
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(
+                      widget.position.latitude,
+                      widget.position.longitude,
                     ),
+                    zoom: 20,
                   ),
-                  leading: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.arrow_back),
-                  ),
-                  bottom: BottomAppBar(),
                 ),
+                const Align(
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.location_on,
+                    size: 40,
+                  ),
+                )
               ],
             ),
           ),
-          Expanded(
-            flex: 2,
+          Align(
+            alignment: Alignment.bottomCenter,
             child: Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
+              height: MediaQuery.of(context).size.height * .45,
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(
                 color: PloffColors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
+                  Center(
+                    child: Container(
+                      height: 5,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: PloffColors.C_F0F0F0,
+                      ),
+                    ),
+                  ),
                   Text(
-                    "data",
+                    "Delivery Address",
                     style: PloffTextStyle.w600.copyWith(fontSize: 20),
                   ),
+                  const SizedBox(height: 15),
                   Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: PloffColors.C_F0F0F0,
                       borderRadius: BorderRadius.circular(10),
                     ),
+                    margin: const EdgeInsets.symmetric(vertical: 5),
                     child: TextField(
+                      maxLines: null,
+                      maxLength: null,
                       decoration: InputDecoration(
-                        hintText: "",
+                        hintText:
+                            "${widget.placemark[0].administrativeArea}, ${widget.placemark[0].street}",
                         border: InputBorder.none,
                       ),
                     ),
                   ),
                   Row(
                     children: [
-                      MiniTextaFields(hintText: "hintText"),
-                      MiniTextaFields(hintText: "hintText"),
-                      MiniTextaFields(hintText: "hintText"),
+                      MiniTextaFields(
+                        hintText: "Entrance",
+                        controller: entranceController,
+                      ),
+                      MiniTextaFields(
+                        hintText: "Floor",
+                        controller: floorController,
+                      ),
+                      MiniTextaFields(
+                        hintText: "Flat",
+                        controller: flatController,
+                      ),
                     ],
                   ),
+                  const SizedBox(height: 5),
                   Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: PloffColors.C_F0F0F0,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextField(
-                      decoration: InputDecoration(
-                        hintText: "asdqwe",
+                      controller: addressController,
+                      decoration: const InputDecoration(
+                        hintText: "Adress name",
                         border: InputBorder.none,
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   GlobalButton(
-                    buttonText: "asdasd",
+                    buttonText: "Confirm",
                     onTap: () {},
-                  )
+                  ),
                 ],
               ),
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class BottomAppBar extends StatelessWidget implements PreferredSize {
-  const BottomAppBar({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: PloffColors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        ),
-      ),
-    );
-  }
-
-  @override
-  // TODO: implement child
-  Widget get child => throw UnimplementedError();
-
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => Size(double.infinity, 10);
-}
-
-class MiniTextaFields extends StatelessWidget {
-  final String hintText;
-
-  const MiniTextaFields({
-    Key? key,
-    required this.hintText,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: PloffColors.C_F0F0F0,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: TextField(
-          decoration: InputDecoration(
-            hintText: hintText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            enabledBorder: InputBorder.none,
-          ),
-        ),
       ),
     );
   }

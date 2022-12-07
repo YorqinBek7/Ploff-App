@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:ploff/data/models/meal_model.dart';
+import 'package:ploff/data/service/get_location.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/get_location_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/banner_widget.dart';
@@ -22,6 +25,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<AboutMeal> allMeals = [];
+  late List<Placemark> placemark;
+  late Position position;
   var s = GetMeals();
   @override
   void initState() {
@@ -42,12 +47,20 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => GetLocationScreen(),
+                          builder: (context) => GetLocationScreen(
+                            position: position,
+                            placemark: placemark,
+                          ),
                         ),
+                      );
+                      position = await getCurrentLocation();
+                      placemark = await placemarkFromCoordinates(
+                        position.latitude,
+                        position.longitude,
                       );
                     },
                     child: Row(
@@ -135,6 +148,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       MaterialPageRoute(
                                         builder: (context) => MealDetailScreen(
                                           aboutMeal: allMeals[index],
+                                          price: int.parse(
+                                            allMeals[index].mealPrice,
+                                          ),
+                                          firstlyPrice: int.parse(
+                                            allMeals[index].mealPrice,
+                                          ),
                                         ),
                                       ),
                                     );

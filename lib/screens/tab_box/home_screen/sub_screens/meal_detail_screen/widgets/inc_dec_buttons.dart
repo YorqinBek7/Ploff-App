@@ -13,13 +13,11 @@ class IncDecButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
+    return TextButton(
+      onPressed: onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: SvgPicture.asset(
-          imagePath,
-        ),
+        child: SvgPicture.asset(imagePath),
       ),
     );
   }

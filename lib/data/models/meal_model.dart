@@ -20,35 +20,35 @@ class GetMeals {
       AboutMeal(
         mealDescription: "Zo'r qilingan qoyil zo'r",
         mealName: "Go'ja",
-        mealPrice: "23 000",
+        mealPrice: "23000",
       ),
     );
     allMeals.add(
       AboutMeal(
         mealDescription: "Yaxshi",
         mealName: "Osh",
-        mealPrice: "45 000",
+        mealPrice: "45000",
       ),
     );
     allMeals.add(
       AboutMeal(
         mealDescription: "Zo'r",
         mealName: "Moshxorda",
-        mealPrice: "20 000 ",
+        mealPrice: "20000 ",
       ),
     );
     allMeals.add(
       AboutMeal(
         mealDescription: "Yaxshi qilinmagan",
         mealName: "Manti",
-        mealPrice: "12 000",
+        mealPrice: "12000",
       ),
     );
     allMeals.add(
       AboutMeal(
         mealDescription: "Chidasa bo'ladi",
         mealName: "Xonim",
-        mealPrice: "25 000",
+        mealPrice: "25000",
       ),
     );
 
