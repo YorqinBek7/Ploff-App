@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
-import 'package:ploff/screens/tab_box/widgets/custom_app_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -16,6 +15,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  int count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,18 +56,28 @@ class _CartScreenState extends State<CartScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-                                  child: DialogButtons(
-                                    color: PloffColors.C_F0F0F0,
-                                    text: 'Нет',
+                                  child: GestureDetector(
+                                    onTap: () => {
+                                      Navigator.pop(context),
+                                    },
+                                    child: DialogButtons(
+                                      color: PloffColors.C_F0F0F0,
+                                      text: 'Нет',
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
                                   width: 5,
                                 ),
                                 Expanded(
-                                  child: DialogButtons(
-                                    color: PloffColors.C_FFCC00,
-                                    text: 'Да',
+                                  child: GestureDetector(
+                                    onTap: () => {
+                                      Navigator.pop(context),
+                                    },
+                                    child: DialogButtons(
+                                      color: PloffColors.C_FFCC00,
+                                      text: 'Да',
+                                    ),
                                   ),
                                 )
                               ],
@@ -123,25 +133,43 @@ class _CartScreenState extends State<CartScreen> {
                         SizedBox(height: 20),
                         Row(
                           children: [
-                            Container(
-                                margin: EdgeInsets.symmetric(horizontal: 8),
-                                padding: EdgeInsets.all(10),
-                                height: 32,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: PloffColors.C_FAFAFA,
-                                ),
-                                child: SvgPicture.asset(Plofficons.minus)),
-                            Text("1"),
-                            Container(
-                                height: 32,
-                                margin: EdgeInsets.symmetric(horizontal: 8),
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: PloffColors.C_FAFAFA,
-                                ),
-                                child: SvgPicture.asset(Plofficons.plus))
+                            GestureDetector(
+                              onTap: () => {
+                                if (count > 0)
+                                  {
+                                    count--,
+                                  },
+                                setState(
+                                  () => {},
+                                )
+                              },
+                              child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 8),
+                                  padding: EdgeInsets.all(10),
+                                  height: 32,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: PloffColors.C_FAFAFA,
+                                  ),
+                                  child: SvgPicture.asset(Plofficons.minus)),
+                            ),
+                            Text("$count"),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  count++;
+                                });
+                              },
+                              child: Container(
+                                  height: 32,
+                                  margin: EdgeInsets.symmetric(horizontal: 8),
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: PloffColors.C_FAFAFA,
+                                  ),
+                                  child: SvgPicture.asset(Plofficons.plus)),
+                            )
                           ],
                         ),
                       ],

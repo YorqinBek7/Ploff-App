@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -177,13 +178,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Container(
                       margin: EdgeInsets.symmetric(vertical: 10),
                       height: 170,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        key: GlobalKey(),
-                        scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
+                      child: CarouselSlider.builder(
                         itemCount: 5,
-                        itemBuilder: (context, index) => BannerWidget(),
+                        itemBuilder: (context, index, realIndex) =>
+                            BannerWidget(),
+                        options: CarouselOptions(
+                          autoPlay: true,
+                        ),
                       ),
                     ),
                   ),

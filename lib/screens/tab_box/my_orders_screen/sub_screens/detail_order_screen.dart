@@ -20,7 +20,7 @@ class DetailOrderScreen extends StatelessWidget {
         ),
       ),
       body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
             child: Container(

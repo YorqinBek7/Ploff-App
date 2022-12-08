@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ploff/main.dart';
-import 'package:ploff/screens/tab_box/profile_screen/sub_screens/widgets/profile_subscreen_appbar.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/widgets/edit_fields.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/style/text_style.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -23,7 +25,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     numberController.text =
         sharedPreferences!.getString("numberPhone").toString();
     controller.text = "Yorqin";
-    dateController.text = "30.03.2003";
+    dateController.text = "";
     super.initState();
   }
 
@@ -32,7 +34,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Scaffold(
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
-        title: Text('Edit profile'),
+        title: Text(
+          'Edit profile',
+          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -57,9 +62,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     isDisable: false,
                   ),
                   const Text("Date of birth"),
-                  EditFields(
-                    controller: dateController,
-                    isDisable: false,
+                  GestureDetector(
+                    onTap: () => {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) => Container(
+                          padding: EdgeInsets.all(40),
+                          decoration: BoxDecoration(color: Colors.white),
+                          child: Column(
+                            children: [
+                              Text("Select Date"),
+                              SfCalendar(
+                                view: CalendarView.month,
+                                onTap: (calendarTapDetails) => {
+                                  dateController.text = DateFormat.yMd()
+                                      .format(calendarTapDetails.date!),
+                                  Navigator.pop(context),
+                                  setState(
+                                    () => {},
+                                  ),
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    },
+                    child: EditFields(
+                      controller: dateController,
+                      isDisable: false,
+                    ),
                   ),
                 ],
               ),

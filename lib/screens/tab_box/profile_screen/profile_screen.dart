@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ploff/main.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/about_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/branches_screen/branches_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/edit_profile_screen.dart';
@@ -48,7 +49,7 @@ class ProfileScreen extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "+998 123 12 34",
+                      sharedPreferences!.getString("numberPhone").toString(),
                       style: PloffTextStyle.w400.copyWith(
                         color: PloffColors.black.withOpacity(.5),
                       ),
@@ -56,15 +57,16 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
                 IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => const EditProfileScreen(),
-                        ),
-                      );
-                    },
-                    icon: SvgPicture.asset(Plofficons.edit))
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => const EditProfileScreen(),
+                      ),
+                    );
+                  },
+                  icon: SvgPicture.asset(Plofficons.edit),
+                )
               ],
             ),
           ),

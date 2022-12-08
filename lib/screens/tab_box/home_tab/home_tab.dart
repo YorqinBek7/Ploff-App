@@ -56,8 +56,9 @@ class _HomeTabState extends State<HomeTab> {
             unselectedFontSize: 12,
             type: BottomNavigationBarType.fixed,
             onTap: (value) async {
-              if ((index == 2 || index == 3) &&
-                  sharedPreferences?.getString("numberPhone") == null) {
+              if ((value == 2 || value == 3) &&
+                  (sharedPreferences?.getString("numberPhone") == null ||
+                      sharedPreferences?.getString("numberPhone") == "")) {
                 await Navigator.push(
                   context,
                   CupertinoPageRoute(

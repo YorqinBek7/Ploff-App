@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ploff/main.dart';
+import 'package:ploff/screens/splash_screen/splash_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/widgets/profile_subscreen_appbar.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -55,7 +57,16 @@ class SettingsScreen extends StatelessWidget {
             ),
             const Spacer(),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                sharedPreferences!.setString("numberPhone", "");
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => SplashScreen(),
+                  ),
+                  (route) => false,
+                );
+              },
               child: Container(
                 width: double.infinity,
                 margin: const EdgeInsets.symmetric(horizontal: 10),
