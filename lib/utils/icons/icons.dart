@@ -41,4 +41,6 @@ class Plofficons {
   static const String flag = "assets/svg/flag.svg";
   static const String minus = "assets/svg/minus.svg";
   static const String plus = "assets/svg/plus.svg";
+  static const String korzina = "assets/svg/korzina.svg";
+  static const String location_black = "assets/svg/location_black.svg";
 }

@@ -8,8 +8,9 @@ class LicenceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: ProfileSubscreensAppbar(title: "Licence agreements"),
-    );
+    return Scaffold(
+        appBar: AppBar(
+      title: Text("Licence agreements"),
+    ));
   }
 }

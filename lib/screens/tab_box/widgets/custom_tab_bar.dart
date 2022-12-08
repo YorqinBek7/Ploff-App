@@ -34,12 +34,14 @@ class CustomTabBar extends StatelessWidget implements PreferredSize {
         onTap: (value) {},
         tabs: [
           Tab(
+            height: 40,
             child: Text(
               firstTabText,
               style: PloffTextStyle.w500.copyWith(fontSize: 15),
             ),
           ),
           Tab(
+            height: 40,
             child: Text(
               secondTabText,
               style: PloffTextStyle.w500.copyWith(fontSize: 15),
@@ -54,5 +56,5 @@ class CustomTabBar extends StatelessWidget implements PreferredSize {
   Widget get child => throw UnimplementedError();
 
   @override
-  Size get preferredSize => const Size(double.infinity, 80);
+  Size get preferredSize => const Size(double.infinity, 70);
 }

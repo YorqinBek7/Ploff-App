@@ -13,3 +13,8 @@ enum CourierCall {
   Yes,
   No,
 }
+
+enum GetAddress {
+  First,
+  Second,
+}

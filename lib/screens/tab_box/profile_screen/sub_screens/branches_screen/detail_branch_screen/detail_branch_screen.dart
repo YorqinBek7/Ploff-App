@@ -12,8 +12,11 @@ class DetailBranchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: PloffColors.C_F0F0F0,
-      appBar: const ProfileSubscreensAppbar(
-        title: "Branches",
+      appBar: AppBar(
+        title: Text(
+          "Branches",
+          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(

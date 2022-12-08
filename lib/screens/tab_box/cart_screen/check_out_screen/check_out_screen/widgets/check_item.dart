@@ -16,7 +16,7 @@ class CheckItem extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: 8,
+          flex: 6,
           child: Text(
             item,
             style: PloffTextStyle.w500.copyWith(

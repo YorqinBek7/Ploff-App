@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/sub_screens/condensation_policy_screen.dart';
@@ -5,6 +6,7 @@ import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/su
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/widgets/profile_subscreen_appbar.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
+import 'package:ploff/utils/style/text_style.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -12,7 +14,12 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const ProfileSubscreensAppbar(title: "About the service"),
+      appBar: AppBar(
+        title: Text(
+          "About the service",
+          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Column(
@@ -31,7 +38,7 @@ class AboutScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (context) =>
                               const CondensationPolicyScreen(),
                         ),
@@ -45,7 +52,7 @@ class AboutScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (context) => const LicenceScreen(),
                         ),
                       );

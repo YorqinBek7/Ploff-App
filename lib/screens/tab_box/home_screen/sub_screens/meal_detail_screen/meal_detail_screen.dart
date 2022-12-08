@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
 import 'package:ploff/data/models/meal_model.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/appbar_bottom.dart';
@@ -45,6 +47,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                         Navigator.pop(context);
                       },
                       child: Container(
+                        padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white.withOpacity(.8),
@@ -164,47 +167,49 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: PloffColors.white,
-                        borderRadius: BorderRadius.circular(6),
-                        border: Border.all(
-                          color: PloffColors.black.withOpacity(.1),
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          IncDecButtons(
-                            imagePath: "assets/svg/minus.svg",
-                            onTap: () {
-                              setState(() {
-                                if (count > 1) {
-                                  count--;
-                                  widget.price -= count * widget.firstlyPrice;
-                                }
-                              });
-                            },
-                          ),
-                          Text(
-                            "$count",
-                            style: PloffTextStyle.w500.copyWith(
-                              fontSize: 15,
+                    BlocBuilder<CountSelectedMealCubit, int>(
+                      builder: (context, state) {
+                        return Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: PloffColors.white,
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(
+                              color: PloffColors.black.withOpacity(.1),
                             ),
                           ),
-                          IncDecButtons(
-                            onTap: () {
-                              setState(() {
-                                if (widget.price > 0) {
-                                  widget.price += count * widget.firstlyPrice;
-                                  count++;
-                                }
-                              });
-                            },
-                            imagePath: "assets/svg/plus.svg",
-                          )
-                        ],
-                      ),
+                          child: Row(
+                            children: [
+                              IncDecButtons(
+                                imagePath: "-",
+                                onTap: () {
+                                  if (state > 1) {
+                                    context
+                                        .read<CountSelectedMealCubit>()
+                                        .removeCountMeal();
+                                    widget.price -= state * widget.firstlyPrice;
+                                  }
+                                },
+                              ),
+                              Text(
+                                "$state",
+                                style: PloffTextStyle.w500.copyWith(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              IncDecButtons(
+                                onTap: () {
+                                  widget.price += state * widget.firstlyPrice;
+                                  context
+                                      .read<CountSelectedMealCubit>()
+                                      .addCountMeal();
+                                },
+                                imagePath: "+",
+                              )
+                            ],
+                          ),
+                        );
+                      },
                     ),
                     Text(
                       "${widget.price} so'm",

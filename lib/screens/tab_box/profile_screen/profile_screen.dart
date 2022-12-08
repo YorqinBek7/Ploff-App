@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/about_screen.dart';
@@ -5,7 +6,6 @@ import 'package:ploff/screens/tab_box/profile_screen/sub_screens/branches_screen
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/edit_profile_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/settings_screen/settings_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/widgets/profile_options_item.dart';
-import 'package:ploff/screens/tab_box/widgets/custom_app_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -17,9 +17,11 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: PloffColors.C_F0F0F0,
-      appBar: CustomAppBar(
-        title: "Profile",
-        notTabBar: true,
+      appBar: AppBar(
+        title: Text(
+          "Profile",
+          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+        ),
       ),
       body: Column(
         children: [
@@ -57,7 +59,7 @@ class ProfileScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (context) => const EditProfileScreen(),
                         ),
                       );
@@ -72,12 +74,12 @@ class ProfileScreen extends StatelessWidget {
             onTap: () {},
           ),
           ProfileOptionsItem(
-            icon: Plofficons.location,
+            icon: Plofficons.location_black,
             title: "Branches",
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
+                CupertinoPageRoute(
                   builder: (context) {
                     return const BranchesScreen();
                   },
@@ -91,7 +93,7 @@ class ProfileScreen extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
+                CupertinoPageRoute(
                   builder: (context) {
                     return const SettingsScreen();
                   },
@@ -105,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
+                CupertinoPageRoute(
                   builder: (context) => const AboutScreen(),
                 ),
               );
@@ -117,7 +119,8 @@ class ProfileScreen extends StatelessWidget {
             style: PloffTextStyle.w500.copyWith(
               color: PloffColors.black.withOpacity(.5),
             ),
-          )
+          ),
+          const SizedBox(height: 5),
         ],
       ),
     );

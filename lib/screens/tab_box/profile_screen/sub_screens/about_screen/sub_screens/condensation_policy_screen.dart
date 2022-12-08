@@ -9,7 +9,9 @@ class CondensationPolicyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const ProfileSubscreensAppbar(title: "Condensation policy"),
+      appBar: AppBar(
+        title: Text("Condensation policy"),
+      ),
       backgroundColor: PloffColors.C_F0F0F0,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),

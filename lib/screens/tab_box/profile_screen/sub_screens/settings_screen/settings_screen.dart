@@ -13,15 +13,18 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: PloffColors.C_F0F0F0,
-      appBar: const ProfileSubscreensAppbar(
-        title: 'Edit profile',
+      appBar: AppBar(
+        title: Text(
+          'Edit profile',
+          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.symmetric(vertical: 5),
               decoration: BoxDecoration(
                 color: PloffColors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -31,6 +34,7 @@ class SettingsScreen extends StatelessWidget {
                   ListTile(
                     leading: SvgPicture.asset(Plofficons.globus),
                     title: const Text("Language"),
+                    tileColor: PloffColors.C_F0F0F0,
                     trailing: IconButton(
                       onPressed: () {},
                       icon: SvgPicture.asset(Plofficons.arrow_right),
@@ -40,6 +44,7 @@ class SettingsScreen extends StatelessWidget {
                   ListTile(
                     leading: SvgPicture.asset(Plofficons.notification),
                     title: const Text("Notification"),
+                    tileColor: PloffColors.C_F0F0F0,
                     trailing: CupertinoSwitch(
                       value: true,
                       onChanged: (value) {},

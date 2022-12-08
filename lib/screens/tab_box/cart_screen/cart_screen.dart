@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen.dart';
@@ -19,9 +20,66 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: PloffColors.C_F0F0F0,
-      appBar: CustomAppBar(
-        title: 'Savatcha',
-        notTabBar: true,
+      appBar: AppBar(
+        title: Text(
+          "Savatcha",
+          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+        ),
+        actions: [
+          InkWell(
+              onTap: () => {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "Очистить корзину?",
+                              style: PloffTextStyle.w600.copyWith(fontSize: 20),
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Text(
+                              "Вы уверены, что хотите очистить корзину?",
+                              style: PloffTextStyle.w400.copyWith(
+                                fontSize: 15,
+                                color: PloffColors.C_858585,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: DialogButtons(
+                                    color: PloffColors.C_F0F0F0,
+                                    text: 'Нет',
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Expanded(
+                                  child: DialogButtons(
+                                    color: PloffColors.C_FFCC00,
+                                    text: 'Да',
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  },
+              child: SvgPicture.asset(Plofficons.korzina)),
+          SizedBox(width: 5)
+        ],
       ),
       body: Column(
         mainAxisSize: MainAxisSize.min,
@@ -136,8 +194,14 @@ class _CartScreenState extends State<CartScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Order price"),
-                    Text("28000"),
+                    Text(
+                      "Order price",
+                      style: PloffTextStyle.w500.copyWith(fontSize: 15),
+                    ),
+                    Text(
+                      "28000",
+                      style: PloffTextStyle.w500.copyWith(fontSize: 15),
+                    ),
                   ],
                 ),
                 SizedBox(
@@ -148,7 +212,7 @@ class _CartScreenState extends State<CartScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
+                      CupertinoPageRoute(
                         builder: (context) => CheckOutScreen(),
                       ),
                     );
@@ -158,6 +222,34 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class DialogButtons extends StatelessWidget {
+  final String text;
+  final Color color;
+  const DialogButtons({
+    Key? key,
+    required this.text,
+    required this.color,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 48,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: color,
+      ),
+      child: Center(
+        child: Text(
+          text,
+          style: PloffTextStyle.w600.copyWith(fontSize: 15),
+        ),
       ),
     );
   }

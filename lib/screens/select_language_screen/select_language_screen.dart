@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ploff/screens/select_language_screen/widgets/select_language_item.dart';
 import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
@@ -41,7 +42,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
               onTap: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
+                  CupertinoPageRoute(
                     builder: (context) => HomeTab(),
                   ),
                 );

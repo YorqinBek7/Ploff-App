@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/check_out_bottom_bar.dart';
-import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/enum_classes/enum_classes.dart';
+import 'package:ploff/utils/enum_classes/enum_classes.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/first_screen.dart';
 import 'package:ploff/screens/tab_box/widgets/custom_tab_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -42,7 +42,10 @@ class _CheckOutScreenState extends State<CheckOutScreen>
       resizeToAvoidBottomInset: true,
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
-        title: const Text("CheckOut order"),
+        title: Text(
+          "Оформить заказ",
+          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+        ),
         bottom: CustomTabBar(
           tabController: tabController,
           firstTabText: 'Order',

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/screens/tab_box/my_orders_screen/sub_screens/detail_order_screen.dart';
@@ -30,14 +31,16 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: PloffColors.C_F0F0F0,
-      appBar: CustomAppBar(
-        title: 'My Orders',
+      appBar: AppBar(
+        title: Text(
+          'My Orders',
+          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+        ),
         bottom: CustomTabBar(
-          firstTabText: "Active order",
-          secondTabText: 'History order',
+          firstTabText: 'Active order',
+          secondTabText: 'History Order',
           tabController: tabController,
         ),
-        notTabBar: false,
       ),
       body: TabBarView(
         controller: tabController,
@@ -48,7 +51,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
+                    CupertinoPageRoute(
                       builder: (context) => DetailOrderScreen(),
                     ),
                   );

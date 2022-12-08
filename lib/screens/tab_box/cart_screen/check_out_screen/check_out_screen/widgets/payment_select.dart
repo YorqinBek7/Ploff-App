@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/enum_classes/enum_classes.dart';
+import 'package:ploff/utils/enum_classes/enum_classes.dart';
 import 'package:ploff/utils/colors/colors.dart';
 
 class TypePayment extends StatelessWidget {
