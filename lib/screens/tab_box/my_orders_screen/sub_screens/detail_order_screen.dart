@@ -69,9 +69,55 @@ class DetailOrderScreen extends StatelessWidget {
                         ),
                         child: SvgPicture.asset(Plofficons.done),
                       ),
-                      SvgPicture.asset(Plofficons.chef),
-                      SvgPicture.asset(Plofficons.car),
-                      SvgPicture.asset(Plofficons.flag),
+                      Expanded(
+                        child: Visibility(
+                          visible: true,
+                          child: Container(
+                            height: 2,
+                            color: PloffColors.C_FFCC00,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: PloffColors.C_FFCC00,
+                        ),
+                        child: SvgPicture.asset(Plofficons.chef),
+                      ),
+                      Expanded(
+                        child: Visibility(
+                          visible: false,
+                          child: Container(
+                            height: 2,
+                            color: PloffColors.C_FFCC00,
+                          ),
+                        ),
+                      ),
+                      Container(
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: PloffColors.C_F0F0F0,
+                          ),
+                          child: SvgPicture.asset(Plofficons.car)),
+                      Expanded(
+                        child: Visibility(
+                          visible: false,
+                          child: Container(
+                            height: 2,
+                            color: PloffColors.C_FFCC00,
+                          ),
+                        ),
+                      ),
+                      Container(
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: PloffColors.C_F0F0F0,
+                          ),
+                          child: SvgPicture.asset(Plofficons.flag)),
                     ],
                   ),
                   OrderDetailTexts(
@@ -125,7 +171,14 @@ class DetailOrderScreen extends StatelessWidget {
                     ],
                   ),
                   Spacer(),
-                  SvgPicture.asset(Plofficons.phone)
+                  Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: PloffColors.C_F0F0F0,
+                    ),
+                    child: SvgPicture.asset(Plofficons.phone),
+                  )
                 ],
               ),
             ),
@@ -140,9 +193,10 @@ class DetailOrderScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  CheckItem(item: "Osh", price: "23000"),
-                  CheckItem(item: "Osh", price: "23000"),
-                  CheckItem(item: "Osh", price: "23000"),
+                  ...List.generate(
+                    5,
+                    (index) => CheckItem(item: "Osh", price: "23000"),
+                  )
                 ],
               ),
             ),

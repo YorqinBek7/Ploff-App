@@ -102,6 +102,15 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                             ),
                             child: SvgPicture.asset(Plofficons.done),
                           ),
+                          Expanded(
+                            child: Visibility(
+                              visible: true,
+                              child: Container(
+                                height: 2,
+                                color: PloffColors.C_FFCC00,
+                              ),
+                            ),
+                          ),
                           Container(
                             padding: EdgeInsets.all(16),
                             decoration: BoxDecoration(
@@ -110,6 +119,15 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                             ),
                             child: SvgPicture.asset(Plofficons.chef),
                           ),
+                          Expanded(
+                            child: Visibility(
+                              visible: false,
+                              child: Container(
+                                height: 2,
+                                color: PloffColors.C_FFCC00,
+                              ),
+                            ),
+                          ),
                           Container(
                             padding: EdgeInsets.all(16),
                             decoration: BoxDecoration(
@@ -117,6 +135,15 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                               color: PloffColors.C_FAFAFA,
                             ),
                             child: SvgPicture.asset(Plofficons.car),
+                          ),
+                          Expanded(
+                            child: Visibility(
+                              visible: false,
+                              child: Container(
+                                height: 2,
+                                color: PloffColors.C_FFCC00,
+                              ),
+                            ),
                           ),
                           Container(
                             padding: EdgeInsets.all(16),
