@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:ploff/data/local_database/local_database.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -15,7 +18,7 @@ Future<dynamic> deleteAllDialog(BuildContext context) {
             "Очистить корзину?",
             style: PloffTextStyle.w600.copyWith(fontSize: 20),
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Text(
@@ -25,7 +28,7 @@ Future<dynamic> deleteAllDialog(BuildContext context) {
               color: PloffColors.C_858585,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           Row(
@@ -36,21 +39,26 @@ Future<dynamic> deleteAllDialog(BuildContext context) {
                   onTap: () => {
                     Navigator.pop(context),
                   },
-                  child: DialogButtons(
+                  child: const DialogButtons(
                     color: PloffColors.C_F0F0F0,
                     text: 'Нет',
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Expanded(
                 child: GestureDetector(
-                  onTap: () => {
-                    Navigator.pop(context),
+                  onTap: () async {
+                    context
+                        .read<BottomNavigationCubit>()
+                        .changeBottomNavigationPages(1, []);
+                    context.read<BottomNavigationCubit>().meals = [];
+                    Navigator.pop(context);
+                    await LocalDataBase.deleteAllCachedMeals();
                   },
-                  child: DialogButtons(
+                  child: const DialogButtons(
                     color: PloffColors.C_FFCC00,
                     text: 'Да',
                   ),

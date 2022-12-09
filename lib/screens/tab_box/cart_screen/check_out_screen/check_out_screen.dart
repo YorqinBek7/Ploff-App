@@ -1,13 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/check_out_bottom_bar.dart';
+import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/first_screen.dart';
+import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/second_screen.dart';
 import 'package:ploff/utils/enum_classes/enum_classes.dart';
-import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/first_screen.dart';
 import 'package:ploff/screens/tab_box/widgets/custom_tab_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
-import 'check_out_screen/widgets/second_screen.dart';
 
 class CheckOutScreen extends StatefulWidget {
   const CheckOutScreen({super.key});

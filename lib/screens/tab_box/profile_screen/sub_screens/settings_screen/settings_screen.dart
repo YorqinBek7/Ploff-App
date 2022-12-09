@@ -46,61 +46,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     title: const Text("Language"),
                     tileColor: PloffColors.C_F0F0F0,
                     onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        builder: (context) => Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 15),
-                                child: Text(
-                                  "Language",
-                                  style: PloffTextStyle.w600
-                                      .copyWith(fontSize: 20),
-                                ),
-                              ),
-                              Divider(),
-                              ListTile(
-                                leading: Image.asset(Plofficons.uzbFlag),
-                                title: Text(
-                                  "O'zbekcha",
-                                  style: PloffTextStyle.w600
-                                      .copyWith(fontSize: 15),
-                                ),
-                                trailing: Icon(
-                                  Icons.done,
-                                  color: PloffColors.C_FFCC00,
-                                ),
-                              ),
-                              Divider(),
-                              ListTile(
-                                  leading: Image.asset(Plofficons.russiaFlag),
-                                  title: Text(
-                                    "Русский",
-                                    style: PloffTextStyle.w600
-                                        .copyWith(fontSize: 15),
-                                  ),
-                                  trailing: null),
-                              Divider(),
-                              ListTile(
-                                leading: Image.asset(Plofficons.englishFlag),
-                                title: Text(
-                                  "English",
-                                  style: PloffTextStyle.w600
-                                      .copyWith(fontSize: 15),
-                                ),
-                                trailing: null,
-                              ),
-                              Divider(),
-                            ],
-                          ),
-                        ),
-                      );
+                      languageBottomDialog(context);
                     },
                     trailing: IconButton(
                       onPressed: () {
@@ -146,11 +92,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 sharedPreferences!.setString("numberPhone", "");
                 context
                     .read<BottomNavigationCubit>()
-                    .changeBottomNavigationPages(0);
+                    .changeBottomNavigationPages(0, []);
                 Navigator.pushAndRemoveUntil(
                   context,
                   CupertinoPageRoute(
-                    builder: (context) => HomeTab(),
+                    builder: (context) => const HomeTab(),
                   ),
                   (route) => false,
                 );
@@ -173,6 +119,64 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<dynamic> languageBottomDialog(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
+      ),
+      builder: (context) => Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 10),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              child: Text(
+                "Language",
+                style: PloffTextStyle.w600.copyWith(fontSize: 20),
+              ),
+            ),
+            const Divider(),
+            ListTile(
+              leading: Image.asset(Plofficons.uzbFlag),
+              title: Text(
+                "O'zbekcha",
+                style: PloffTextStyle.w600.copyWith(fontSize: 15),
+              ),
+              trailing: const Icon(
+                Icons.done,
+                color: PloffColors.C_FFCC00,
+              ),
+            ),
+            const Divider(),
+            ListTile(
+                leading: Image.asset(Plofficons.russiaFlag),
+                title: Text(
+                  "Русский",
+                  style: PloffTextStyle.w600.copyWith(fontSize: 15),
+                ),
+                trailing: null),
+            const Divider(),
+            ListTile(
+              leading: Image.asset(Plofficons.englishFlag),
+              title: Text(
+                "English",
+                style: PloffTextStyle.w600.copyWith(fontSize: 15),
+              ),
+              trailing: null,
+            ),
+            const Divider(),
           ],
         ),
       ),

@@ -72,7 +72,7 @@ class LocalDataBase {
     }
   }
 
-  static Future<int> deleteAllCachedUsers() async {
+  static Future<int> deleteAllCachedMeals() async {
     final db = await getInstance.database;
     return await db.delete(tableName);
   }

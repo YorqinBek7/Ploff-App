@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen/widgets/check_item.dart';
+import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/check_item.dart';
 import 'package:ploff/screens/tab_box/my_orders_screen/sub_screens/widgets/order_detail_texts.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';

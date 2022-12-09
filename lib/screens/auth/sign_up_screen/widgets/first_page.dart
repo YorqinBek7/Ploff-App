@@ -24,23 +24,24 @@ class FistPage extends StatelessWidget {
         Form(
           key: formKey,
           child: TextFormField(
-            autovalidateMode: AutovalidateMode.always,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: phoneController,
             style: PloffTextStyle.w500.copyWith(fontSize: 15),
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Enter something";
-              }
-              return null;
+              // if (value == null || value.isEmpty) {
+              //   return "Enter something";
+              // }
+              // return null;
             },
             decoration: InputDecoration(
+              errorText: "",
               filled: true,
               focusColor: PloffColors.C_FFCC00,
               prefixIcon: Text(
                 " +998 ",
                 style: PloffTextStyle.w500.copyWith(fontSize: 15),
               ),
-              prefixIconConstraints: BoxConstraints(
+              prefixIconConstraints: const BoxConstraints(
                 maxHeight: 60,
                 maxWidth: 60,
               ),

@@ -5,7 +5,10 @@ abstract class BottomNavigationState {}
 
 class BottomNavigationInHome extends BottomNavigationState {}
 
-class BottomNavigationInCart extends BottomNavigationState {}
+class BottomNavigationInCart extends BottomNavigationState {
+  List<CachedMeals> meals;
+  BottomNavigationInCart({required this.meals});
+}
 
 class BottomNavigationInMyOrders extends BottomNavigationState {}
 

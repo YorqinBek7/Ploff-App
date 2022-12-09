@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
@@ -226,10 +228,21 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                 GlobalButton(
                   buttonText: "To Cart",
                   onTap: () async {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Product added to cart")),
+                    );
+                    context
+                        .read<BottomNavigationCubit>()
+                        .meals
+                        .add(widget.aboutMeal);
                     await LocalDataBase.insertMeals(widget.aboutMeal);
                     context
                         .read<BottomNavigationCubit>()
-                        .changeBottomNavigationPages(1);
+                        .changeBottomNavigationPages(
+                          1,
+                          context.read<BottomNavigationCubit>().meals,
+                        );
+                    Navigator.pop(context);
                   },
                 ),
               ],

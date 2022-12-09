@@ -12,7 +12,7 @@ class CartsItem extends StatefulWidget {
     required this.count,
   }) : super(key: key);
 
-  List<CachedMeals> meals;
+  CachedMeals meals;
   int count;
 
   @override
@@ -23,7 +23,7 @@ class _CartsItemState extends State<CartsItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: PloffColors.white,
         border: Border(
@@ -45,26 +45,26 @@ class _CartsItemState extends State<CartsItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.meals[0].mealName,
+                    widget.meals.mealName,
                     style: PloffTextStyle.w600.copyWith(fontSize: 17),
                   ),
-                  SizedBox(height: 25),
+                  const SizedBox(height: 25),
                   Text(
-                    widget.meals[0].mealDescription,
+                    widget.meals.mealDescription,
                     style: PloffTextStyle.w500.copyWith(fontSize: 15),
                   ),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(right: 15),
+                    margin: const EdgeInsets.only(right: 15),
                     child: SvgPicture.asset(Plofficons.cancel),
                   ),
-                  SizedBox(height: 25),
+                  const SizedBox(height: 25),
                   Row(
                     children: [
                       GestureDetector(
@@ -78,8 +78,8 @@ class _CartsItemState extends State<CartsItem> {
                           )
                         },
                         child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 8),
-                            padding: EdgeInsets.all(10),
+                            margin: const EdgeInsets.symmetric(horizontal: 8),
+                            padding: const EdgeInsets.all(10),
                             height: 32,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -96,8 +96,8 @@ class _CartsItemState extends State<CartsItem> {
                         },
                         child: Container(
                             height: 32,
-                            margin: EdgeInsets.symmetric(horizontal: 8),
-                            padding: EdgeInsets.all(10),
+                            margin: const EdgeInsets.symmetric(horizontal: 8),
+                            padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               color: PloffColors.C_FAFAFA,

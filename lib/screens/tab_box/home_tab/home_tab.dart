@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:ploff/data/local_database/local_database.dart';
 import 'package:ploff/main.dart';
 import 'package:ploff/screens/auth/sign_up_screen/sign_up_screen.dart';
 import 'package:ploff/screens/tab_box/cart_screen/cart_screen.dart';
@@ -26,9 +29,18 @@ class _HomeTabState extends State<HomeTab> {
     const MyOrdersScreen(),
     const ProfileScreen()
   ];
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  init() async {
+    context.read<BottomNavigationCubit>().meals =
+        await LocalDataBase.getAllCachedMeals();
+  }
 
   int index = 0;
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BottomNavigationCubit, BottomNavigationState>(
@@ -67,9 +79,11 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                 );
               }
-              context
-                  .read<BottomNavigationCubit>()
-                  .changeBottomNavigationPages(value);
+              log(context.read<BottomNavigationCubit>().meals.toString());
+              context.read<BottomNavigationCubit>().changeBottomNavigationPages(
+                    value,
+                    context.read<BottomNavigationCubit>().meals,
+                  );
             },
             items: [
               BottomNavigationBarItem(
