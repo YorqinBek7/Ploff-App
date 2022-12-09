@@ -16,13 +16,13 @@ class SearchField extends StatelessWidget {
         color: PloffColors.C_F5F5F5,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: const TextField(
+      child: TextField(
         decoration: InputDecoration(
           border: InputBorder.none,
           enabledBorder: InputBorder.none,
           prefixIcon: Icon(Icons.search_outlined),
           hintText: "Поиск по всей еде",
-          hintStyle: PloffTextStyle.w400,
+          hintStyle: PloffTextStyle.w400.copyWith(color: PloffColors.C_858585),
         ),
       ),
     );

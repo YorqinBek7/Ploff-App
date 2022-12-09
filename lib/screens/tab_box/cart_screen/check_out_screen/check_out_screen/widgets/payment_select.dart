@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ploff/utils/enum_classes/enum_classes.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/style/text_style.dart';
 
 class TypePayment extends StatelessWidget {
   ValueChanged valueChanged;
@@ -23,24 +24,37 @@ class TypePayment extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("Тип оплаты"),
+          Text(
+            "Тип оплаты",
+            style: PloffTextStyle.w600.copyWith(fontSize: 17),
+          ),
           RadioListTile(
-              title: const Text("Наличные"),
+              title: Text(
+                "Наличные",
+                style: PloffTextStyle.w600.copyWith(fontSize: 15),
+              ),
               value: PaymentType.Cash,
               groupValue: paymentType,
               onChanged: valueChanged),
           const Divider(),
           RadioListTile(
-              title: const Text("Payme"),
+              title: Text(
+                "Payme",
+                style: PloffTextStyle.w600.copyWith(fontSize: 15),
+              ),
               value: PaymentType.Payme,
               groupValue: paymentType,
               onChanged: valueChanged),
           const Divider(),
           RadioListTile(
-              title: const Text("Click"),
-              value: PaymentType.Click,
-              groupValue: paymentType,
-              onChanged: valueChanged),
+            title: Text(
+              "Click",
+              style: PloffTextStyle.w600.copyWith(fontSize: 15),
+            ),
+            value: PaymentType.Click,
+            groupValue: paymentType,
+            onChanged: valueChanged,
+          ),
         ],
       ),
     );

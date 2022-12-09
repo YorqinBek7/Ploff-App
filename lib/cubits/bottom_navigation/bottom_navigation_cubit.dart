@@ -17,6 +17,5 @@ class BottomNavigationCubit extends Cubit<BottomNavigationState> {
     } else if (index == 3) {
       emit(BottomNavigationInProfile());
     }
-    log(index.toString());
   }
 }

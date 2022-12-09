@@ -1,54 +1,50 @@
-class AboutMeal {
-  final String mealName;
-  final String mealDescription;
-  final String mealPrice;
-  AboutMeal({
-    required this.mealDescription,
-    required this.mealName,
-    required this.mealPrice,
-  });
-}
+import 'package:ploff/data/local_database/cached_meals.dart';
 
 class GetMeals {
   GetMeals() {
     addMeals();
   }
-  List<AboutMeal> allMeals = [];
+  List<CachedMeals> allMeals = [];
 
-  List<AboutMeal> addMeals() {
+  List<CachedMeals> addMeals() {
     allMeals.add(
-      AboutMeal(
+      CachedMeals(
         mealDescription: "Zo'r qilingan qoyil zo'r",
         mealName: "Go'ja",
-        mealPrice: "23000",
+        typeMeal: 1,
+        priceMeal: 23000,
       ),
     );
     allMeals.add(
-      AboutMeal(
+      CachedMeals(
         mealDescription: "Yaxshi",
         mealName: "Osh",
-        mealPrice: "45000",
+        typeMeal: 2,
+        priceMeal: 3500,
       ),
     );
     allMeals.add(
-      AboutMeal(
+      CachedMeals(
         mealDescription: "Zo'r",
         mealName: "Moshxorda",
-        mealPrice: "20000 ",
+        typeMeal: 2,
+        priceMeal: 40000,
       ),
     );
     allMeals.add(
-      AboutMeal(
+      CachedMeals(
         mealDescription: "Yaxshi qilinmagan",
         mealName: "Manti",
-        mealPrice: "12000",
+        typeMeal: 1,
+        priceMeal: 13000,
       ),
     );
     allMeals.add(
-      AboutMeal(
+      CachedMeals(
         mealDescription: "Chidasa bo'ladi",
         mealName: "Xonim",
-        mealPrice: "25000",
+        typeMeal: 2,
+        priceMeal: 34000,
       ),
     );
 

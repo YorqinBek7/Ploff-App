@@ -37,6 +37,11 @@ class PloffApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
           primarySwatch: null,
+          radioTheme: RadioThemeData(
+            fillColor: MaterialStateProperty.all(
+              PloffColors.C_FFCC00,
+            ),
+          ),
         ),
         debugShowCheckedModeBanner: false,
         title: 'Ploff app',

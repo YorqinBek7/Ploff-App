@@ -1,10 +1,12 @@
 import 'dart:developer';
-
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
-import 'package:ploff/data/models/meal_model.dart';
+import 'package:ploff/data/local_database/cached_meals.dart';
+import 'package:ploff/data/local_database/local_database.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/appbar_bottom.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/inc_dec_buttons.dart';
@@ -19,9 +21,9 @@ class MealDetailScreen extends StatefulWidget {
     required this.price,
     required this.firstlyPrice,
   });
-  final AboutMeal aboutMeal;
-  int price;
-  int firstlyPrice;
+  final CachedMeals aboutMeal;
+  double price;
+  double firstlyPrice;
 
   @override
   State<MealDetailScreen> createState() => _MealDetailScreenState();
@@ -47,12 +49,15 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                         Navigator.pop(context);
                       },
                       child: Container(
-                        padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white.withOpacity(.8),
                         ),
-                        child: SvgPicture.asset(Plofficons.arrow_back),
+                        child: Platform.isAndroid
+                            ? Icon(Icons.arrow_back)
+                            : Icon(
+                                Icons.arrow_back_ios,
+                              ),
                       ),
                     ),
                   ),
@@ -144,7 +149,6 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                               groupValue: "k",
                               onChanged: (value) => {
                                 setState(() => {}),
-                                log(value.toString()),
                               },
                               value: null,
                             ),
@@ -164,13 +168,12 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
             padding: const EdgeInsets.all(10),
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    BlocBuilder<CountSelectedMealCubit, int>(
-                      builder: (context, state) {
-                        return Container(
-                          padding: const EdgeInsets.all(10),
+                BlocBuilder<CountSelectedMealCubit, int>(
+                  builder: (context, state) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
                           decoration: BoxDecoration(
                             color: PloffColors.white,
                             borderRadius: BorderRadius.circular(6),
@@ -181,13 +184,13 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                           child: Row(
                             children: [
                               IncDecButtons(
-                                imagePath: "-",
+                                imagePath: Plofficons.minus,
                                 onTap: () {
                                   if (state > 1) {
                                     context
                                         .read<CountSelectedMealCubit>()
                                         .removeCountMeal();
-                                    widget.price -= state * widget.firstlyPrice;
+                                    widget.price = state * widget.firstlyPrice;
                                   }
                                 },
                               ),
@@ -199,30 +202,35 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                               ),
                               IncDecButtons(
                                 onTap: () {
-                                  widget.price += state * widget.firstlyPrice;
+                                  widget.price = state * widget.firstlyPrice;
                                   context
                                       .read<CountSelectedMealCubit>()
                                       .addCountMeal();
                                 },
-                                imagePath: "+",
+                                imagePath: Plofficons.plus,
                               )
                             ],
                           ),
-                        );
-                      },
-                    ),
-                    Text(
-                      "${widget.price} so'm",
-                      style: PloffTextStyle.w600.copyWith(
-                        fontSize: 18,
-                      ),
-                    ),
-                  ],
+                        ),
+                        Text(
+                          "${widget.price} so'm",
+                          style: PloffTextStyle.w600.copyWith(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
                 const SizedBox(height: 15),
                 GlobalButton(
                   buttonText: "To Cart",
-                  onTap: () {},
+                  onTap: () async {
+                    await LocalDataBase.insertMeals(widget.aboutMeal);
+                    context
+                        .read<BottomNavigationCubit>()
+                        .changeBottomNavigationPages(1);
+                  },
                 ),
               ],
             ),

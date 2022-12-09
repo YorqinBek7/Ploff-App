@@ -36,7 +36,6 @@ class Plofficons {
   static const String cancel = "assets/svg/cancel.svg";
   static const String oval = "assets/svg/oval.svg";
   static const String big = "assets/svg/big.svg";
-  static const String restaurant = "assets/svg/restaurant.svg";
   static const String done = "assets/svg/done.svg";
   static const String flag = "assets/svg/flag.svg";
   static const String minus = "assets/svg/minus.svg";

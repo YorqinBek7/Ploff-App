@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/screens/tab_box/my_orders_screen/sub_screens/detail_order_screen.dart';
-import 'package:ploff/screens/tab_box/widgets/custom_app_bar.dart';
+import 'package:ploff/screens/tab_box/my_orders_screen/widgets/history_order_item.dart';
 import 'package:ploff/screens/tab_box/widgets/custom_tab_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -20,6 +20,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
   bool isCurrent = false;
   int index = 0;
   late TabController tabController;
+  bool isVisible = false;
 
   @override
   void initState() {
@@ -47,6 +48,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
         children: [
           Column(
             children: [
+              SizedBox(
+                height: 6,
+              ),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -57,7 +61,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                   );
                 },
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
+                  margin: EdgeInsets.symmetric(vertical: 6),
                   padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -103,16 +107,15 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                             child: SvgPicture.asset(Plofficons.done),
                           ),
                           Expanded(
-                            child: Visibility(
-                              visible: true,
-                              child: Container(
-                                height: 2,
-                                color: PloffColors.C_FFCC00,
-                              ),
+                            child: Container(
+                              height: 2,
+                              color: !isVisible
+                                  ? PloffColors.C_FFCC00
+                                  : PloffColors.C_F0F0F0,
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.all(16),
+                            padding: EdgeInsets.all(13),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: PloffColors.C_FFCC00,
@@ -120,12 +123,11 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                             child: SvgPicture.asset(Plofficons.chef),
                           ),
                           Expanded(
-                            child: Visibility(
-                              visible: false,
-                              child: Container(
-                                height: 2,
-                                color: PloffColors.C_FFCC00,
-                              ),
+                            child: Container(
+                              height: 2,
+                              color: !isVisible
+                                  ? PloffColors.C_FFCC00
+                                  : PloffColors.C_F0F0F0,
                             ),
                           ),
                           Container(
@@ -137,12 +139,11 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                             child: SvgPicture.asset(Plofficons.car),
                           ),
                           Expanded(
-                            child: Visibility(
-                              visible: false,
-                              child: Container(
-                                height: 2,
-                                color: PloffColors.C_FFCC00,
-                              ),
+                            child: Container(
+                              height: 2,
+                              color: isVisible
+                                  ? PloffColors.C_FFCC00
+                                  : PloffColors.C_F0F0F0,
                             ),
                           ),
                           Container(
@@ -162,7 +163,17 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
             ],
           ),
           Column(
-            children: [],
+            children: [
+              SizedBox(
+                height: 6,
+              ),
+              HistoryOrderItem(),
+              HistoryOrderItem(),
+              HistoryOrderItem(),
+              SizedBox(
+                height: 6,
+              ),
+            ],
           )
         ],
       ),

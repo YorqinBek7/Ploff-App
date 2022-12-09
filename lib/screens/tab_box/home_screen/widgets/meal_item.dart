@@ -22,55 +22,62 @@ class MealItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          border: index != length - 1
-              ? Border(
-                  bottom: BorderSide(
-                    color: PloffColors.black.withOpacity(.1),
-                  ),
-                )
-              : null,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return Material(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(10),
+        onTap: onTap,
+        child: Ink(
+          color: PloffColors.white,
+          child: Container(
+            decoration: BoxDecoration(
+              border: index != length - 1
+                  ? Border(
+                      bottom: BorderSide(
+                        color: PloffColors.black.withOpacity(.1),
+                      ),
+                    )
+                  : null,
+            ),
+            child: Row(
               children: [
-                Text(
-                  mealName,
-                  style: PloffTextStyle.w500.copyWith(fontSize: 15),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * .5,
-                  child: Text(
-                    mealDescription,
-                    style: PloffTextStyle.w400.copyWith(
-                      color: PloffColors.black.withOpacity(.4),
+                SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      mealName,
+                      style: PloffTextStyle.w500.copyWith(fontSize: 15),
                     ),
-                  ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * .5,
+                      child: Text(
+                        mealDescription,
+                        style: PloffTextStyle.w400.copyWith(
+                          color: PloffColors.black.withOpacity(.4),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      mealPrice,
+                      style: PloffTextStyle.w600.copyWith(fontSize: 16),
+                    )
+                  ],
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  mealPrice,
-                  style: PloffTextStyle.w600.copyWith(fontSize: 16),
+                Spacer(),
+                Image.asset(
+                  Plofficons.meal,
+                  width: 130.0,
+                  height: 130.0,
                 )
               ],
             ),
-            Image.asset(
-              Plofficons.meal,
-              width: 130.0,
-              height: 130.0,
-            )
-          ],
+          ),
         ),
       ),
     );

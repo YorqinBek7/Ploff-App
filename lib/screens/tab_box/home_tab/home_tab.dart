@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,7 +60,10 @@ class _HomeTabState extends State<HomeTab> {
                 await Navigator.push(
                   context,
                   CupertinoPageRoute(
-                    builder: (context) => SignUpScreen(),
+                    builder: (context) {
+                      value = index;
+                      return SignUpScreen();
+                    },
                   ),
                 );
               }

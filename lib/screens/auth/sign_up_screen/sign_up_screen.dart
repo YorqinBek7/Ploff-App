@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,6 +12,9 @@ import 'package:ploff/utils/style/text_style.dart';
 class SignUpScreen extends StatelessWidget {
   final PageController _pageController = PageController();
   final TextEditingController phoneController = TextEditingController();
+  final FocusNode phoneFocusNode = FocusNode();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   int index = 0;
   SignUpScreen({super.key});
 
@@ -55,6 +56,7 @@ class SignUpScreen extends StatelessWidget {
                 children: [
                   FistPage(
                     phoneController: phoneController,
+                    formKey: _formKey,
                   ),
                   const SecondPage(),
                 ],
@@ -68,10 +70,11 @@ class SignUpScreen extends StatelessWidget {
                       .setString("numberPhone", phoneController.text);
                 }
                 index++;
-                if (index < 2) {
+                if (index < 2 && phoneController.text.isNotEmpty) {
                   _pageController.jumpToPage(index);
+                } else if (phoneController.text.isEmpty) {
                 } else {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     CupertinoPageRoute(
                       builder: (context) => const HomeTab(),
@@ -106,8 +109,11 @@ class SecondPage extends StatelessWidget {
 
 class FistPage extends StatelessWidget {
   final TextEditingController phoneController;
+  final GlobalKey<FormState> formKey;
+
   const FistPage({
     required this.phoneController,
+    required this.formKey,
     Key? key,
   }) : super(key: key);
 
@@ -120,15 +126,32 @@ class FistPage extends StatelessWidget {
           "Номер телефона",
           style: PloffTextStyle.w400.copyWith(fontSize: 15),
         ),
-        TextFormField(
-          controller: phoneController,
-          decoration: InputDecoration(
-            filled: true,
-            focusColor: PloffColors.C_FFCC00,
-            hintText: "+998",
-            hintStyle: PloffTextStyle.w400.copyWith(fontSize: 15),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
+        Form(
+          key: formKey,
+          child: TextFormField(
+            autovalidateMode: AutovalidateMode.always,
+            controller: phoneController,
+            style: PloffTextStyle.w500.copyWith(fontSize: 15),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Enter something";
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+              filled: true,
+              focusColor: PloffColors.C_FFCC00,
+              prefixIcon: Text(
+                " +998 ",
+                style: PloffTextStyle.w500.copyWith(fontSize: 15),
+              ),
+              prefixIconConstraints: BoxConstraints(
+                maxHeight: 60,
+                maxWidth: 60,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
           ),
         ),

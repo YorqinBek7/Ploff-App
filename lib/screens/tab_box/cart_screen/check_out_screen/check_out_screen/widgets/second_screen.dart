@@ -8,15 +8,22 @@ import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
-class SecondPage extends StatelessWidget {
+class SecondPage extends StatefulWidget {
   final ValueChanged paymentValueChanged;
   Object? paymentType;
+
   SecondPage({
     super.key,
     required this.paymentType,
     required this.paymentValueChanged,
   });
 
+  @override
+  State<SecondPage> createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
+  int branchIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -68,16 +75,32 @@ class SecondPage extends StatelessWidget {
                         ),
                       ),
                       ListTile(
-                        leading: SvgPicture.asset(Plofficons.restaurant),
                         title: Text("Samarqand Darvoza"),
+                        onTap: () {
+                          branchIndex = 0;
+                          setState(() => {});
+                        },
                         subtitle: Text("SSS, Tshkent"),
-                        trailing: Icon(Icons.circle_outlined),
+                        trailing: Icon(
+                          branchIndex == 1
+                              ? Icons.circle_outlined
+                              : Icons.circle,
+                          color: PloffColors.C_FFCC00,
+                        ),
                       ),
                       ListTile(
-                        leading: SvgPicture.asset(Plofficons.restaurant),
+                        onTap: () {
+                          branchIndex = 1;
+                          setState(() => {});
+                        },
                         title: Text("Toshkent"),
                         subtitle: Text("SSS, Tshkent"),
-                        trailing: Icon(Icons.circle_outlined),
+                        trailing: Icon(
+                          branchIndex == 0
+                              ? Icons.circle_outlined
+                              : Icons.circle,
+                          color: PloffColors.C_FFCC00,
+                        ),
                       ),
                     ],
                   ),
@@ -85,8 +108,8 @@ class SecondPage extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                 child: TypePayment(
-                  valueChanged: paymentValueChanged,
-                  paymentType: paymentType,
+                  valueChanged: widget.paymentValueChanged,
+                  paymentType: widget.paymentType,
                 ),
               ),
               SliverToBoxAdapter(

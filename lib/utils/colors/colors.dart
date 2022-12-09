@@ -8,6 +8,7 @@ class PloffColors {
   static const Color C_F0F0F0 = Color(0xFFF0F0F0);
   static const Color C_858585 = Color(0xFF858585);
   static const Color C_FAFAFA = Color(0xFFFAFAFA);
+  static const Color C_22C348 = Color(0xFF22C348);
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
   static const Color red = Color(0xFFFF0000);

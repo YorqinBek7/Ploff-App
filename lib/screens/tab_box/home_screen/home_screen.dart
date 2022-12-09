@@ -1,18 +1,18 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:ploff/data/local_database/cached_meals.dart';
 import 'package:ploff/data/models/meal_model.dart';
 import 'package:ploff/data/service/get_location.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/banner_widget.dart';
+import 'package:ploff/screens/tab_box/home_screen/widgets/bottom_dialog.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/category.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/meal_item.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/search_field.dart';
-import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/enum_classes/enum_classes.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -28,19 +28,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<AboutMeal> allMeals = [];
+  List<CachedMeals> allMeals = [];
   late List<Placemark> placemark;
   late Position position;
-  var s = GetMeals();
   List<int> numbers = [1, 2, 3, 4, 5, 6];
   Object? _address;
   List<GetAddress> addresses = [];
 
   @override
   void initState() {
-    allMeals = s.allMeals;
+    init();
     _address = numbers[0];
     super.initState();
+  }
+
+  init() async {
+    GetMeals();
+    allMeals = GetMeals().allMeals;
   }
 
   @override
@@ -69,61 +73,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     //     ),
                     //   ),
                     // );
-                    showModalBottomSheet(
-                      context: context,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                        ),
-                      ),
-                      builder: (context) => StatefulBuilder(
-                        builder: (context, setState) {
-                          return Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Center(
-                                child: Text(
-                                  "Мои адреса",
-                                  style: PloffTextStyle.w600
-                                      .copyWith(fontSize: 20),
-                                ),
-                              ),
-                              Expanded(
-                                child: ListView(
-                                  physics: BouncingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  children: [
-                                    ...List.generate(
-                                      5,
-                                      (index) => RadioListTile(
-                                        subtitle: Text("qwerty"),
-                                        value: numbers[index],
-                                        title: Text("Qwerty"),
-                                        groupValue: _address,
-                                        onChanged: (value) {
-                                          setState(
-                                            () => {
-                                              _address = value,
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.all(16),
-                                child: GlobalButton(
-                                  buttonText: "Text",
-                                  onTap: () {},
-                                ),
-                              )
-                            ],
-                          );
-                        },
-                      ),
+                    BottomDialog(
+                      context,
+                      numbers,
+                      _address,
+                      position,
+                      placemark,
                     );
                     position = await getCurrentLocation();
                     placemark = await placemarkFromCoordinates(
@@ -134,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 5,
+                        width: 10,
                       ),
                       SvgPicture.asset(Plofficons.location),
                       SizedBox(
@@ -176,15 +131,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 slivers: [
                   SliverToBoxAdapter(
                     child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
+                      margin: EdgeInsets.symmetric(vertical: 15),
                       height: 170,
-                      child: CarouselSlider.builder(
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
                         itemCount: 5,
-                        itemBuilder: (context, index, realIndex) =>
-                            BannerWidget(),
-                        options: CarouselOptions(
-                          autoPlay: true,
-                        ),
+                        itemBuilder: (context, index) => BannerWidget(),
                       ),
                     ),
                   ),
@@ -192,8 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     delegate: SliverChildBuilderDelegate(
                       childCount: 5,
                       (context, index) => Container(
-                        margin: EdgeInsets.symmetric(vertical: 5),
-                        padding: EdgeInsets.all(16),
+                        margin: EdgeInsets.only(bottom: 12),
                         decoration: BoxDecoration(
                           color: PloffColors.white,
                           borderRadius: BorderRadius.circular(10),
@@ -201,9 +152,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "Birinchi taomlar",
-                              style: PloffTextStyle.w600.copyWith(fontSize: 22),
+                            Container(
+                              margin: EdgeInsets.only(left: 16),
+                              child: Text(
+                                "Birinchi taomlar",
+                                style:
+                                    PloffTextStyle.w600.copyWith(fontSize: 22),
+                              ),
                             ),
                             ...List.generate(
                               allMeals.length,
@@ -211,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mealDescription:
                                     allMeals[index].mealDescription,
                                 mealName: allMeals[index].mealName,
-                                mealPrice: allMeals[index].mealPrice,
+                                mealPrice: allMeals[index].priceMeal.toString(),
                                 index: index,
                                 length: allMeals.length,
                                 onTap: () {
@@ -220,12 +175,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     CupertinoPageRoute(
                                       builder: (context) => MealDetailScreen(
                                         aboutMeal: allMeals[index],
-                                        price: int.parse(
-                                          allMeals[index].mealPrice,
-                                        ),
-                                        firstlyPrice: int.parse(
-                                          allMeals[index].mealPrice,
-                                        ),
+                                        price: allMeals[index].priceMeal,
+                                        firstlyPrice: allMeals[index].priceMeal,
                                       ),
                                     ),
                                   );
@@ -236,11 +187,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

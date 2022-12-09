@@ -1,15 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/main.dart';
-import 'package:ploff/screens/splash_screen/splash_screen.dart';
-import 'package:ploff/screens/tab_box/profile_screen/sub_screens/widgets/profile_subscreen_appbar.dart';
+import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
+import 'dart:io' show Platform;
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  bool isNotificationOn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +26,7 @@ class SettingsScreen extends StatelessWidget {
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
         title: Text(
-          'Edit profile',
+          'Settings',
           style: PloffTextStyle.w600.copyWith(fontSize: 20),
         ),
       ),
@@ -26,7 +35,6 @@ class SettingsScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 5),
               decoration: BoxDecoration(
                 color: PloffColors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -37,8 +45,70 @@ class SettingsScreen extends StatelessWidget {
                     leading: SvgPicture.asset(Plofficons.globus),
                     title: const Text("Language"),
                     tileColor: PloffColors.C_F0F0F0,
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        builder: (context) => Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 15),
+                                child: Text(
+                                  "Language",
+                                  style: PloffTextStyle.w600
+                                      .copyWith(fontSize: 20),
+                                ),
+                              ),
+                              Divider(),
+                              ListTile(
+                                leading: Image.asset(Plofficons.uzbFlag),
+                                title: Text(
+                                  "O'zbekcha",
+                                  style: PloffTextStyle.w600
+                                      .copyWith(fontSize: 15),
+                                ),
+                                trailing: Icon(
+                                  Icons.done,
+                                  color: PloffColors.C_FFCC00,
+                                ),
+                              ),
+                              Divider(),
+                              ListTile(
+                                  leading: Image.asset(Plofficons.russiaFlag),
+                                  title: Text(
+                                    "Русский",
+                                    style: PloffTextStyle.w600
+                                        .copyWith(fontSize: 15),
+                                  ),
+                                  trailing: null),
+                              Divider(),
+                              ListTile(
+                                leading: Image.asset(Plofficons.englishFlag),
+                                title: Text(
+                                  "English",
+                                  style: PloffTextStyle.w600
+                                      .copyWith(fontSize: 15),
+                                ),
+                                trailing: null,
+                              ),
+                              Divider(),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                     trailing: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => Container(),
+                        );
+                      },
                       icon: SvgPicture.asset(Plofficons.arrow_right),
                     ),
                   ),
@@ -47,10 +117,25 @@ class SettingsScreen extends StatelessWidget {
                     leading: SvgPicture.asset(Plofficons.notification),
                     title: const Text("Notification"),
                     tileColor: PloffColors.C_F0F0F0,
-                    trailing: CupertinoSwitch(
-                      value: true,
-                      onChanged: (value) {},
-                    ),
+                    trailing: Platform.isIOS
+                        ? CupertinoSwitch(
+                            value: isNotificationOn,
+                            onChanged: (value) {
+                              setState(() => {
+                                    isNotificationOn = value,
+                                  });
+                            },
+                          )
+                        : Switch(
+                            value: isNotificationOn,
+                            onChanged: (value) {
+                              setState(
+                                () => {
+                                  isNotificationOn = value,
+                                },
+                              );
+                            },
+                          ),
                   ),
                 ],
               ),
@@ -59,10 +144,13 @@ class SettingsScreen extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 sharedPreferences!.setString("numberPhone", "");
+                context
+                    .read<BottomNavigationCubit>()
+                    .changeBottomNavigationPages(0);
                 Navigator.pushAndRemoveUntil(
                   context,
                   CupertinoPageRoute(
-                    builder: (context) => SplashScreen(),
+                    builder: (context) => HomeTab(),
                   ),
                   (route) => false,
                 );

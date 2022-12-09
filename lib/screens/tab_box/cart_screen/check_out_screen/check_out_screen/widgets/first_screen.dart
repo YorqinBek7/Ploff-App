@@ -104,10 +104,11 @@ class FirstPage extends StatelessWidget {
                                 ),
                               ),
                               Align(
-                                  alignment: Alignment.topLeft,
-                                  child: SvgPicture.asset(
-                                    Plofficons.big,
-                                  )),
+                                alignment: Alignment.topLeft,
+                                child: SvgPicture.asset(
+                                  Plofficons.big,
+                                ),
+                              ),
                             ],
                           ),
                         ),

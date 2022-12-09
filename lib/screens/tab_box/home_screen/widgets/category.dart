@@ -11,38 +11,47 @@ class CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 40,
-      child: ListView.separated(
-        physics: const BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () {
-            categoryIndex.add(index);
-            setter(
-              () => {},
-            );
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: selectedCategories(
-                        index: index,
-                      ) ==
-                      index
-                  ? PloffColors.C_FFCC00
-                  : PloffColors.C_F0F0F0,
-            ),
-            child: const Center(
-              child: Text(
-                "Популярные блюда",
-                style: PloffTextStyle.w500,
+      child: Row(
+        children: [
+          Expanded(
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  categoryIndex.add(index);
+                  setter(
+                    () => {},
+                  );
+                },
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  margin: EdgeInsets.only(
+                    left: index == 0 ? 10 : 5,
+                    right: index == 5 - 1 ? 10 : 5,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: selectedCategories(
+                              index: index,
+                            ) ==
+                            index
+                        ? PloffColors.C_FFCC00
+                        : PloffColors.C_F0F0F0,
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Популярные блюда",
+                      style: PloffTextStyle.w500,
+                    ),
+                  ),
+                ),
               ),
+              separatorBuilder: (context, index) => Container(),
+              itemCount: 5,
             ),
           ),
-        ),
-        separatorBuilder: (context, index) => Container(),
-        itemCount: 5,
+        ],
       ),
     );
   }

@@ -8,24 +8,36 @@ class ProfileOptionsItem extends StatelessWidget {
   final String title;
   final String icon;
   final VoidCallback onTap;
+  final bool isDivider;
   const ProfileOptionsItem({
     Key? key,
     required this.title,
     required this.icon,
     required this.onTap,
+    required this.isDivider,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      tileColor: PloffColors.white,
-      onTap: onTap,
-      leading: SvgPicture.asset(icon),
-      title: Text(
-        title,
-        style: PloffTextStyle.w500.copyWith(fontSize: 16),
+    return Container(
+      decoration: BoxDecoration(
+          border: isDivider
+              ? Border(
+                  bottom: BorderSide(
+                    color: PloffColors.black.withOpacity(.01),
+                  ),
+                )
+              : null),
+      child: ListTile(
+        tileColor: PloffColors.white,
+        onTap: onTap,
+        leading: SvgPicture.asset(icon),
+        title: Text(
+          title,
+          style: PloffTextStyle.w500.copyWith(fontSize: 16),
+        ),
+        trailing: SvgPicture.asset(Plofficons.arrow_right),
       ),
-      trailing: SvgPicture.asset(Plofficons.arrow_right),
     );
   }
 }

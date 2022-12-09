@@ -74,6 +74,7 @@ class ProfileScreen extends StatelessWidget {
             icon: Plofficons.my_location,
             title: 'My locations',
             onTap: () {},
+            isDivider: true,
           ),
           ProfileOptionsItem(
             icon: Plofficons.location_black,
@@ -88,6 +89,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               );
             },
+            isDivider: true,
           ),
           ProfileOptionsItem(
             icon: Plofficons.settings,
@@ -102,6 +104,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               );
             },
+            isDivider: true,
           ),
           ProfileOptionsItem(
             icon: Plofficons.about,
@@ -114,6 +117,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               );
             },
+            isDivider: false,
           ),
           const Spacer(),
           Text(
