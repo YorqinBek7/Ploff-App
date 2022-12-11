@@ -7,7 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/data/local_database/local_database.dart';
 import 'package:ploff/main.dart';
-import 'package:ploff/screens/auth/sign_up_screen/sign_up_screen.dart';
+import 'package:ploff/screens/auth/sign_up_screen/enter_phone_number_page.dart';
 import 'package:ploff/screens/tab_box/cart_screen/cart_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/home_screen.dart';
 import 'package:ploff/screens/tab_box/my_orders_screen/my_orders_screen.dart';
@@ -69,12 +69,12 @@ class _HomeTabState extends State<HomeTab> {
               if ((value == 2 || value == 3) &&
                   (sharedPreferences?.getString("numberPhone") == null ||
                       sharedPreferences?.getString("numberPhone") == "")) {
-                await Navigator.push(
+                Navigator.push(
                   context,
                   CupertinoPageRoute(
                     builder: (context) {
                       value = index;
-                      return SignUpScreen();
+                      return EnterPhoneNumberPage();
                     },
                   ),
                 );

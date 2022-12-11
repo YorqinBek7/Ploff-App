@@ -13,6 +13,7 @@ import 'package:ploff/utils/style/text_style.dart';
 class GetLocationScreen extends StatefulWidget {
   final Position position;
   List<Placemark> placemark;
+
   GetLocationScreen(
       {super.key, required this.position, required this.placemark});
 
@@ -22,16 +23,19 @@ class GetLocationScreen extends StatefulWidget {
 
 class _GetLocationScreenState extends State<GetLocationScreen> {
   final TextEditingController entranceController = TextEditingController();
-
   final TextEditingController floorController = TextEditingController();
-
   final TextEditingController flatController = TextEditingController();
-
   final TextEditingController addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        scrolledUnderElevation: 0,
+        elevation: 0,
+      ),
       resizeToAvoidBottomInset: false,
       backgroundColor: PloffColors.C_F0F0F0,
       body: Stack(
@@ -61,14 +65,8 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   ),
                 ),
                 Align(
-                  alignment: Alignment.center,
-                  child: Stack(
-                    children: [
-                      SvgPicture.asset(Plofficons.oval),
-                      SvgPicture.asset(Plofficons.line),
-                    ],
-                  ),
-                )
+                    alignment: Alignment.center,
+                    child: SvgPicture.asset(Plofficons.location_center))
               ],
             ),
           ),
