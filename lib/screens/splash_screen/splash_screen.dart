@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
+import 'package:ploff/main.dart';
 import 'package:ploff/screens/select_language_screen/select_language_screen.dart';
 import 'package:ploff/utils/colors/colors.dart';
 
@@ -22,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         CupertinoPageRoute(
-          builder: (context) => SelectLanguageScreen(),
+          builder: (context) => const SelectLanguageScreen(),
         ),
       );
     });

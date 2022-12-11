@@ -1,15 +1,23 @@
 part of 'bottom_navigation_cubit.dart';
 
 @immutable
-abstract class BottomNavigationState {}
-
-class BottomNavigationInHome extends BottomNavigationState {}
-
-class BottomNavigationInCart extends BottomNavigationState {
-  List<CachedMeals> meals;
-  BottomNavigationInCart({required this.meals});
+abstract class BottomNavigationState {
+  BottomNavigationState({required this.index});
+  int index;
 }
 
-class BottomNavigationInMyOrders extends BottomNavigationState {}
+class BottomNavigationInHome extends BottomNavigationState {
+  BottomNavigationInHome({required super.index});
+}
 
-class BottomNavigationInProfile extends BottomNavigationState {}
+class BottomNavigationInCart extends BottomNavigationState {
+  BottomNavigationInCart({required super.index});
+}
+
+class BottomNavigationInMyOrders extends BottomNavigationState {
+  BottomNavigationInMyOrders({required super.index});
+}
+
+class BottomNavigationInProfile extends BottomNavigationState {
+  BottomNavigationInProfile({required super.index});
+}

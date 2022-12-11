@@ -1,17 +1,15 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
-import 'package:ploff/data/local_database/local_database.dart';
 import 'package:ploff/main.dart';
 import 'package:ploff/screens/auth/sign_up_screen/enter_phone_number_page.dart';
-import 'package:ploff/screens/tab_box/cart_screen/cart_screen.dart';
-import 'package:ploff/screens/tab_box/home_screen/home_screen.dart';
-import 'package:ploff/screens/tab_box/my_orders_screen/my_orders_screen.dart';
-import 'package:ploff/screens/tab_box/profile_screen/profile_screen.dart';
+import 'package:ploff/screens/tab_box/home_tab/cart_screen/cart_screen.dart';
+import 'package:ploff/screens/tab_box/home_tab/home_screen/home_screen.dart';
+import 'package:ploff/screens/tab_box/home_tab/my_orders_screen/my_orders_screen.dart';
+import 'package:ploff/screens/tab_box/home_tab/profile_screen/profile_screen.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 
@@ -29,39 +27,27 @@ class _HomeTabState extends State<HomeTab> {
     const MyOrdersScreen(),
     const ProfileScreen()
   ];
-  @override
-  void initState() {
-    init();
-    super.initState();
-  }
 
-  init() async {
-    context.read<BottomNavigationCubit>().meals =
-        await LocalDataBase.getAllCachedMeals();
-  }
-
-  int index = 0;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BottomNavigationCubit, BottomNavigationState>(
       builder: (context, state) {
-        if (state is BottomNavigationInHome) {
-          index = 0;
-        } else if (state is BottomNavigationInCart) {
-          index = 1;
-        } else if (state is BottomNavigationInMyOrders) {
-          index = 2;
-        } else if (state is BottomNavigationInProfile) {
-          index = 3;
-        }
         return Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 0.0,
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarBrightness: Brightness.dark,
+              statusBarColor: PloffColors.white,
+              statusBarIconBrightness: Brightness.dark,
+            ),
+          ),
           body: IndexedStack(
-            index: index,
+            index: state.index,
             children: screens,
           ),
           bottomNavigationBar: BottomNavigationBar(
             selectedItemColor: PloffColors.C_FFCC00,
-            currentIndex: index,
+            currentIndex: state.index,
             selectedFontSize: 12,
             unselectedFontSize: 12,
             type: BottomNavigationBarType.fixed,
@@ -69,21 +55,20 @@ class _HomeTabState extends State<HomeTab> {
               if ((value == 2 || value == 3) &&
                   (sharedPreferences?.getString("numberPhone") == null ||
                       sharedPreferences?.getString("numberPhone") == "")) {
-                Navigator.push(
+                await Navigator.push(
                   context,
                   CupertinoPageRoute(
                     builder: (context) {
-                      value = index;
+                      value = state.index;
                       return EnterPhoneNumberPage();
                     },
                   ),
                 );
               }
-              log(context.read<BottomNavigationCubit>().meals.toString());
-              context.read<BottomNavigationCubit>().changeBottomNavigationPages(
-                    value,
-                    context.read<BottomNavigationCubit>().meals,
-                  );
+
+              context
+                  .read<BottomNavigationCubit>()
+                  .changeBottomNavigationPages(value);
             },
             items: [
               BottomNavigationBarItem(
