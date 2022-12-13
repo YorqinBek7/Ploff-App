@@ -1,14 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
-import 'package:ploff/data/local_database/cached_meals.dart';
-import 'package:ploff/data/local_database/local_database.dart';
+import 'package:ploff/data/models/meal_model.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/appbar_bottom.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/inc_dec_buttons.dart';
@@ -23,7 +21,7 @@ class MealDetailScreen extends StatefulWidget {
     required this.price,
     required this.firstlyPrice,
   });
-  final CachedMeals aboutMeal;
+  final AboutMeal aboutMeal;
   double price;
   double firstlyPrice;
 
@@ -231,16 +229,11 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Product added to cart")),
                     );
-                    context
-                        .read<BottomNavigationCubit>()
-                        .meals
-                        .add(widget.aboutMeal);
-                    await LocalDataBase.insertMeals(widget.aboutMeal);
+
                     context
                         .read<BottomNavigationCubit>()
                         .changeBottomNavigationPages(
                           1,
-                          context.read<BottomNavigationCubit>().meals,
                         );
                     Navigator.pop(context);
                   },

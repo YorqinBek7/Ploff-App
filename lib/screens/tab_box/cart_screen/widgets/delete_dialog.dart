@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
-import 'package:ploff/data/local_database/local_database.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -53,10 +52,9 @@ Future<dynamic> deleteAllDialog(BuildContext context) {
                   onTap: () async {
                     context
                         .read<BottomNavigationCubit>()
-                        .changeBottomNavigationPages(1, []);
-                    context.read<BottomNavigationCubit>().meals = [];
+                        .changeBottomNavigationPages(1);
+
                     Navigator.pop(context);
-                    await LocalDataBase.deleteAllCachedMeals();
                   },
                   child: const DialogButtons(
                     color: PloffColors.C_FFCC00,

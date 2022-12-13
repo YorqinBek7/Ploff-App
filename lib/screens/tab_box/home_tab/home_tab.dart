@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
-import 'package:ploff/data/local_database/local_database.dart';
 import 'package:ploff/main.dart';
 import 'package:ploff/screens/auth/sign_up_screen/enter_phone_number_page.dart';
 import 'package:ploff/screens/tab_box/cart_screen/cart_screen.dart';
@@ -29,16 +26,6 @@ class _HomeTabState extends State<HomeTab> {
     const MyOrdersScreen(),
     const ProfileScreen()
   ];
-  @override
-  void initState() {
-    init();
-    super.initState();
-  }
-
-  init() async {
-    context.read<BottomNavigationCubit>().meals =
-        await LocalDataBase.getAllCachedMeals();
-  }
 
   int index = 0;
   @override
@@ -69,7 +56,7 @@ class _HomeTabState extends State<HomeTab> {
               if ((value == 2 || value == 3) &&
                   (sharedPreferences?.getString("numberPhone") == null ||
                       sharedPreferences?.getString("numberPhone") == "")) {
-                Navigator.push(
+                await Navigator.push(
                   context,
                   CupertinoPageRoute(
                     builder: (context) {
@@ -79,11 +66,9 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                 );
               }
-              log(context.read<BottomNavigationCubit>().meals.toString());
-              context.read<BottomNavigationCubit>().changeBottomNavigationPages(
-                    value,
-                    context.read<BottomNavigationCubit>().meals,
-                  );
+              context
+                  .read<BottomNavigationCubit>()
+                  .changeBottomNavigationPages(value);
             },
             items: [
               BottomNavigationBarItem(

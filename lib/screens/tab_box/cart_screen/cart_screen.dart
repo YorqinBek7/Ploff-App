@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:ploff/data/models/meal_model.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen.dart';
 import 'package:ploff/screens/tab_box/cart_screen/widgets/delete_dialog.dart';
 import 'package:ploff/screens/tab_box/cart_screen/widgets/carts_item.dart';
@@ -55,10 +56,11 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                       ),
                       ...List.generate(
-                        state.meals.length,
+                        2,
                         (index) => SliverToBoxAdapter(
                           child: CartsItem(
-                            meals: state.meals[index],
+                            meals: AboutMeal(
+                                mealDescription: "32", mealName: 'wqeqweqwe'),
                             count: count,
                           ),
                         ),

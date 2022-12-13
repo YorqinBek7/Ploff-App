@@ -92,7 +92,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 sharedPreferences!.setString("numberPhone", "");
                 context
                     .read<BottomNavigationCubit>()
-                    .changeBottomNavigationPages(0, []);
+                    .changeBottomNavigationPages(0);
                 Navigator.pushAndRemoveUntil(
                   context,
                   CupertinoPageRoute(

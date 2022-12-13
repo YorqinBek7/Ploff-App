@@ -4,17 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:ploff/data/local_database/cached_meals.dart';
-import 'package:ploff/data/models/meal_model.dart';
 import 'package:ploff/data/service/get_location.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/get_location_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/banner_widget.dart';
-import 'package:ploff/screens/tab_box/home_screen/widgets/bottom_dialog.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/category.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/meal_item.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/search_field.dart';
-import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/enum_classes/enum_classes.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -30,24 +26,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<CachedMeals> allMeals = [];
   late List<Placemark> placemark;
   late Position position;
-  List<int> numbers = [1, 2, 3, 4, 5, 6];
-  Object? _address;
-  List<GetAddress> addresses = [];
-
-  @override
-  void initState() {
-    init();
-    _address = numbers[0];
-    super.initState();
-  }
-
-  init() async {
-    GetMeals();
-    allMeals = GetMeals().allMeals;
-  }
+  List allMeals = [];
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +123,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     //     ],
                     //   ),
                     // );
-
                   },
                   child: Row(
                     children: [
