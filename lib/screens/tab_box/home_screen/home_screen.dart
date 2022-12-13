@@ -12,7 +12,6 @@ import 'package:ploff/screens/tab_box/home_screen/widgets/category.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/meal_item.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/search_field.dart';
 import 'package:ploff/utils/colors/colors.dart';
-import 'package:ploff/utils/enum_classes/enum_classes.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
