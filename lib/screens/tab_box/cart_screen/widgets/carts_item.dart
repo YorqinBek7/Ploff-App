@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ploff/data/models/meal_model.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -8,11 +7,9 @@ import 'package:ploff/utils/style/text_style.dart';
 class CartsItem extends StatefulWidget {
   CartsItem({
     Key? key,
-    required this.meals,
     required this.count,
   }) : super(key: key);
 
-  AboutMeal meals;
   int count;
 
   @override
@@ -45,12 +42,12 @@ class _CartsItemState extends State<CartsItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.meals.mealName,
+                    "widget.meals.mealName",
                     style: PloffTextStyle.w600.copyWith(fontSize: 17),
                   ),
                   const SizedBox(height: 25),
                   Text(
-                    widget.meals.mealDescription,
+                    "widget.meals.mealDescription",
                     style: PloffTextStyle.w500.copyWith(fontSize: 15),
                   ),
                 ],

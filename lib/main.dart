@@ -3,8 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
+import 'package:ploff/cubits/get_categories/get_categories_cubit.dart';
+import 'package:ploff/cubits/get_products/get_products_cubit.dart';
 import 'package:ploff/cubits/sign_up/sign_up_cubit.dart';
-import 'package:ploff/screens/splash_screen/splash_screen.dart';
+import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -36,6 +38,12 @@ class PloffApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SignUpCubit(),
         ),
+        BlocProvider(
+          create: (context) => GetProductsCubit(),
+        ),
+        BlocProvider(
+          create: (context) => GetCategoriesCubit(),
+        ),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -49,7 +57,7 @@ class PloffApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         title: 'Ploff app',
-        home: SplashScreen(),
+        home: HomeTab(),
       ),
     );
   }

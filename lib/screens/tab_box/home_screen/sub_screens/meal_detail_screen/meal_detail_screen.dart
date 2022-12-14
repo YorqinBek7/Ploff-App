@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
-import 'package:ploff/data/models/meal_model.dart';
+import 'package:ploff/data/models/products/product.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/appbar_bottom.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/inc_dec_buttons.dart';
@@ -21,7 +21,7 @@ class MealDetailScreen extends StatefulWidget {
     required this.price,
     required this.firstlyPrice,
   });
-  final AboutMeal aboutMeal;
+  final Product aboutMeal;
   double price;
   double firstlyPrice;
 
@@ -104,11 +104,11 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.aboutMeal.mealName,
+                          widget.aboutMeal.name,
                           style: PloffTextStyle.w500,
                         ),
                         Text(
-                          "Ba'tafsil: ${widget.aboutMeal.mealDescription}",
+                          "Ba'tafsil: ${widget.aboutMeal.description}",
                           style: PloffTextStyle.w400.copyWith(
                             fontSize: 15.0,
                             color: PloffColors.black.withOpacity(.5),
