@@ -1,14 +1,16 @@
 import 'package:dio/dio.dart';
+import 'package:ploff/data/models/banenrs/banner.dart';
 import 'package:ploff/data/models/categories/categories.dart';
 import 'package:ploff/data/models/products/product.dart';
 import 'package:ploff/utils/constants/const.dart';
 
 class ApiService {
   Dio dio = Dio();
-  Future<List<Product>> getMeals() async {
+  Future<List<Product>> getMeals({String? searchText}) async {
     try {
       Response response = await dio.get(
         "$BASE_URL/v1/product",
+        queryParameters: {"search": searchText},
         options: Options(
           headers: {
             "Shipper": "d4b1658f-3271-4973-8591-98a82939a664",
@@ -41,6 +43,29 @@ class ApiService {
       if (response.statusCode! >= 200 && response.statusCode! <= 300) {
         return (response.data["categories"] as List?)
                 ?.map((data) => Categorie.fromMap(data))
+                .toList() ??
+            [];
+      } else {
+        return [];
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<List<Banner>> getBanners() async {
+    try {
+      Response response = await dio.get(
+        "$BASE_URL/v1/banner",
+        options: Options(
+          headers: {
+            "Shipper": "d4b1658f-3271-4973-8591-98a82939a664",
+          },
+        ),
+      );
+      if (response.statusCode! >= 200 && response.statusCode! <= 300) {
+        return (response.data["banners"] as List?)
+                ?.map((data) => Banner.fromMap(data))
                 .toList() ??
             [];
       } else {

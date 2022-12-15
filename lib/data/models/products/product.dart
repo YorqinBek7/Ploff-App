@@ -3,29 +3,29 @@ import 'package:ploff/data/models/products/description.dart';
 import 'package:ploff/data/models/products/title.dart';
 
 class Product {
-  final String id;
+  final String? id;
   final String name;
-  final String slug;
-  final String category_id;
+  final String? slug;
+  final String? category_id;
   final String description;
   final String price;
-  final String order_no;
-  final String image;
-  final Title title;
-  final Description_v2 description_v2;
-  final bool has_modifier;
+  final String? order_no;
+  final String? image;
+  final Title? title;
+  final Description_v2? description_v2;
+  final bool? has_modifier;
   Product({
-    required this.id,
+    this.id,
     required this.name,
-    required this.slug,
-    required this.category_id,
+    this.slug,
+    this.category_id,
     required this.description,
     required this.price,
-    required this.order_no,
-    required this.image,
-    required this.title,
-    required this.description_v2,
-    required this.has_modifier,
+    this.order_no,
+    this.image,
+    this.title,
+    this.description_v2,
+    this.has_modifier,
   });
 
   Product copyWith({
@@ -56,6 +56,14 @@ class Product {
     );
   }
 
+  Map<String, dynamic> toBase() {
+    return <String, dynamic>{
+      'name': name,
+      'description': description,
+      'price': price,
+    };
+  }
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
@@ -66,10 +74,18 @@ class Product {
       'price': price,
       'order_no': order_no,
       'image': image,
-      'title': title.toMap(),
-      'description_v2': description_v2.toMap(),
+      'title': title!.toMap(),
+      'description_v2': description_v2!.toMap(),
       'has_modifier': has_modifier,
     };
+  }
+
+  factory Product.fromBase(Map<String, dynamic> map) {
+    return Product(
+      name: map['name'] as String,
+      description: map['description'] as String,
+      price: map['price'] as String,
+    );
   }
 
   factory Product.fromMap(Map<String, dynamic> map) {

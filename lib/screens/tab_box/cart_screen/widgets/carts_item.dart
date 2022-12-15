@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ploff/data/models/products/product.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -8,9 +9,11 @@ class CartsItem extends StatefulWidget {
   CartsItem({
     Key? key,
     required this.count,
+    required this.aboutMeal,
   }) : super(key: key);
 
   int count;
+  Product aboutMeal;
 
   @override
   State<CartsItem> createState() => _CartsItemState();
@@ -41,14 +44,24 @@ class _CartsItemState extends State<CartsItem> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "widget.meals.mealName",
-                    style: PloffTextStyle.w600.copyWith(fontSize: 17),
+                  SizedBox(
+                    width: 150,
+                    child: Text(
+                      widget.aboutMeal.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: PloffTextStyle.w600.copyWith(fontSize: 17),
+                    ),
                   ),
                   const SizedBox(height: 25),
-                  Text(
-                    "widget.meals.mealDescription",
-                    style: PloffTextStyle.w500.copyWith(fontSize: 15),
+                  SizedBox(
+                    width: 150,
+                    child: Text(
+                      widget.aboutMeal.description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: PloffTextStyle.w500.copyWith(fontSize: 15),
+                    ),
                   ),
                 ],
               ),

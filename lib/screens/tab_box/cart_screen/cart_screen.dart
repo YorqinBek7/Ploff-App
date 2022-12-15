@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:ploff/data/local_database/data_base.dart';
+import 'package:ploff/data/models/products/product.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen.dart';
 import 'package:ploff/screens/tab_box/cart_screen/widgets/delete_dialog.dart';
 import 'package:ploff/screens/tab_box/cart_screen/widgets/carts_item.dart';
@@ -20,7 +22,19 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  init() async {
+    product = await LocalDatabase.getAllCachedMeals();
+  }
+
   int count = 0;
+  List<Product> product = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,16 +68,15 @@ class _CartScreenState extends State<CartScreen> {
                           height: 15,
                         ),
                       ),
-                      // ...List.generate(
-                      //   2,
-                      //   (index) => SliverToBoxAdapter(
-                      //     child: CartsItem(
-                      //       meals: AboutMeal(
-                      //           mealDescription: "32", mealName: 'wqeqweqwe'),
-                      //       count: count,
-                      //     ),
-                      //   ),
-                      // ),
+                      ...List.generate(
+                        product.length,
+                        (index) => SliverToBoxAdapter(
+                          child: CartsItem(
+                            count: count,
+                            aboutMeal: product[index],
+                          ),
+                        ),
+                      ),
                       const SliverToBoxAdapter(
                         child: SizedBox(
                           height: 15,

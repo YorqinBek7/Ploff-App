@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ploff/utils/colors/colors.dart';
-import 'package:ploff/utils/icons/icons.dart';
-import 'package:ploff/utils/style/text_style.dart';
 
 class BannerWidget extends StatelessWidget {
+  final String imagePath;
   const BannerWidget({
+    required this.imagePath,
     Key? key,
   }) : super(key: key);
 
@@ -23,10 +23,14 @@ class BannerWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           color: PloffColors.C_F0F0F0,
         ),
-        child: Image.asset(
-          Plofficons.meal,
-          width: 148,
-          height: 152,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.network(
+            imagePath,
+            width: 148,
+            height: 152,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
