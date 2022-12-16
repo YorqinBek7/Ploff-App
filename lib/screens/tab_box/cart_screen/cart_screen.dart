@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/data/local_database/data_base.dart';
-import 'package:ploff/data/models/products/product.dart';
+import 'package:ploff/data/models/products/products.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen.dart';
 import 'package:ploff/screens/tab_box/cart_screen/widgets/delete_dialog.dart';
 import 'package:ploff/screens/tab_box/cart_screen/widgets/carts_item.dart';

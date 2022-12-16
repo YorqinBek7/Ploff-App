@@ -8,8 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
 import 'package:ploff/data/local_database/data_base.dart';
-import 'package:ploff/data/models/products/product.dart';
-import 'package:ploff/data/service/hive_service/hive_service.dart';
+import 'package:ploff/data/models/products/products.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/appbar_bottom.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/inc_dec_buttons.dart';
@@ -107,7 +106,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.aboutMeal.name,
+                          widget.aboutMeal.measurement.short_name.toString(),
                           style: PloffTextStyle.w500,
                         ),
                         Text(

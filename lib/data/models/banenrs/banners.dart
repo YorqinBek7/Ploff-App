@@ -31,7 +31,7 @@ class Banners {
   factory Banners.fromMap(Map<String, dynamic> map) {
     return Banners(
       banners: List<Banner>.from(
-        (map['banners'] as List<int>).map<Banner>(
+        (map['banners']).map<Banner>(
           (x) => Banner.fromMap(x as Map<String, dynamic>),
         ),
       ),

@@ -5,15 +5,30 @@ import 'package:ploff/data/models/categories/categories.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
-class CategoryItem extends StatelessWidget {
+class CategoryItem extends SliverPersistentHeaderDelegate {
   StateSetter setter;
   List<Categorie> categorie;
-  CategoryItem({super.key, required this.setter, required this.categorie});
+  CategoryItem({
+    required this.setter,
+    required this.categorie,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
+  double get maxExtent => 50;
+
+  @override
+  double get minExtent => 50;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return true;
+  }
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: PloffColors.white,
       child: Row(
         children: [
           Expanded(
@@ -35,6 +50,7 @@ class CategoryItem extends StatelessWidget {
                   margin: EdgeInsets.only(
                     left: index == 0 ? 10 : 5,
                     right: index == 5 - 1 ? 10 : 5,
+                    bottom: 10,
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -48,7 +64,7 @@ class CategoryItem extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      categorie[index].name,
+                      categorie[index].title.uz,
                       style: PloffTextStyle.w500,
                     ),
                   ),

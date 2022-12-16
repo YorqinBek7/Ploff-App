@@ -6,12 +6,14 @@ class GetProductAndCategoryState extends Equatable {
   final List<Product> products;
   final List<Categorie> categories;
   final List<Banner> banners;
+  final HomeScreenStates states;
   const GetProductAndCategoryState({
     required this.errorText,
     required this.products,
     required this.status,
     required this.categories,
     required this.banners,
+    required this.states,
   });
 
   GetProductAndCategoryState copyWith({
@@ -20,15 +22,17 @@ class GetProductAndCategoryState extends Equatable {
     List<Product>? products,
     List<Categorie>? categories,
     List<Banner>? banners,
+    HomeScreenStates? states,
   }) {
     return GetProductAndCategoryState(
         errorText: errorText ?? this.errorText,
         products: products ?? this.products,
         status: status ?? this.status,
         categories: categories ?? this.categories,
-        banners: banners ?? this.banners);
+        banners: banners ?? this.banners,
+        states: states ?? this.states);
   }
 
   @override
-  List<Object> get props => [categories, products, errorText, status];
+  List<Object> get props => [categories, products, errorText, status, states];
 }

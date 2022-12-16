@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ploff/data/models/products/product.dart';
+import 'package:ploff/data/models/products/products.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -47,7 +47,7 @@ class _CartsItemState extends State<CartsItem> {
                   SizedBox(
                     width: 150,
                     child: Text(
-                      widget.aboutMeal.name,
+                      widget.aboutMeal.measurement.short_name.toString(),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: PloffTextStyle.w600.copyWith(fontSize: 17),
@@ -57,7 +57,7 @@ class _CartsItemState extends State<CartsItem> {
                   SizedBox(
                     width: 150,
                     child: Text(
-                      widget.aboutMeal.description,
+                      widget.aboutMeal.description.uz,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: PloffTextStyle.w500.copyWith(fontSize: 15),

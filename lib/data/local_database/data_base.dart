@@ -1,5 +1,7 @@
+import 'dart:developer';
+
 import 'package:ploff/data/local_database/cached_fields.dart';
-import 'package:ploff/data/models/products/product.dart';
+import 'package:ploff/data/models/products/products.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
