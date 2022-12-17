@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -49,6 +51,15 @@ class GetProductAndCategoryCubit extends Cubit<GetProductAndCategoryState> {
           banners: banners,
         ),
       );
+      for (Categorie element in categories) {
+        for (Product element2 in products) {
+          for (int i = 0; i < element2.categories.length; i++) {
+            if (element.id == element2.categories[i].id) {
+              log(element2.title?.uz ?? "");
+            }
+          }
+        }
+      }
     } catch (e) {
       emit(state.copyWith(
           status: FormzStatus.submissionFailure, errorText: e.toString()));

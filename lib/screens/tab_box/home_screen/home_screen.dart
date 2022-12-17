@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late Position position;
   List<Product> product = [];
   final TextEditingController textEditingController = TextEditingController();
-  var length = 0;
+  int length = 0;
 
   @override
   void initState() {
@@ -276,69 +275,74 @@ class _HomeScreenState extends State<HomeScreen> {
                         SliverList(
                           delegate: SliverChildListDelegate(
                             [
-                              ...List.generate(state.categories.length,
-                                  (categoryIndex) {
-                                return Container(
-                                  margin: EdgeInsets.only(bottom: 12),
-                                  decoration: BoxDecoration(
-                                    color: PloffColors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(left: 16),
-                                        child: Text(
-                                          state.categories[categoryIndex].title
-                                              .uz,
-                                          style: PloffTextStyle.w600
-                                              .copyWith(fontSize: 22),
+                              ...List.generate(
+                                state.categories.length,
+                                (categoryIndex) {
+                                  return Container(
+                                    margin: EdgeInsets.only(bottom: 12),
+                                    decoration: BoxDecoration(
+                                      color: PloffColors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(left: 16),
+                                          child: Text(
+                                            state.categories[categoryIndex]
+                                                .title.uz,
+                                            style: PloffTextStyle.w600
+                                                .copyWith(fontSize: 22),
+                                          ),
                                         ),
-                                      ),
-                                      ...List.generate(
-                                        state.products.length,
-                                        (index) {
-                                          return MealItem(
-                                            mealDescription: state
-                                                .products[index].description.uz,
-                                            mealName: state.products[index]
-                                                .measurement.short_name
-                                                .toString(),
-                                            mealPrice: state
-                                                .products[index].out_price
-                                                .toString(),
-                                            index: index,
-                                            length: state.products.length,
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                CupertinoPageRoute(
-                                                  builder: (context) =>
-                                                      MealDetailScreen(
-                                                    aboutMeal:
-                                                        state.products[index],
-                                                    price: double.parse(state
-                                                        .products[index]
-                                                        .out_price
-                                                        .toString()),
-                                                    firstlyPrice: double.parse(
-                                                      state.products[index]
+                                        ...List.generate(
+                                          state.products.length,
+                                          (index) {
+                                            return MealItem(
+                                              mealDescription: state
+                                                  .products[index]
+                                                  .description
+                                                  .uz,
+                                              mealName: state.products[index]
+                                                  .measurement.short_name
+                                                  .toString(),
+                                              mealPrice: state
+                                                  .products[index].out_price
+                                                  .toString(),
+                                              index: index,
+                                              length: state.products.length,
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  CupertinoPageRoute(
+                                                    builder: (context) =>
+                                                        MealDetailScreen(
+                                                      aboutMeal:
+                                                          state.products[index],
+                                                      price: double.parse(state
+                                                          .products[index]
                                                           .out_price
-                                                          .toString(),
+                                                          .toString()),
+                                                      firstlyPrice:
+                                                          double.parse(
+                                                        state.products[index]
+                                                            .out_price
+                                                            .toString(),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
                             ],
                           ),
                         )

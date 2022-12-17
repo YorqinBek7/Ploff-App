@@ -1,60 +1,71 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 
 class Product {
-  final bool? active;
-  final bool? is_divisible;
-  final bool? has_modifier;
-  final String? order;
-  final int? in_price;
+  final bool active;
+  final bool is_divisible;
+  final bool has_modifier;
+  final String order;
+  final int in_price;
   final int out_price;
-  final String? currency;
-  final String? count;
-  final String? id;
-  final String? slug;
-  final String? image;
-  final String? code;
-  final String? iiko_id;
-  final String? jowi_id;
+  final String currency;
+  final String count;
+  final String id;
+  final String slug;
+  final String image;
+  final String code;
+  final Gallery gallery;
+  final String iiko_id;
+  final String jowi_id;
   final Description description;
-  final Title? title;
-  final Brand? brand;
+  final Title title;
+  final Brand brand;
   final Measurement measurement;
-  final Rate? rate;
-  final bool? active_in_menu;
-  final String? from_time;
-  final String? to_time;
-  final bool? off_always;
-  final Favorites? favorites;
-  final List<Categories> categories;
-  final String? type;
+  final Rate rate;
+  final bool active_in_menu;
+  final String from_time;
+  final String to_time;
+  final bool off_always;
+  final Favorites favorites;
+  final List<Categorie> categories;
+  final Tags tags;
+  final Product_property product_property;
+  final Price_changers price_changers;
+  final Properties properties;
+  final Variant_products variant_products;
+  final String type;
   Product({
-    this.active,
-    this.is_divisible,
-    this.has_modifier,
-    this.order,
-    this.in_price,
+    required this.active,
+    required this.is_divisible,
+    required this.has_modifier,
+    required this.order,
+    required this.in_price,
     required this.out_price,
-    this.currency,
-    this.count,
-    this.id,
-    this.slug,
-    this.image,
-    this.code,
-    this.iiko_id,
-    this.jowi_id,
+    required this.currency,
+    required this.count,
+    required this.id,
+    required this.slug,
+    required this.image,
+    required this.code,
+    required this.gallery,
+    required this.iiko_id,
+    required this.jowi_id,
     required this.description,
-    this.title,
-    this.brand,
+    required this.title,
+    required this.brand,
     required this.measurement,
-    this.rate,
-    this.active_in_menu,
-    this.from_time,
-    this.to_time,
-    this.off_always,
-    this.favorites,
+    required this.rate,
+    required this.active_in_menu,
+    required this.from_time,
+    required this.to_time,
+    required this.off_always,
+    required this.favorites,
     required this.categories,
-    this.type,
+    required this.tags,
+    required this.product_property,
+    required this.price_changers,
+    required this.properties,
+    required this.variant_products,
+    required this.type,
   });
 
   Product copyWith({
@@ -70,6 +81,7 @@ class Product {
     String? slug,
     String? image,
     String? code,
+    Gallery? gallery,
     String? iiko_id,
     String? jowi_id,
     Description? description,
@@ -82,7 +94,12 @@ class Product {
     String? to_time,
     bool? off_always,
     Favorites? favorites,
-    List<Categories>? categories,
+    List<Categorie>? categories,
+    Tags? tags,
+    Product_property? product_property,
+    Price_changers? price_changers,
+    Properties? properties,
+    Variant_products? variant_products,
     String? type,
   }) {
     return Product(
@@ -98,6 +115,7 @@ class Product {
       slug: slug ?? this.slug,
       image: image ?? this.image,
       code: code ?? this.code,
+      gallery: gallery ?? this.gallery,
       iiko_id: iiko_id ?? this.iiko_id,
       jowi_id: jowi_id ?? this.jowi_id,
       description: description ?? this.description,
@@ -111,24 +129,12 @@ class Product {
       off_always: off_always ?? this.off_always,
       favorites: favorites ?? this.favorites,
       categories: categories ?? this.categories,
+      tags: tags ?? this.tags,
+      product_property: product_property ?? this.product_property,
+      price_changers: price_changers ?? this.price_changers,
+      properties: properties ?? this.properties,
+      variant_products: variant_products ?? this.variant_products,
       type: type ?? this.type,
-    );
-  }
-
-  Map<String, dynamic> toBase() {
-    return <String, dynamic>{
-      'name': measurement.title.uz,
-      'description': description.uz,
-      'price': out_price.toString()
-    };
-  }
-
-  factory Product.fromBase(Map<String, dynamic> map) {
-    return Product(
-      out_price: int.parse(map["price"]),
-      description: Description(uz: map["description"], en: '', ru: ''),
-      measurement: Measurement(title: Title(uz: map["name"], ru: "", en: "")),
-      categories: [],
     );
   }
 
@@ -146,19 +152,25 @@ class Product {
       'slug': slug,
       'image': image,
       'code': code,
+      'gallery': gallery.toMap(),
       'iiko_id': iiko_id,
       'jowi_id': jowi_id,
       'description': description.toMap(),
-      'title': title!.toMap(),
-      'brand': brand!.toMap(),
+      'title': title.toMap(),
+      'brand': brand.toMap(),
       'measurement': measurement.toMap(),
-      'rate': rate!.toMap(),
+      'rate': rate.toMap(),
       'active_in_menu': active_in_menu,
       'from_time': from_time,
       'to_time': to_time,
       'off_always': off_always,
-      'favorites': favorites,
+      'favorites': favorites.toMap(),
       'categories': categories.map((x) => x.toMap()).toList(),
+      'tags': tags.toMap(),
+      'product_property': product_property.toMap(),
+      'price_changers': price_changers.toMap(),
+      'properties': properties.toMap(),
+      'variant_products': variant_products.toMap(),
       'type': type,
     };
   }
@@ -177,6 +189,7 @@ class Product {
       slug: map['slug'] as String,
       image: map['image'] as String,
       code: map['code'] as String,
+      gallery: Gallery.fromMap(map['gallery'] as Map<String, dynamic>),
       iiko_id: map['iiko_id'] as String,
       jowi_id: map['jowi_id'] as String,
       description:
@@ -190,16 +203,21 @@ class Product {
       from_time: map['from_time'] as String,
       to_time: map['to_time'] as String,
       off_always: map['off_always'] as bool,
-      favorites: Favorites(),
-      type: map['type'] as String,
-      categories: List<Categories>.from(
-        (map['categories'] as List?)
-                ?.map<Categories>(
-                  (x) => Categories.fromMap(x as Map<String, dynamic>),
-                )
-                .toList() ??
-            [],
+      favorites: Favorites.fromMap(map['favorites'] as Map<String, dynamic>),
+      categories: List<Categorie>.from(
+        (map['categories'] as List<int>).map<Categorie>(
+          (x) => Categorie.fromMap(x as Map<String, dynamic>),
+        ),
       ),
+      tags: Tags.fromMap(map['tags'] as Map<String, dynamic>),
+      product_property: Product_property.fromMap(
+          map['product_property'] as Map<String, dynamic>),
+      price_changers:
+          Price_changers.fromMap(map['price_changers'] as Map<String, dynamic>),
+      properties: Properties.fromMap(map['properties'] as Map<String, dynamic>),
+      variant_products: Variant_products.fromMap(
+          map['variant_products'] as Map<String, dynamic>),
+      type: map['type'] as String,
     );
   }
 
@@ -210,7 +228,7 @@ class Product {
 
   @override
   String toString() {
-    return 'Product(active: $active, is_divisible: $is_divisible, has_modifier: $has_modifier, order: $order, in_price: $in_price, out_price: $out_price, currency: $currency, count: $count, id: $id, slug: $slug, image: $image, code: $code, iiko_id: $iiko_id, jowi_id: $jowi_id, description: $description, title: $title, brand: $brand, measurement: $measurement, rate: $rate, active_in_menu: $active_in_menu, from_time: $from_time, to_time: $to_time, off_always: $off_always, favorites: $favorites, categories: $categories)';
+    return 'Product(active: $active, is_divisible: $is_divisible, has_modifier: $has_modifier, order: $order, in_price: $in_price, out_price: $out_price, currency: $currency, count: $count, id: $id, slug: $slug, image: $image, code: $code, gallery: $gallery, iiko_id: $iiko_id, jowi_id: $jowi_id, description: $description, title: $title, brand: $brand, measurement: $measurement, rate: $rate, active_in_menu: $active_in_menu, from_time: $from_time, to_time: $to_time, off_always: $off_always, favorites: $favorites, categories: $categories, tags: $tags, product_property: $product_property, price_changers: $price_changers, properties: $properties, variant_products: $variant_products, type: $type)';
   }
 
   @override
@@ -229,6 +247,7 @@ class Product {
         other.slug == slug &&
         other.image == image &&
         other.code == code &&
+        other.gallery == gallery &&
         other.iiko_id == iiko_id &&
         other.jowi_id == jowi_id &&
         other.description == description &&
@@ -242,6 +261,11 @@ class Product {
         other.off_always == off_always &&
         other.favorites == favorites &&
         listEquals(other.categories, categories) &&
+        other.tags == tags &&
+        other.product_property == product_property &&
+        other.price_changers == price_changers &&
+        other.properties == properties &&
+        other.variant_products == variant_products &&
         other.type == type;
   }
 
@@ -259,6 +283,7 @@ class Product {
         slug.hashCode ^
         image.hashCode ^
         code.hashCode ^
+        gallery.hashCode ^
         iiko_id.hashCode ^
         jowi_id.hashCode ^
         description.hashCode ^
@@ -272,9 +297,16 @@ class Product {
         off_always.hashCode ^
         favorites.hashCode ^
         categories.hashCode ^
+        tags.hashCode ^
+        product_property.hashCode ^
+        price_changers.hashCode ^
+        properties.hashCode ^
+        variant_products.hashCode ^
         type.hashCode;
   }
 }
+
+class Gallery {}
 
 class Description {
   final String uz;
@@ -497,17 +529,17 @@ class Brand {
 }
 
 class Measurement {
-  final String? id;
-  final String? slug;
+  final String id;
+  final String slug;
   final Title title;
-  final String? short_name;
-  final int? accuracy;
+  final String short_name;
+  final int accuracy;
   Measurement({
-    this.id,
-    this.slug,
+    required this.id,
+    required this.slug,
     required this.title,
-    this.short_name,
-    this.accuracy,
+    required this.short_name,
+    required this.accuracy,
   });
 
   Measurement copyWith({
@@ -660,7 +692,7 @@ class Rate {
 
 class Favorites {}
 
-class Categories {
+class Categorie {
   final String id;
   final String slug;
   final String parent_id;
@@ -669,8 +701,8 @@ class Categories {
   final Title title;
   final String order_no;
   final bool active;
-
-  Categories({
+  final Products products;
+  Categorie({
     required this.id,
     required this.slug,
     required this.parent_id,
@@ -679,9 +711,10 @@ class Categories {
     required this.title,
     required this.order_no,
     required this.active,
+    required this.products,
   });
 
-  Categories copyWith({
+  Categorie copyWith({
     String? id,
     String? slug,
     String? parent_id,
@@ -690,8 +723,9 @@ class Categories {
     Title? title,
     String? order_no,
     bool? active,
+    Products? products,
   }) {
-    return Categories(
+    return Categorie(
       id: id ?? this.id,
       slug: slug ?? this.slug,
       parent_id: parent_id ?? this.parent_id,
@@ -700,6 +734,7 @@ class Categories {
       title: title ?? this.title,
       order_no: order_no ?? this.order_no,
       active: active ?? this.active,
+      products: products ?? this.products,
     );
   }
 
@@ -713,11 +748,12 @@ class Categories {
       'title': title.toMap(),
       'order_no': order_no,
       'active': active,
+      'products': products.toMap(),
     };
   }
 
-  factory Categories.fromMap(Map<String, dynamic> map) {
-    return Categories(
+  factory Categorie.fromMap(Map<String, dynamic> map) {
+    return Categorie(
       id: map['id'] as String,
       slug: map['slug'] as String,
       parent_id: map['parent_id'] as String,
@@ -727,21 +763,22 @@ class Categories {
       title: Title.fromMap(map['title'] as Map<String, dynamic>),
       order_no: map['order_no'] as String,
       active: map['active'] as bool,
+      products: Products.fromMap(map['products'] as Map<String, dynamic>),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Categories.fromJson(String source) =>
-      Categories.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Categorie.fromJson(String source) =>
+      Categorie.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'Categorie(id: $id, slug: $slug, parent_id: $parent_id, image: $image, description: $description, title: $title, order_no: $order_no, active: $active)';
+    return 'Categorie(id: $id, slug: $slug, parent_id: $parent_id, image: $image, description: $description, title: $title, order_no: $order_no, active: $active, products: $products)';
   }
 
   @override
-  bool operator ==(covariant Categories other) {
+  bool operator ==(covariant Categorie other) {
     if (identical(this, other)) return true;
 
     return other.id == id &&
@@ -751,7 +788,8 @@ class Categories {
         other.description == description &&
         other.title == title &&
         other.order_no == order_no &&
-        other.active == active;
+        other.active == active &&
+        other.products == products;
   }
 
   @override
@@ -763,6 +801,19 @@ class Categories {
         description.hashCode ^
         title.hashCode ^
         order_no.hashCode ^
-        active.hashCode;
+        active.hashCode ^
+        products.hashCode;
   }
 }
+
+class Products {}
+
+class Tags {}
+
+class Product_property {}
+
+class Price_changers {}
+
+class Properties {}
+
+class Variant_products {}
