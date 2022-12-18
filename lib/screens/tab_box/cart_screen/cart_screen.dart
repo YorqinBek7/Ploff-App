@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
-import 'package:ploff/data/local_database/data_base.dart';
-import 'package:ploff/data/models/products/products.dart';
+import 'package:ploff/data/models/products/product.dart';
+import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen.dart';
 import 'package:ploff/screens/tab_box/cart_screen/widgets/delete_dialog.dart';
 import 'package:ploff/screens/tab_box/cart_screen/widgets/carts_item.dart';
@@ -22,19 +23,8 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  @override
-  void initState() {
-    init();
-    super.initState();
-  }
-
-  init() async {
-    product = await LocalDatabase.getAllCachedMeals();
-  }
-
   int count = 0;
-  List<Product> product = [];
-
+  Box<Products> savedMeals = HiveService.instance.dataBox;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,11 +59,11 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                       ),
                       ...List.generate(
-                        product.length,
+                        savedMeals.length,
                         (index) => SliverToBoxAdapter(
                           child: CartsItem(
                             count: count,
-                            aboutMeal: product[index],
+                            aboutMeal: savedMeals.getAt(index)!,
                           ),
                         ),
                       ),

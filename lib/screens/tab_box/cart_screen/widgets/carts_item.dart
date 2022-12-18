@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ploff/data/models/products/products.dart';
+import 'package:ploff/data/models/products/product.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -13,7 +13,7 @@ class CartsItem extends StatefulWidget {
   }) : super(key: key);
 
   int count;
-  Product aboutMeal;
+  Products aboutMeal;
 
   @override
   State<CartsItem> createState() => _CartsItemState();

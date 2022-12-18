@@ -1,14 +1,15 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:ploff/data/models/banenrs/banner.dart';
+import 'package:ploff/data/models/banners/banners.dart';
 import 'package:ploff/data/models/categories/categories.dart';
-import 'package:ploff/data/models/products/products.dart';
+import 'package:ploff/data/models/products/product.dart';
+
 import 'package:ploff/utils/constants/const.dart';
 
 class ApiService {
   Dio dio = Dio();
-  Future<List<Product>> getMeals({String? searchText}) async {
+  Future<List<Products>> getMeals({String? searchText}) async {
     try {
       Response response = await dio.get(
         "$BASE_URL/v2/product",
@@ -21,7 +22,7 @@ class ApiService {
       );
       if (response.statusCode! >= 200 && response.statusCode! <= 300) {
         return (response.data["products"] as List?)
-                ?.map((data) => Product.fromMap(data))
+                ?.map((data) => Products.fromJson(data))
                 .toList() ??
             [];
       } else {
@@ -32,7 +33,7 @@ class ApiService {
     }
   }
 
-  Future<List<Categorie>> getCategories() async {
+  Future<List<Categories>> getCategories() async {
     try {
       Response response = await dio.get(
         "$BASE_URL/v2/category",
@@ -44,7 +45,7 @@ class ApiService {
       );
       if (response.statusCode! >= 200 && response.statusCode! <= 300) {
         return (response.data["categories"] as List?)
-                ?.map((data) => Categorie.fromMap(data))
+                ?.map((data) => Categories.fromJson(data))
                 .toList() ??
             [];
       } else {
@@ -55,7 +56,7 @@ class ApiService {
     }
   }
 
-  Future<List<Banner>> getBanners() async {
+  Future<List<Banners>> getBanners() async {
     try {
       Response response = await dio.get(
         "$BASE_URL/v1/banner",
@@ -67,7 +68,7 @@ class ApiService {
       );
       if (response.statusCode! >= 200 && response.statusCode! <= 300) {
         return (response.data["banners"] as List?)
-                ?.map((data) => Banner.fromMap(data))
+                ?.map((data) => Banners.fromJson(data))
                 .toList() ??
             [];
       } else {

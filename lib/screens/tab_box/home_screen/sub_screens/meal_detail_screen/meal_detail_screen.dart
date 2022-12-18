@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
-import 'package:ploff/data/local_database/data_base.dart';
-import 'package:ploff/data/models/products/products.dart';
+import 'package:ploff/data/models/products/product.dart';
+import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/appbar_bottom.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/inc_dec_buttons.dart';
@@ -23,7 +23,7 @@ class MealDetailScreen extends StatefulWidget {
     required this.price,
     required this.firstlyPrice,
   });
-  final Product aboutMeal;
+  final Products aboutMeal;
   double price;
   double firstlyPrice;
 
@@ -56,8 +56,8 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                           color: Colors.white.withOpacity(.8),
                         ),
                         child: Platform.isAndroid
-                            ? Icon(Icons.arrow_back)
-                            : Icon(
+                            ? const Icon(Icons.arrow_back)
+                            : const Icon(
                                 Icons.arrow_back_ios,
                               ),
                       ),
@@ -147,7 +147,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                             ),
                             child: RadioListTile(
                               activeColor: PloffColors.C_FFCC00,
-                              title: Text("Select"),
+                              title: const Text("Select"),
                               groupValue: "k",
                               onChanged: (value) => {
                                 setState(() => {}),
@@ -231,15 +231,17 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Product added to cart")),
                     );
-                    //     HiveService.instance.addData(widget.aboutMeal);
-                    await LocalDatabase.insertCachedUser(widget.aboutMeal);
-                    var s = await LocalDatabase.getAllCachedMeals();
-                    log(s.toString());
+                    await HiveService.instance.addData(widget.aboutMeal);
+                    log(HiveService.instance.dataBox.length.toString());
+                    log(
+                      HiveService.instance.dataBox
+                          .getAt(0)!
+                          .out_price
+                          .toString(),
+                    );
                     context
                         .read<BottomNavigationCubit>()
-                        .changeBottomNavigationPages(
-                          1,
-                        );
+                        .changeBottomNavigationPages(1);
                     Navigator.pop(context);
                   },
                 ),

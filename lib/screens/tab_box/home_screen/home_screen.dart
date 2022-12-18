@@ -7,7 +7,7 @@ import 'package:formz/formz.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
-import 'package:ploff/data/models/products/products.dart';
+import 'package:ploff/data/models/products/product.dart';
 import 'package:ploff/data/service/get_location.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/get_location_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';
@@ -29,7 +29,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late List<Placemark> placemark;
   late Position position;
-  List<Product> product = [];
+  List<Products> product = [];
   final TextEditingController textEditingController = TextEditingController();
   int length = 0;
 

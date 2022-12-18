@@ -7,7 +7,7 @@ import 'package:ploff/utils/style/text_style.dart';
 
 class CategoryItem extends SliverPersistentHeaderDelegate {
   StateSetter setter;
-  List<Categorie> categorie;
+  List<Categories> categorie;
   CategoryItem({
     required this.setter,
     required this.categorie,

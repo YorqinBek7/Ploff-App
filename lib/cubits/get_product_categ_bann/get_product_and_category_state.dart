@@ -3,9 +3,9 @@ part of 'get_product_and_category_cubit.dart';
 class GetProductAndCategoryState extends Equatable {
   final String errorText;
   final FormzStatus status;
-  final List<Product> products;
-  final List<Categorie> categories;
-  final List<Banner> banners;
+  final List<Products> products;
+  final List<Categories> categories;
+  final List<Banners> banners;
   final HomeScreenStates states;
   const GetProductAndCategoryState({
     required this.errorText,
@@ -19,9 +19,9 @@ class GetProductAndCategoryState extends Equatable {
   GetProductAndCategoryState copyWith({
     String? errorText,
     FormzStatus? status,
-    List<Product>? products,
-    List<Categorie>? categories,
-    List<Banner>? banners,
+    List<Products>? products,
+    List<Categories>? categories,
+    List<Banners>? banners,
     HomeScreenStates? states,
   }) {
     return GetProductAndCategoryState(
