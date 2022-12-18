@@ -8,7 +8,7 @@ part of 'measurement.dart';
 
 class MeasurementAdapter extends TypeAdapter<Measurement> {
   @override
-  final int typeId = 5;
+  final int typeId = 4;
 
   @override
   Measurement read(BinaryReader reader) {
@@ -19,7 +19,7 @@ class MeasurementAdapter extends TypeAdapter<Measurement> {
     return Measurement(
       id: fields[0] as String,
       slug: fields[1] as String,
-      title: fields[2] as Title,
+      title: fields[2] as Title1,
       accuracy: fields[4] as int,
       short_name: fields[3] as String,
     );
@@ -59,7 +59,7 @@ class MeasurementAdapter extends TypeAdapter<Measurement> {
 Measurement _$MeasurementFromJson(Map<String, dynamic> json) => Measurement(
       id: json['id'] as String? ?? '',
       slug: json['slug'] as String? ?? '',
-      title: Title.fromJson(json['title'] as Map<String, dynamic>),
+      title: Title1.fromJson(json['title'] as Map<String, dynamic>),
       accuracy: json['accuracy'] as int? ?? 0,
       short_name: json['short_name'] as String? ?? '',
     );

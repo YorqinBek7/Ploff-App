@@ -16,11 +16,11 @@ class OrderDetailTexts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
           Icon(icon),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           Text(
             title,
             style: PloffTextStyle.w400.copyWith(
@@ -28,7 +28,7 @@ class OrderDetailTexts extends StatelessWidget {
               color: PloffColors.C_858585,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Text(
             description,
             style: PloffTextStyle.w500.copyWith(

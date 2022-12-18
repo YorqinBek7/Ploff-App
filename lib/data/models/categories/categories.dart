@@ -22,7 +22,7 @@ class Categories {
   final Description description;
 
   @JsonKey(name: "title")
-  final Title title;
+  final Title1 title;
 
   @JsonKey(defaultValue: "", name: "order_no")
   final String order_no;

@@ -7,7 +7,6 @@ import 'package:formz/formz.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
-import 'package:ploff/data/models/products/product.dart';
 import 'package:ploff/data/service/get_location.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/get_location_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';
@@ -15,6 +14,7 @@ import 'package:ploff/screens/tab_box/home_screen/widgets/banner_widget.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/category.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/meal_item.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/search_field.dart';
+import 'package:ploff/screens/tab_box/home_screen/widgets/search_state_ui.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -29,8 +29,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late List<Placemark> placemark;
   late Position position;
-  List<Products> product = [];
-  final TextEditingController textEditingController = TextEditingController();
+  final TextEditingController searchController = TextEditingController();
   int length = 0;
 
   @override
@@ -45,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var getProdCateg = context.read<GetProductAndCategoryCubit>();
     return Scaffold(
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
@@ -60,11 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    position = await getCurrentLocation();
-                    placemark = await placemarkFromCoordinates(
-                      position.latitude,
-                      position.longitude,
-                    );
+                    await getLocation();
                     Navigator.push(
                       context,
                       CupertinoPageRoute(
@@ -165,22 +161,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 12),
                 SearchField(
-                    textEditingController: textEditingController,
+                    textEditingController: searchController,
                     onChanged: (value) async {
                       if (value.length > 2) {
                         if (length < value.length) {
-                          await context
-                              .read<GetProductAndCategoryCubit>()
-                              .getProductAndCateg(searchText: value);
-                          setState(() {});
+                          await getProdCateg.getProductAndCateg(
+                              searchText: value);
                         }
                         length = value.length;
                       }
                       if (value.length == 0) {
-                        await context
-                            .read<GetProductAndCategoryCubit>()
-                            .getProductAndCateg();
-                        setState(() {});
+                        await getProdCateg.getProductAndCateg();
                       }
                     }),
                 SizedBox(height: 5),
@@ -199,41 +190,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               } else if (state.states == HomeScreenStates.searchState &&
                   state.status == FormzStatus.submissionSuccess) {
-                return Expanded(
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    itemCount: state.products.length,
-                    itemBuilder: (context, index) => Column(
-                      children: [
-                        SizedBox(height: 10),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 12),
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: PloffColors.white,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                Plofficons.meal,
-                                width: 80,
-                                height: 80,
-                              ),
-                              Expanded(
-                                  flex: 3,
-                                  child: Text(state
-                                      .products[index].measurement.short_name
-                                      .toString())),
-                              Expanded(
-                                  child: Text(state.products[index].out_price
-                                      .toString()))
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                return SearchStateUi(
+                  state: state,
                 );
               } else if (state.states == HomeScreenStates.initialState &&
                   FormzStatus.submissionSuccess == state.status) {
@@ -254,6 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 () => {},
                               ),
                             },
+                            products: state.products,
                           ),
                         ),
                         SliverToBoxAdapter(
@@ -300,17 +259,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ...List.generate(
                                           state.products.length,
                                           (index) {
+                                            var product = state.products[index];
                                             return MealItem(
-                                              mealDescription: state
-                                                  .products[index]
-                                                  .description
-                                                  .uz,
-                                              mealName: state.products[index]
-                                                  .measurement.short_name
-                                                  .toString(),
-                                              mealPrice: state
-                                                  .products[index].out_price
-                                                  .toString(),
+                                              mealDescription:
+                                                  product.description.uz,
+                                              mealName: product.title.uz,
+                                              mealPrice:
+                                                  product.out_price.toString(),
                                               index: index,
                                               length: state.products.length,
                                               onTap: () {
@@ -319,18 +274,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   CupertinoPageRoute(
                                                     builder: (context) =>
                                                         MealDetailScreen(
-                                                      aboutMeal:
-                                                          state.products[index],
-                                                      price: double.parse(state
-                                                          .products[index]
+                                                      aboutMeal: product,
+                                                      price: product.out_price
+                                                          .toDouble(),
+                                                      firstlyPrice: product
                                                           .out_price
-                                                          .toString()),
-                                                      firstlyPrice:
-                                                          double.parse(
-                                                        state.products[index]
-                                                            .out_price
-                                                            .toString(),
-                                                      ),
+                                                          .toDouble(),
                                                     ),
                                                   ),
                                                 );
@@ -357,6 +306,14 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
+    );
+  }
+
+  Future<void> getLocation() async {
+    position = await getCurrentLocation();
+    placemark = await placemarkFromCoordinates(
+      position.latitude,
+      position.longitude,
     );
   }
 }

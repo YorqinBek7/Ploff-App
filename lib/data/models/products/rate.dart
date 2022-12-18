@@ -1,10 +1,10 @@
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'rate.g.dart';
 
 @JsonSerializable()
-@HiveType(typeId: 6)
+@HiveType(typeId: 5)
 class Rate {
   @JsonKey(defaultValue: "", name: "id")
   @HiveField(0)

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/branches_screen/detail_branch_screen/widgets/detail_branch_item.dart';
-import 'package:ploff/screens/tab_box/profile_screen/sub_screens/widgets/profile_subscreen_appbar.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';

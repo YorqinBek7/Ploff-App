@@ -42,7 +42,7 @@ class SelectOptions extends StatelessWidget {
           groupValue: firstGroupValue,
           onChanged: firstOnTap,
         ),
-        Divider(),
+        const Divider(),
         RadioListTile(
           title: Text(
             secondSelect,

@@ -39,7 +39,7 @@ class ProductsAdapter extends TypeAdapter<Products> {
       out_price: fields[5] as int,
       rate: fields[18] as Rate,
       slug: fields[9] as String,
-      title: fields[15] as Title,
+      title: fields[15] as Title1,
       to_time: fields[21] as String,
       type: fields[24] as String,
     );
@@ -144,7 +144,7 @@ Products _$ProductsFromJson(Map<String, dynamic> json) => Products(
       out_price: json['out_price'] as int? ?? 0,
       rate: Rate.fromJson(json['rate'] as Map<String, dynamic>),
       slug: json['slug'] as String? ?? '',
-      title: Title.fromJson(json['title'] as Map<String, dynamic>),
+      title: Title1.fromJson(json['title'] as Map<String, dynamic>),
       to_time: json['to_time'] as String? ?? '',
       type: json['type'] as String? ?? '',
     );

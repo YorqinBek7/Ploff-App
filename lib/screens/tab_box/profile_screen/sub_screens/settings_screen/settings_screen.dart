@@ -128,7 +128,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<dynamic> languageBottomDialog(BuildContext context) {
     return showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10),
           topRight: Radius.circular(10),

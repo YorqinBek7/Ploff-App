@@ -9,10 +9,11 @@ import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
 import 'package:ploff/data/models/products/product.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
-import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
+import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/appbar_bottom.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/inc_dec_buttons.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/helper/helper.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -215,7 +216,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                           ),
                         ),
                         Text(
-                          "${widget.price} so'm",
+                          Helper.formatSumm(widget.price.toInt().toString()),
                           style: PloffTextStyle.w600.copyWith(
                             fontSize: 18,
                           ),
@@ -232,13 +233,6 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                       const SnackBar(content: Text("Product added to cart")),
                     );
                     await HiveService.instance.addData(widget.aboutMeal);
-                    log(HiveService.instance.dataBox.length.toString());
-                    log(
-                      HiveService.instance.dataBox
-                          .getAt(0)!
-                          .out_price
-                          .toString(),
-                    );
                     context
                         .read<BottomNavigationCubit>()
                         .changeBottomNavigationPages(1);

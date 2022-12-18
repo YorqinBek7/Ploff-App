@@ -1,17 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
 import 'package:ploff/data/models/categories/categories.dart';
+import 'package:ploff/data/models/products/product.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class CategoryItem extends SliverPersistentHeaderDelegate {
   StateSetter setter;
   List<Categories> categorie;
-  CategoryItem({
-    required this.setter,
-    required this.categorie,
-  });
+  List<Products> products;
+  CategoryItem(
+      {required this.setter, required this.categorie, required this.products});
 
   @override
   double get maxExtent => 50;
@@ -40,16 +42,15 @@ class CategoryItem extends SliverPersistentHeaderDelegate {
                       .read<GetProductAndCategoryCubit>()
                       .selectedCategories
                       .add(index);
-                  setter(
-                    () => {},
-                  );
+
+                  setter(() => {});
                 },
                 child: Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   margin: EdgeInsets.only(
                     left: index == 0 ? 10 : 5,
-                    right: index == 5 - 1 ? 10 : 5,
+                    right: index == categorie.length - 1 ? 10 : 5,
                     bottom: 10,
                   ),
                   decoration: BoxDecoration(

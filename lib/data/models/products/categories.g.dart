@@ -8,7 +8,7 @@ part of 'categories.dart';
 
 class CategoriesAdapter extends TypeAdapter<Categories> {
   @override
-  final int typeId = 4;
+  final int typeId = 3;
 
   @override
   Categories read(BinaryReader reader) {
@@ -19,7 +19,7 @@ class CategoriesAdapter extends TypeAdapter<Categories> {
     return Categories(
       id: fields[0] as String,
       slug: fields[1] as String,
-      title: fields[5] as Title,
+      title: fields[5] as Title1,
       description: fields[4] as Description,
       image: fields[3] as String,
       parent_id: fields[2] as String,
@@ -68,7 +68,7 @@ class CategoriesAdapter extends TypeAdapter<Categories> {
 Categories _$CategoriesFromJson(Map<String, dynamic> json) => Categories(
       id: json['id'] as String? ?? '',
       slug: json['slug'] as String? ?? '',
-      title: Title.fromJson(json['title'] as Map<String, dynamic>),
+      title: Title1.fromJson(json['title'] as Map<String, dynamic>),
       description:
           Description.fromJson(json['description'] as Map<String, dynamic>),
       image: json['image'] as String? ?? '',

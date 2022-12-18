@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:ploff/data/models/products/brand.dart';
 import 'package:ploff/data/models/products/categories.dart';
@@ -74,7 +74,7 @@ class Products {
 
   @JsonKey(name: "title")
   @HiveField(15)
-  final Title title;
+  final Title1 title;
 
   @JsonKey(name: "brand")
   @HiveField(16)

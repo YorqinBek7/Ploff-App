@@ -24,8 +24,8 @@ class DetailOrderScreen extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child: Container(
-              margin: EdgeInsets.symmetric(vertical: 16),
-              padding: EdgeInsets.all(16.0),
+              margin: const EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: PloffColors.white,
@@ -53,17 +53,17 @@ class DetailOrderScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {},
-                        child: Text("Order is processed"),
+                        child: const Text("Order is processed"),
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.all(16),
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: PloffColors.C_FFCC00,
                         ),
@@ -79,8 +79,8 @@ class DetailOrderScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.all(16),
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: PloffColors.C_FFCC00,
                         ),
@@ -96,8 +96,8 @@ class DetailOrderScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                          padding: EdgeInsets.all(16),
-                          decoration: BoxDecoration(
+                          padding: const EdgeInsets.all(16),
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: PloffColors.C_F0F0F0,
                           ),
@@ -112,30 +112,30 @@ class DetailOrderScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                          padding: EdgeInsets.all(16),
-                          decoration: BoxDecoration(
+                          padding: const EdgeInsets.all(16),
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: PloffColors.C_F0F0F0,
                           ),
                           child: SvgPicture.asset(Plofficons.flag)),
                     ],
                   ),
-                  OrderDetailTexts(
+                  const OrderDetailTexts(
                     description: 'Massive',
                     icon: Icons.location_on,
                     title: 'Address',
                   ),
-                  OrderDetailTexts(
+                  const OrderDetailTexts(
                     description: 'Massive',
                     icon: Icons.location_on,
                     title: 'Address',
                   ),
-                  OrderDetailTexts(
+                  const OrderDetailTexts(
                     description: 'Massive',
                     icon: Icons.location_on,
                     title: 'Address',
                   ),
-                  OrderDetailTexts(
+                  const OrderDetailTexts(
                     description: 'Massive',
                     icon: Icons.location_on,
                     title: 'Address',
@@ -146,7 +146,7 @@ class DetailOrderScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: PloffColors.white,
@@ -170,10 +170,10 @@ class DetailOrderScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Container(
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.all(16),
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: PloffColors.C_F0F0F0,
                     ),
@@ -185,8 +185,8 @@ class DetailOrderScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              margin: EdgeInsets.symmetric(vertical: 16),
-              padding: EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: PloffColors.white,
@@ -195,7 +195,7 @@ class DetailOrderScreen extends StatelessWidget {
                 children: [
                   ...List.generate(
                     5,
-                    (index) => CheckItem(item: "Osh", price: "23000"),
+                    (index) => const CheckItem(item: "Osh", price: "23000"),
                   )
                 ],
               ),

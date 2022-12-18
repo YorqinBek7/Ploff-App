@@ -22,15 +22,16 @@ SharedPreferences? sharedPreferences;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   sharedPreferences = await SharedPreferences.getInstance();
+  Hive.registerAdapter<Products>(ProductsAdapter());
+  Hive.registerAdapter<Description>(DescriptionAdapter());
+  Hive.registerAdapter<Brand>(BrandAdapter());
+  Hive.registerAdapter<Categories>(CategoriesAdapter());
+  Hive.registerAdapter<Measurement>(MeasurementAdapter());
+  Hive.registerAdapter<Rate>(RateAdapter());
+  Hive.registerAdapter<Title1>(TitleAdapter());
   await Hive.initFlutter();
   await HiveService.instance.createBox();
-  Hive.registerAdapter(ProductsAdapter());
-  Hive.registerAdapter(DescriptionAdapter());
-  Hive.registerAdapter(BrandAdapter());
-  Hive.registerAdapter(CategoriesAdapter());
-  Hive.registerAdapter(MeasurementAdapter());
-  Hive.registerAdapter(RateAdapter());
-  Hive.registerAdapter(TitleAdapter());
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarBrightness: Brightness.light,
     statusBarColor: PloffColors.white,

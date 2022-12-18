@@ -48,7 +48,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
         children: [
           Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 6,
               ),
               GestureDetector(
@@ -56,13 +56,13 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                   Navigator.push(
                     context,
                     CupertinoPageRoute(
-                      builder: (context) => DetailOrderScreen(),
+                      builder: (context) => const DetailOrderScreen(),
                     ),
                   );
                 },
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 6),
-                  padding: EdgeInsets.all(16),
+                  margin: const EdgeInsets.symmetric(vertical: 6),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: PloffColors.white,
@@ -90,17 +90,17 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                               ),
                             ),
                             onPressed: () {},
-                            child: Text("Order is processed"),
+                            child: const Text("Order is processed"),
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            padding: EdgeInsets.all(16),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(16),
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: PloffColors.C_FFCC00,
                             ),
@@ -115,8 +115,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.all(13),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(13),
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: PloffColors.C_FFCC00,
                             ),
@@ -131,8 +131,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.all(16),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(16),
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: PloffColors.C_FAFAFA,
                             ),
@@ -147,8 +147,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.all(16),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(16),
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: PloffColors.C_FAFAFA,
                             ),
@@ -163,7 +163,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
             ],
           ),
           Column(
-            children: [
+            children: const [
               SizedBox(
                 height: 6,
               ),

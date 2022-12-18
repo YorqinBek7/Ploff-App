@@ -9,7 +9,7 @@ part of 'categories.dart';
 Categories _$CategoriesFromJson(Map<String, dynamic> json) => Categories(
       id: json['id'] as String? ?? '',
       slug: json['slug'] as String? ?? '',
-      title: Title.fromJson(json['title'] as Map<String, dynamic>),
+      title: Title1.fromJson(json['title'] as Map<String, dynamic>),
       description:
           Description.fromJson(json['description'] as Map<String, dynamic>),
       image: json['image'] as String? ?? '',

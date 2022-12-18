@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/helper/helper.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -44,9 +46,14 @@ class MealItem extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      mealName,
-                      style: PloffTextStyle.w500.copyWith(fontSize: 15),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * .5,
+                      child: Text(
+                        mealName,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: PloffTextStyle.w500.copyWith(fontSize: 15),
+                      ),
                     ),
                     const SizedBox(
                       height: 5,
@@ -55,6 +62,8 @@ class MealItem extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * .5,
                       child: Text(
                         mealDescription,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: PloffTextStyle.w400.copyWith(
                           color: PloffColors.black.withOpacity(.4),
                         ),
@@ -64,12 +73,12 @@ class MealItem extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      mealPrice,
+                      Helper.formatSumm(mealPrice),
                       style: PloffTextStyle.w600.copyWith(fontSize: 16),
                     )
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 Image.asset(
                   Plofficons.meal,
                   width: 130.0,

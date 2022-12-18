@@ -7,17 +7,17 @@ import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/selec
 import 'package:ploff/utils/enum_classes/enum_classes.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/widgets/mini_text_fields.dart';
 import 'package:ploff/screens/tab_box/widgets/address_text_fields.dart';
-import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
+import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class FirstPage extends StatelessWidget {
-  final TextEditingController podezd;
+  final TextEditingController entranceController;
 
-  final TextEditingController etaj;
+  final TextEditingController floorController;
 
-  final TextEditingController kvartira;
+  final TextEditingController flatController;
 
   PaymentType? paymentType = PaymentType.Cash;
   DeliveryMethod? deliveryMethod = DeliveryMethod.Express;
@@ -29,9 +29,9 @@ class FirstPage extends StatelessWidget {
 
   FirstPage({
     super.key,
-    required this.podezd,
-    required this.etaj,
-    required this.kvartira,
+    required this.entranceController,
+    required this.floorController,
+    required this.flatController,
     required this.courierValueChanged,
     required this.courierCall,
     required this.deliveryMethod,
@@ -80,15 +80,15 @@ class FirstPage extends StatelessWidget {
                         children: [
                           MiniTextaFields(
                             hintText: "Podezd",
-                            controller: podezd,
+                            controller: entranceController,
                           ),
                           MiniTextaFields(
                             hintText: "Etaj",
-                            controller: etaj,
+                            controller: floorController,
                           ),
                           MiniTextaFields(
                             hintText: "Kvartira",
-                            controller: kvartira,
+                            controller: flatController,
                           )
                         ],
                       ),

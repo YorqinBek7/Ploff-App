@@ -14,7 +14,7 @@ class HiveService {
     try {
       dataBox = await Hive.openBox<Products>("cart_meals");
     } catch (e) {
-      log("Error Open Box");
+      log(e.toString());
     }
   }
 
@@ -28,9 +28,7 @@ class HiveService {
 
   Future<void> addData(Products data) async {
     try {
-      dataBox
-          .add(data)
-          .then((value) => log(dataBox.getAt(0)!.currency.toString()));
+      dataBox.add(data);
     } catch (e) {
       log("Error adding data to box");
     }

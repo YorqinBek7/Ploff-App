@@ -1,11 +1,11 @@
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:ploff/data/models/products/title.dart';
 
 part 'measurement.g.dart';
 
 @JsonSerializable()
-@HiveType(typeId: 5)
+@HiveType(typeId: 4)
 class Measurement {
   @JsonKey(defaultValue: "", name: "id")
   @HiveField(0)
@@ -17,7 +17,7 @@ class Measurement {
 
   @JsonKey(name: "title")
   @HiveField(2)
-  final Title title;
+  final Title1 title;
 
   @JsonKey(defaultValue: "", name: "short_name")
   @HiveField(3)

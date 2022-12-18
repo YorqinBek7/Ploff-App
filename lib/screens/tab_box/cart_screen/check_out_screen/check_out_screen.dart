@@ -53,9 +53,9 @@ class _CheckOutScreenState extends State<CheckOutScreen>
         controller: tabController,
         children: [
           FirstPage(
-            podezd: podezd,
-            etaj: etaj,
-            kvartira: kvartira,
+            entranceController: podezd,
+            floorController: etaj,
+            flatController: kvartira,
             courierCall: _courierCall,
             deliveryMethod: _deliveryMethod,
             paymentType: _paymentType,

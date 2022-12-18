@@ -8,7 +8,7 @@ part of 'brand.dart';
 
 class BrandAdapter extends TypeAdapter<Brand> {
   @override
-  final int typeId = 3;
+  final int typeId = 2;
 
   @override
   Brand read(BinaryReader reader) {
@@ -22,7 +22,7 @@ class BrandAdapter extends TypeAdapter<Brand> {
       parent_id: fields[2] as String,
       slug: fields[1] as String,
       description: fields[4] as Description,
-      title: fields[5] as Title,
+      title: fields[5] as Title1,
       is_active: fields[7] as bool,
       order_no: fields[6] as String,
     );
@@ -72,7 +72,7 @@ Brand _$BrandFromJson(Map<String, dynamic> json) => Brand(
       slug: json['slug'] as String? ?? '',
       description:
           Description.fromJson(json['description'] as Map<String, dynamic>),
-      title: Title.fromJson(json['title'] as Map<String, dynamic>),
+      title: Title1.fromJson(json['title'] as Map<String, dynamic>),
       is_active: json['is_active'] as bool? ?? false,
       order_no: json['order_no'] as String? ?? '',
     );

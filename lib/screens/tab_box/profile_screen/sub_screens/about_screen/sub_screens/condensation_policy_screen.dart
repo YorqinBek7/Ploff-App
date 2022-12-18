@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ploff/screens/tab_box/profile_screen/sub_screens/widgets/profile_subscreen_appbar.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -10,7 +9,7 @@ class CondensationPolicyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Condensation policy"),
+        title: const Text("Condensation policy"),
       ),
       backgroundColor: PloffColors.C_F0F0F0,
       body: Padding(

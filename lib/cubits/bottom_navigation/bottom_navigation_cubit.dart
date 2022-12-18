@@ -2,20 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'bottom_navigation_state.dart';
 
-class BottomNavigationCubit extends Cubit<BottomNavigationState> {
-  BottomNavigationCubit() : super(BottomNavigationInHome());
+class BottomNavigationCubit extends Cubit<int> {
+  BottomNavigationCubit() : super(0);
 
-  void changeBottomNavigationPages(
-    int index,
-  ) {
-    if (index == 0) {
-      emit(BottomNavigationInHome());
-    } else if (index == 1) {
-      emit(BottomNavigationInCart());
-    } else if (index == 2) {
-      emit(BottomNavigationInMyOrders());
-    } else if (index == 3) {
-      emit(BottomNavigationInProfile());
-    }
+  void changeBottomNavigationPages(int index) {
+    emit(index);
   }
 }

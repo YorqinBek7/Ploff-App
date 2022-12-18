@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ploff/cubits/sign_up/sign_up_cubit.dart';
 import 'package:ploff/screens/auth/sign_up_screen/otp_page.dart';
-import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
+import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -96,16 +96,15 @@ class EnterPhoneNumberPage extends StatelessWidget {
               buttonText: "Продолжить",
               onTap: () async {
                 if (phoneController.text.isEmpty) {
-                  context
-                      .read<SignUpCubit>()
-                      .errorCheckInPhoneNum(errorText: "Please enter something!");
+                  context.read<SignUpCubit>().errorCheckInPhoneNum(
+                      errorText: "Please enter something!");
                 } else if (phoneController.text.length < 9 ||
                     phoneController.text.length < 9) {
-                  context
-                      .read<SignUpCubit>()
-                      .errorCheckInPhoneNum(errorText: "Please enter correct number!");
+                  context.read<SignUpCubit>().errorCheckInPhoneNum(
+                      errorText: "Please enter correct number!");
                 } else {
-                  context.read<SignUpCubit>().numberPhone = phoneController.text;
+                  context.read<SignUpCubit>().numberPhone =
+                      phoneController.text;
                   Navigator.pushReplacement(
                     context,
                     CupertinoPageRoute(

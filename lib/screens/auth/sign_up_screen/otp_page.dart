@@ -7,7 +7,7 @@ import 'package:pinput/pinput.dart';
 import 'package:ploff/cubits/sign_up/sign_up_cubit.dart';
 import 'package:ploff/main.dart';
 import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
-import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
+import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -61,7 +61,8 @@ class OtpPage extends StatelessWidget {
                       .read<SignUpCubit>()
                       .errorCheckInOtp(errorText: "Please enter correct code!");
                 } else {
-                  sharedPreferences!.setString("numberPhone",context.read<SignUpCubit>().numberPhone );
+                  sharedPreferences!.setString(
+                      "numberPhone", context.read<SignUpCubit>().numberPhone);
                   Navigator.pushReplacement(
                     context,
                     CupertinoPageRoute(

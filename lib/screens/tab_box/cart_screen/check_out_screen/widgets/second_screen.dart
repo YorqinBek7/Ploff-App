@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/check_item.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/payment_select.dart';
-import 'package:ploff/screens/tab_box/widgets/auth_button.dart';
+import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';

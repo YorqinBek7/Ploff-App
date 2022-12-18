@@ -32,25 +32,16 @@ class _HomeTabState extends State<HomeTab> {
   int index = 0;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BottomNavigationCubit, BottomNavigationState>(
+    return BlocBuilder<BottomNavigationCubit, int>(
       builder: (context, state) {
-        if (state is BottomNavigationInHome) {
-          index = 0;
-        } else if (state is BottomNavigationInCart) {
-          index = 1;
-        } else if (state is BottomNavigationInMyOrders) {
-          index = 2;
-        } else if (state is BottomNavigationInProfile) {
-          index = 3;
-        }
         return Scaffold(
           body: IndexedStack(
-            index: index,
+            index: state,
             children: screens,
           ),
           bottomNavigationBar: BottomNavigationBar(
             selectedItemColor: PloffColors.C_FFCC00,
-            currentIndex: index,
+            currentIndex: state,
             selectedFontSize: 12,
             unselectedFontSize: 12,
             type: BottomNavigationBarType.fixed,

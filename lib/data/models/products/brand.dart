@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:ploff/data/models/products/description.dart';
 import 'package:ploff/data/models/products/title.dart';
@@ -6,7 +6,7 @@ import 'package:ploff/data/models/products/title.dart';
 part 'brand.g.dart';
 
 @JsonSerializable()
-@HiveType(typeId: 3)
+@HiveType(typeId: 2)
 class Brand {
   @JsonKey(defaultValue: "", name: "id")
   @HiveField(0)
@@ -30,7 +30,7 @@ class Brand {
 
   @JsonKey(name: "title")
   @HiveField(5)
-  final Title title;
+  final Title1 title;
 
   @JsonKey(defaultValue: "", name: "order_no")
   @HiveField(6)

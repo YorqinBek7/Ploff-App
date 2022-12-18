@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/helper/helper.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class CheckItem extends StatelessWidget {
@@ -27,7 +28,7 @@ class CheckItem extends StatelessWidget {
         ),
         Expanded(
           child: Text(
-            price,
+            Helper.formatSumm(price),
             style: PloffTextStyle.w600.copyWith(
               color: PloffColors.C_858585,
               fontSize: 15,

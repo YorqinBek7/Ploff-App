@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/sub_screens/condensation_policy_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/sub_screens/license_agreements.dart';
-import 'package:ploff/screens/tab_box/profile_screen/sub_screens/widgets/profile_subscreen_appbar.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -33,7 +32,7 @@ class AboutScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ListTile(
-                    title: Text("Condensation policy"),
+                    title: const Text("Condensation policy"),
                     trailing: SvgPicture.asset(Plofficons.arrow_right),
                     onTap: () {
                       Navigator.push(
