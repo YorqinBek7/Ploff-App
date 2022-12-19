@@ -166,7 +166,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (value.length > 2) {
                         if (length < value.length) {
                           await getProdCateg.getProductAndCateg(
-                              searchText: value);
+                            searchText: value,
+                          );
                         }
                         length = value.length;
                       }
@@ -206,13 +207,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         SliverPersistentHeader(
                           pinned: true,
                           delegate: CategoryItem(
-                            categorie: state.categories,
                             setter: (fn) => {
                               setState(
                                 () => {},
                               ),
                             },
-                            products: state.products,
+                            category: state.categories,
                           ),
                         ),
                         SliverToBoxAdapter(
@@ -251,35 +251,43 @@ class _HomeScreenState extends State<HomeScreen> {
                                           margin: EdgeInsets.only(left: 16),
                                           child: Text(
                                             state.categories[categoryIndex]
-                                                .title.uz,
+                                                .title1.uz,
                                             style: PloffTextStyle.w600
                                                 .copyWith(fontSize: 22),
                                           ),
                                         ),
                                         ...List.generate(
-                                          state.products.length,
+                                          state.categories[categoryIndex]
+                                              .products.length,
                                           (index) {
-                                            var product = state.products[index];
+                                            var product = state
+                                                .categories[categoryIndex]
+                                                .products;
                                             return MealItem(
                                               mealDescription:
-                                                  product.description.uz,
-                                              mealName: product.title.uz,
-                                              mealPrice:
-                                                  product.out_price.toString(),
+                                                  product[index].description.uz,
+                                              mealName: product[index].title.uz,
+                                              mealPrice: product[index]
+                                                  .out_price
+                                                  .toString(),
                                               index: index,
-                                              length: state.products.length,
+                                              length: state.categories.length,
                                               onTap: () {
                                                 Navigator.push(
                                                   context,
                                                   CupertinoPageRoute(
                                                     builder: (context) =>
                                                         MealDetailScreen(
-                                                      aboutMeal: product,
-                                                      price: product.out_price
-                                                          .toDouble(),
-                                                      firstlyPrice: product
-                                                          .out_price
-                                                          .toDouble(),
+                                                      aboutMeal: product[index],
+                                                      price: double.parse(
+                                                          product[index]
+                                                              .out_price
+                                                              .toString()),
+                                                      firstlyPrice:
+                                                          double.parse(
+                                                              product[index]
+                                                                  .out_price
+                                                                  .toString()),
                                                     ),
                                                   ),
                                                 );

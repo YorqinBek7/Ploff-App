@@ -1,19 +1,18 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
-import 'package:ploff/data/models/categories/categories.dart';
-import 'package:ploff/data/models/products/product.dart';
+import 'package:ploff/data/models/category_with_products/categ_with_product.dart';
+
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class CategoryItem extends SliverPersistentHeaderDelegate {
   StateSetter setter;
-  List<Categories> categorie;
-  List<Products> products;
-  CategoryItem(
-      {required this.setter, required this.categorie, required this.products});
+  List<CategProducts> category;
+  CategoryItem({
+    required this.setter,
+    required this.category,
+  });
 
   @override
   double get maxExtent => 50;
@@ -50,29 +49,26 @@ class CategoryItem extends SliverPersistentHeaderDelegate {
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   margin: EdgeInsets.only(
                     left: index == 0 ? 10 : 5,
-                    right: index == categorie.length - 1 ? 10 : 5,
+                    right: index == category.length - 1 ? 10 : 5,
                     bottom: 10,
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: selectedCategories(
-                              index: index,
-                              context: context,
-                            ) ==
+                    color: selectedCategories(index: index, context: context) ==
                             index
                         ? PloffColors.C_FFCC00
                         : PloffColors.C_F0F0F0,
                   ),
                   child: Center(
                     child: Text(
-                      categorie[index].title.uz,
+                      category[index].title1.uz,
                       style: PloffTextStyle.w500,
                     ),
                   ),
                 ),
               ),
               separatorBuilder: (context, index) => Container(),
-              itemCount: categorie.length,
+              itemCount: category.length,
             ),
           ),
         ],

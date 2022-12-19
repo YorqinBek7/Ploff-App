@@ -6,17 +6,17 @@ part of 'title.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TitleAdapter extends TypeAdapter<Title1> {
+class TitleAdapter extends TypeAdapter<Title> {
   @override
-  final int typeId = 6;
+  final int typeId = 3;
 
   @override
-  Title1 read(BinaryReader reader) {
+  Title read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Title1(
+    return Title(
       en: fields[2] as String,
       ru: fields[1] as String,
       uz: fields[0] as String,
@@ -24,7 +24,7 @@ class TitleAdapter extends TypeAdapter<Title1> {
   }
 
   @override
-  void write(BinaryWriter writer, Title1 obj) {
+  void write(BinaryWriter writer, Title obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -50,13 +50,13 @@ class TitleAdapter extends TypeAdapter<Title1> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Title1 _$TitleFromJson(Map<String, dynamic> json) => Title1(
+Title _$TitleFromJson(Map<String, dynamic> json) => Title(
       en: json['en'] as String? ?? '',
       ru: json['ru'] as String? ?? '',
       uz: json['uz'] as String? ?? '',
     );
 
-Map<String, dynamic> _$TitleToJson(Title1 instance) => <String, dynamic>{
+Map<String, dynamic> _$TitleToJson(Title instance) => <String, dynamic>{
       'uz': instance.uz,
       'ru': instance.ru,
       'en': instance.en,

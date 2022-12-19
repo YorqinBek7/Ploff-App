@@ -7,7 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
-import 'package:ploff/data/models/products/product.dart';
+import 'package:ploff/data/models/category_with_products/categ_products.dart';
+import 'package:ploff/data/models/category_with_products/categ_with_product.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/appbar_bottom.dart';
@@ -24,7 +25,7 @@ class MealDetailScreen extends StatefulWidget {
     required this.price,
     required this.firstlyPrice,
   });
-  final Products aboutMeal;
+  final CategWithProduct aboutMeal;
   double price;
   double firstlyPrice;
 
@@ -107,7 +108,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.aboutMeal.measurement.short_name.toString(),
+                          widget.aboutMeal.title.uz,
                           style: PloffTextStyle.w500,
                         ),
                         Text(

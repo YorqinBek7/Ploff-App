@@ -1,19 +1,16 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:ploff/data/models/banners/banners.dart';
-import 'package:ploff/data/models/categories/categories.dart';
-import 'package:ploff/data/models/products/product.dart';
+import 'package:ploff/data/models/category_with_products/categ_with_product.dart';
+import 'package:ploff/data/models/searched_products/searched_products.dart';
 
 import 'package:ploff/utils/constants/const.dart';
 
 class ApiService {
   Dio dio = Dio();
-  Future<List<Products>> getMeals({String? searchText}) async {
+  Future<List<CategProducts>> getMeals() async {
     try {
       Response response = await dio.get(
-        "$BASE_URL/v2/product",
-        queryParameters: {"search": searchText},
+        "$BASE_URL/v2/category-with-products",
         options: Options(
           headers: {
             "Shipper": "d4b1658f-3271-4973-8591-98a82939a664",
@@ -21,8 +18,8 @@ class ApiService {
         ),
       );
       if (response.statusCode! >= 200 && response.statusCode! <= 300) {
-        return (response.data["products"] as List?)
-                ?.map((data) => Products.fromJson(data))
+        return (response.data["categories"] as List?)
+                ?.map((data) => CategProducts.fromJson(data))
                 .toList() ??
             [];
       } else {
@@ -33,10 +30,12 @@ class ApiService {
     }
   }
 
-  Future<List<Categories>> getCategories() async {
+  Future<List<SearchedProducts>> getSearchedProduct(
+      {required String searchText}) async {
     try {
       Response response = await dio.get(
-        "$BASE_URL/v2/category",
+        "$BASE_URL/v2/product-non-variant-modifier",
+        queryParameters: {"search": searchText},
         options: Options(
           headers: {
             "Shipper": "d4b1658f-3271-4973-8591-98a82939a664",
@@ -44,8 +43,8 @@ class ApiService {
         ),
       );
       if (response.statusCode! >= 200 && response.statusCode! <= 300) {
-        return (response.data["categories"] as List?)
-                ?.map((data) => Categories.fromJson(data))
+        return (response.data["products"] as List?)
+                ?.map((data) => SearchedProducts.fromJson(data))
                 .toList() ??
             [];
       } else {

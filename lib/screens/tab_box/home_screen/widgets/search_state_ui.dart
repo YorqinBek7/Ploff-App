@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -12,9 +14,10 @@ class SearchStateUi extends StatelessWidget {
     return Expanded(
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
-        itemCount: state.products.length,
+        itemCount: state.searchedProducts.length,
         itemBuilder: (context, index) {
-          var product = state.products[index];
+          var product = state.searchedProducts;
+
           return Column(
             children: [
               SizedBox(height: 10),
@@ -34,9 +37,9 @@ class SearchStateUi extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 3,
-                      child: Text(product.title.uz),
+                      child: Text(product[index].title.uz),
                     ),
-                    Expanded(child: Text(product.out_price.toString()))
+                    Expanded(child: Text(product[index].out_price.toString()))
                   ],
                 ),
               ),

@@ -1,11 +1,11 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'title.g.dart';
+part 'description.g.dart';
 
 @JsonSerializable()
-@HiveType(typeId: 6)
-class Title1 {
+@HiveType(typeId: 2)
+class Description {
   @JsonKey(defaultValue: "", name: "uz")
   @HiveField(0)
   final String uz;
@@ -17,15 +17,15 @@ class Title1 {
   @JsonKey(defaultValue: "", name: "en")
   @HiveField(2)
   final String en;
-  Title1({
+  Description({
     required this.en,
     required this.ru,
     required this.uz,
   });
 
-  factory Title1.fromJson(Map<String, dynamic> json) {
-    return _$TitleFromJson(json);
+  factory Description.fromJson(Map<String, dynamic> json) {
+    return _$DescriptionFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$TitleToJson(this);
+  Map<String, dynamic> toJson() => _$DescriptionToJson(this);
 }

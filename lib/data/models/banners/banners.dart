@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:ploff/data/models/products/description.dart';
-import 'package:ploff/data/models/products/title.dart';
+import 'package:ploff/data/models/category_with_products/title.dart';
 
 part 'banners.g.dart';
 
@@ -10,7 +9,7 @@ class Banners {
   final String id;
 
   @JsonKey(name: "title")
-  final Title1 title;
+  final Title title;
 
   @JsonKey(defaultValue: "", name: "position")
   final String position;
