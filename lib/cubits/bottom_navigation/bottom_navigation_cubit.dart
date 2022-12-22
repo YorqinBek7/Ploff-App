@@ -13,9 +13,6 @@ class BottomNavigationCubit extends Cubit<int> {
   int sum = 0;
   void changeBottomNavigationPages(int index) {
     emit(index);
-    if (index == 1) {
-      getAllOrderPrice();
-    }
   }
 
   void getAllOrderPrice() {
@@ -23,6 +20,9 @@ class BottomNavigationCubit extends Cubit<int> {
     for (var i = 0; i < savedMeals.length; i++) {
       sum += savedMeals.getAt(i)?.out_price ?? 0;
     }
-    log(sum.toString());
+  }
+
+  void addSum(int price) {
+    sum += price;
   }
 }

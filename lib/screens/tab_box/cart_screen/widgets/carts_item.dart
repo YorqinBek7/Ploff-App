@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -8,11 +10,9 @@ import 'package:ploff/utils/style/text_style.dart';
 class CartsItem extends StatefulWidget {
   CartsItem({
     Key? key,
-    required this.count,
     required this.aboutMeal,
   }) : super(key: key);
 
-  int count;
   CategWithProduct aboutMeal;
 
   @override
@@ -20,6 +20,7 @@ class CartsItem extends StatefulWidget {
 }
 
 class _CartsItemState extends State<CartsItem> {
+  int count = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,9 +80,9 @@ class _CartsItemState extends State<CartsItem> {
                     children: [
                       GestureDetector(
                         onTap: () => {
-                          if (widget.count > 0)
+                          if (count > 0)
                             {
-                              widget.count--,
+                              count--,
                             },
                           setState(
                             () => {},
@@ -97,11 +98,20 @@ class _CartsItemState extends State<CartsItem> {
                             ),
                             child: SvgPicture.asset(Plofficons.minus)),
                       ),
-                      Text("${widget.count}"),
+                      Text("$count"),
                       GestureDetector(
                         onTap: () {
+                          context
+                              .read<BottomNavigationCubit>()
+                              .addSum(widget.aboutMeal.out_price);
+                          context
+                              .read<BottomNavigationCubit>()
+                              .changeBottomNavigationPages(0);
+                          context
+                              .read<BottomNavigationCubit>()
+                              .changeBottomNavigationPages(1);
                           setState(() {
-                            widget.count++;
+                            count++;
                           });
                         },
                         child: Container(

@@ -38,6 +38,7 @@ class _CartScreenState extends State<CartScreen> {
           "Savatcha",
           style: PloffTextStyle.w600.copyWith(fontSize: 20),
         ),
+        automaticallyImplyLeading: false,
         scrolledUnderElevation: 0.0,
         actions: [
           InkWell(
@@ -65,7 +66,6 @@ class _CartScreenState extends State<CartScreen> {
                       savedMeals.length,
                       (index) => SliverToBoxAdapter(
                         child: CartsItem(
-                          count: count,
                           aboutMeal: savedMeals.getAt(index)!,
                         ),
                       ),

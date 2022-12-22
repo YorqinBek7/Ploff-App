@@ -33,6 +33,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
     return Scaffold(
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           'My Orders',
           style: PloffTextStyle.w600.copyWith(fontSize: 20),

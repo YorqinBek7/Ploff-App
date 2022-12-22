@@ -63,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 GestureDetector(
                   onTap: () async {
+                    int radioIndex = 0;
                     await helper.getLocation();
                     HiveService.instance.userLocations.isEmpty
                         ? Navigator.push(
@@ -79,63 +80,73 @@ class _HomeScreenState extends State<HomeScreen> {
                                 topRight: Radius.circular(10),
                               ),
                             ),
-                            builder: (context) => Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Center(
-                                  child: Text(
-                                    "Мои адреса",
-                                    style: PloffTextStyle.w600
-                                        .copyWith(fontSize: 20),
+                            builder: (context) =>
+                                StatefulBuilder(builder: (context, setState) {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      "Мои адреса",
+                                      style: PloffTextStyle.w600
+                                          .copyWith(fontSize: 20),
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: ListView(
-                                    physics: BouncingScrollPhysics(),
-                                    shrinkWrap: true,
-                                    children: [
-                                      ...List.generate(
-                                        HiveService
-                                            .instance.userLocations.length,
-                                        (index) => RadioListTile(
-                                          subtitle: Text(
-                                            HiveService.instance.userLocations
+                                  Expanded(
+                                    child: ListView(
+                                      physics: BouncingScrollPhysics(),
+                                      shrinkWrap: true,
+                                      children: [
+                                        ...List.generate(
+                                          HiveService
+                                              .instance.userLocations.length,
+                                          (index) => ListTile(
+                                            leading: radioIndex == index
+                                                ? Icon(
+                                                    Icons.radio_button_checked,
+                                                    color: PloffColors.C_FFCC00,
+                                                  )
+                                                : Icon(Icons
+                                                    .radio_button_off_outlined),
+                                            subtitle: Text(
+                                              HiveService.instance.userLocations
+                                                  .getAt(index)!
+                                                  .address,
+                                            ),
+                                            title: Text(HiveService
+                                                .instance.userLocations
                                                 .getAt(index)!
-                                                .address,
+                                                .nameLocation),
+                                            onTap: () => {
+                                              setState(
+                                                () => {
+                                                  radioIndex = index,
+                                                },
+                                              )
+                                            },
                                           ),
-                                          value: 0,
-                                          title: Text(HiveService
-                                              .instance.userLocations
-                                              .getAt(index)!
-                                              .nameLocation),
-                                          groupValue: 0,
-                                          onChanged: (value) {
-                                            setState(
-                                              () => {},
-                                            );
-                                          },
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(16),
-                                  child: GlobalButton(
-                                    buttonText: "Add address",
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        CupertinoPageRoute(
-                                          builder: (context) =>
-                                              GetLocationScreen(),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                )
-                              ],
-                            ),
+                                  Container(
+                                    padding: EdgeInsets.all(16),
+                                    child: GlobalButton(
+                                      buttonText: "Add address",
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          CupertinoPageRoute(
+                                            builder: (context) =>
+                                                GetLocationScreen(),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  )
+                                ],
+                              );
+                            }),
                           );
                   },
                   child: Row(

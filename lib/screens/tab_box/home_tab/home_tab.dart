@@ -1,10 +1,10 @@
-import 'dart:developer';
-
+import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/main.dart';
 import 'package:ploff/screens/auth/sign_up_screen/enter_phone_number_page.dart';
 import 'package:ploff/screens/tab_box/cart_screen/cart_screen.dart';
@@ -13,6 +13,7 @@ import 'package:ploff/screens/tab_box/my_orders_screen/my_orders_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/profile_screen.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
+import 'package:ploff/utils/style/text_style.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -73,11 +74,25 @@ class _HomeTabState extends State<HomeTab> {
                 ),
               ),
               BottomNavigationBarItem(
-                icon: SvgPicture.asset(Plofficons.cart),
+                icon: Badge(
+                  badgeContent: Text(
+                    HiveService.instance.dataBox.length.toString(),
+                    style: PloffTextStyle.w500
+                        .copyWith(color: PloffColors.white, fontSize: 8.5),
+                  ),
+                  child: SvgPicture.asset(Plofficons.cart),
+                ),
                 label: "Корзина",
-                activeIcon: SvgPicture.asset(
-                  Plofficons.cart,
-                  color: PloffColors.C_FFCC00,
+                activeIcon: Badge(
+                  badgeContent: Text(
+                    HiveService.instance.dataBox.length.toString(),
+                    style: PloffTextStyle.w500
+                        .copyWith(color: PloffColors.white, fontSize: 8.5),
+                  ),
+                  child: SvgPicture.asset(
+                    Plofficons.cart,
+                    color: PloffColors.C_FFCC00,
+                  ),
                 ),
               ),
               BottomNavigationBarItem(

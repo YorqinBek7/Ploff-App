@@ -19,10 +19,9 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
-        title: Text(
-          "Profile",
-          style: PloffTextStyle.w600.copyWith(fontSize: 20),
-        ),
+        title:
+            Text("Profile", style: PloffTextStyle.w600.copyWith(fontSize: 20)),
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [

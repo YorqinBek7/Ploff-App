@@ -257,11 +257,10 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                   buttonText: "To Cart",
                   onTap: () async {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Product added to cart")),
-                    );
+                        const SnackBar(content: Text("Product added to cart")));
                     await HiveService.instance
                         .addProductToStorage(widget.aboutMeal);
-                    log(HiveService.instance.dataBox.length.toString());
+                    context.read<BottomNavigationCubit>().getAllOrderPrice();
                     context
                         .read<BottomNavigationCubit>()
                         .changeBottomNavigationPages(1);

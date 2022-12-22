@@ -54,6 +54,9 @@ Future<dynamic> deleteAllDialog(BuildContext context) {
                     context
                         .read<BottomNavigationCubit>()
                         .changeBottomNavigationPages(0);
+                    context
+                        .read<BottomNavigationCubit>()
+                        .changeBottomNavigationPages(1);
                     context.read<BottomNavigationCubit>().sum = 0;
                     await HiveService.instance.dataBox.clear();
                     Navigator.pop(context);
