@@ -9,6 +9,8 @@ import 'package:ploff/cubits/sign_up/sign_up_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/data/models/category_with_products/categ_with_product.dart';
 import 'package:ploff/data/models/category_with_products/description.dart';
+import 'package:ploff/data/models/category_with_products/title.dart';
+import 'package:ploff/data/models/user_locations/user_locations.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -21,6 +23,8 @@ void main() async {
   Hive.registerAdapter<CategProducts>(CategProductsAdapter());
   Hive.registerAdapter<Description>(DescriptionAdapter());
   Hive.registerAdapter<CategWithProduct>(CategWithProductAdapter());
+  Hive.registerAdapter<TitleModel>(TitleModelAdapter());
+  Hive.registerAdapter<UserLocations>(UserLocationsAdapter());
   await Hive.initFlutter();
   await HiveService.instance.createBox();
 

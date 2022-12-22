@@ -33,7 +33,7 @@ class CategWithProductAdapter extends TypeAdapter<CategWithProduct> {
       from_time: fields[12] as String,
       to_time: fields[13] as String,
       off_always: fields[14] as bool,
-      title: fields[15] as Title,
+      title: fields[15] as TitleModel,
       description: fields[16] as Description,
       iiko_id: fields[18] as String,
       jowi_id: fields[19] as String,
@@ -122,7 +122,7 @@ CategWithProduct _$CategWithProductFromJson(Map<String, dynamic> json) =>
       from_time: json['from_time'] as String? ?? '',
       to_time: json['to_time'] as String? ?? '',
       off_always: json['off_always'] as bool? ?? false,
-      title: Title.fromJson(json['title'] as Map<String, dynamic>),
+      title: TitleModel.fromJson(json['title'] as Map<String, dynamic>),
       description:
           Description.fromJson(json['description'] as Map<String, dynamic>),
       iiko_id: json['iiko_id'] as String? ?? '',

@@ -5,7 +5,7 @@ part 'title.g.dart';
 
 @JsonSerializable()
 @HiveType(typeId: 3)
-class Title {
+class TitleModel {
   @JsonKey(defaultValue: "", name: "uz")
   @HiveField(0)
   final String uz;
@@ -17,11 +17,11 @@ class Title {
   @JsonKey(defaultValue: "", name: "en")
   @HiveField(2)
   final String en;
-  Title({required this.en, required this.ru, required this.uz});
+  TitleModel({required this.en, required this.ru, required this.uz});
 
-  factory Title.fromJson(Map<String, dynamic> json) {
-    return _$TitleFromJson(json);
+  factory TitleModel.fromJson(Map<String, dynamic> json) {
+    return _$TitleModelFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$TitleToJson(this);
+  Map<String, dynamic> toJson() => _$TitleModelToJson(this);
 }

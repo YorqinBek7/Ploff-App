@@ -9,7 +9,9 @@ import 'package:ploff/utils/style/text_style.dart';
 class CategoryItem extends SliverPersistentHeaderDelegate {
   StateSetter setter;
   List<CategProducts> category;
+  GetProductAndCategoryState state;
   CategoryItem({
+    required this.state,
     required this.setter,
     required this.category,
   });
@@ -41,7 +43,9 @@ class CategoryItem extends SliverPersistentHeaderDelegate {
                       .read<GetProductAndCategoryCubit>()
                       .selectedCategories
                       .add(index);
-
+                  context
+                      .read<GetProductAndCategoryCubit>()
+                      .getProduct(id: state.products[index].id);
                   setter(() => {});
                 },
                 child: Container(

@@ -6,17 +6,17 @@ part of 'title.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TitleAdapter extends TypeAdapter<Title> {
+class TitleModelAdapter extends TypeAdapter<TitleModel> {
   @override
   final int typeId = 3;
 
   @override
-  Title read(BinaryReader reader) {
+  TitleModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Title(
+    return TitleModel(
       en: fields[2] as String,
       ru: fields[1] as String,
       uz: fields[0] as String,
@@ -24,7 +24,7 @@ class TitleAdapter extends TypeAdapter<Title> {
   }
 
   @override
-  void write(BinaryWriter writer, Title obj) {
+  void write(BinaryWriter writer, TitleModel obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -41,7 +41,7 @@ class TitleAdapter extends TypeAdapter<Title> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TitleAdapter &&
+      other is TitleModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -50,13 +50,14 @@ class TitleAdapter extends TypeAdapter<Title> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Title _$TitleFromJson(Map<String, dynamic> json) => Title(
+TitleModel _$TitleModelFromJson(Map<String, dynamic> json) => TitleModel(
       en: json['en'] as String? ?? '',
       ru: json['ru'] as String? ?? '',
       uz: json['uz'] as String? ?? '',
     );
 
-Map<String, dynamic> _$TitleToJson(Title instance) => <String, dynamic>{
+Map<String, dynamic> _$TitleModelToJson(TitleModel instance) =>
+    <String, dynamic>{
       'uz': instance.uz,
       'ru': instance.ru,
       'en': instance.en,

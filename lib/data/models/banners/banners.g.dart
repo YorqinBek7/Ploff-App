@@ -8,7 +8,7 @@ part of 'banners.dart';
 
 Banners _$BannersFromJson(Map<String, dynamic> json) => Banners(
       id: json['id'] as String? ?? '',
-      title: Title.fromJson(json['title'] as Map<String, dynamic>),
+      title: TitleModel.fromJson(json['title'] as Map<String, dynamic>),
       about: json['about'] as String? ?? '',
       active: json['active'] as bool? ?? false,
       created_at: json['created_at'] as String? ?? '',

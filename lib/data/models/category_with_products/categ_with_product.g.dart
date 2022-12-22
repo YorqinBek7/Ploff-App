@@ -21,7 +21,7 @@ class CategProductsAdapter extends TypeAdapter<CategProducts> {
       slug: fields[1] as String,
       parent_id: fields[2] as String,
       description: fields[3] as Description,
-      title1: fields[4] as Title,
+      title1: fields[4] as TitleModel,
       order_no: fields[5] as String,
       active: fields[6] as bool,
       products: (fields[7] as List).cast<CategWithProduct>(),
@@ -72,7 +72,7 @@ CategProducts _$CategProductsFromJson(Map<String, dynamic> json) =>
       parent_id: json['parent_id'] as String? ?? '',
       description:
           Description.fromJson(json['description'] as Map<String, dynamic>),
-      title1: Title.fromJson(json['title'] as Map<String, dynamic>),
+      title1: TitleModel.fromJson(json['title'] as Map<String, dynamic>),
       order_no: json['order_no'] as String? ?? '',
       active: json['active'] as bool? ?? false,
       products: (json['products'] as List<dynamic>)

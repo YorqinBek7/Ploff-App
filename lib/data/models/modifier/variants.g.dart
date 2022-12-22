@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'searched_products.dart';
+part of 'variants.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SearchedProducts _$SearchedProductsFromJson(Map<String, dynamic> json) =>
-    SearchedProducts(
+VariantsModel _$VariantsModelFromJson(Map<String, dynamic> json) =>
+    VariantsModel(
       out_price: json['out_price'] as int? ?? 0,
       title: TitleModel.fromJson(json['title'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$SearchedProductsToJson(SearchedProducts instance) =>
+Map<String, dynamic> _$VariantsModelToJson(VariantsModel instance) =>
     <String, dynamic>{
-      'title': instance.title,
       'out_price': instance.out_price,
+      'title': instance.title,
     };

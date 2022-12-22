@@ -1,21 +1,20 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:ploff/main.dart';
+import 'package:ploff/data/models/user_locations/user_locations.dart';
+import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/widgets/mini_text_fields.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/helper/helper.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class GetLocationScreen extends StatefulWidget {
-  final Position position;
-  List<Placemark> placemark;
-
-  GetLocationScreen(
-      {super.key, required this.position, required this.placemark});
+  const GetLocationScreen({super.key});
 
   @override
   State<GetLocationScreen> createState() => _GetLocationScreenState();
@@ -26,6 +25,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
   final TextEditingController floorController = TextEditingController();
   final TextEditingController flatController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
+  Helper helper = Helper();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
               children: [
                 GoogleMap(
                   onCameraMove: (position) async {
-                    widget.placemark = await placemarkFromCoordinates(
+                    helper.placemark = await placemarkFromCoordinates(
                       position.target.latitude,
                       position.target.longitude,
                     );
@@ -58,10 +58,10 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   onCameraIdle: () {},
                   initialCameraPosition: CameraPosition(
                     target: LatLng(
-                      widget.position.latitude,
-                      widget.position.longitude,
+                      helper.position?.latitude ?? 41.3775,
+                      helper.position?.longitude ?? 63.5853,
                     ),
-                    zoom: 20,
+                    zoom: helper.position != null ? 15 : 5,
                   ),
                 ),
                 Align(
@@ -109,7 +109,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                       maxLength: null,
                       decoration: InputDecoration(
                         hintText:
-                            "${widget.placemark[0].administrativeArea}, ${widget.placemark[0].street}",
+                            "${helper.placemark?[0].administrativeArea}, ${helper.placemark?[0].locality}",
                         border: InputBorder.none,
                       ),
                     ),
@@ -148,7 +148,26 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   const Spacer(),
                   GlobalButton(
                     buttonText: "Confirm",
-                    onTap: () {},
+                    onTap: () {
+                      if (addressController.text.isEmpty ||
+                          (helper.placemark?[0].administrativeArea) == null &&
+                              (helper.placemark?[0].locality) == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text("Please fill all fields")),
+                        );
+                      } else {
+                        HiveService.instance.addLocationToStorage(
+                          UserLocations(
+                            address:
+                                (helper.placemark?[0].administrativeArea)! +
+                                    (helper.placemark?[0].locality)!,
+                            nameLocation: addressController.text,
+                          ),
+                        );
+                        Navigator.pop(context);
+                      }
+                    },
                   ),
                 ],
               ),

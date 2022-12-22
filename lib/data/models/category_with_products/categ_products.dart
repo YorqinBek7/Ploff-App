@@ -70,7 +70,7 @@ class CategWithProduct {
 
   @JsonKey(name: "title")
   @HiveField(15)
-  final Title title;
+  final TitleModel title;
 
   @JsonKey(name: "description")
   @HiveField(16)

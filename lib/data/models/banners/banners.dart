@@ -9,7 +9,7 @@ class Banners {
   final String id;
 
   @JsonKey(name: "title")
-  final Title title;
+  final TitleModel title;
 
   @JsonKey(defaultValue: "", name: "position")
   final String position;

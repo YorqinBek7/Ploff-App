@@ -7,7 +7,7 @@ import 'package:formz/formz.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
-import 'package:ploff/data/service/get_location.dart';
+import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/get_location_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/banner_widget.dart';
@@ -15,7 +15,9 @@ import 'package:ploff/screens/tab_box/home_screen/widgets/category.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/meal_item.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/search_field.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/search_state_ui.dart';
+import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/helper/helper.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -27,11 +29,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late List<Placemark> placemark;
-  late Position position;
+  List<Placemark>? placemark;
+  Position? position;
   final TextEditingController searchController = TextEditingController();
   int length = 0;
-
+  bool isTapped = false;
   @override
   void initState() {
     init();
@@ -42,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await context.read<GetProductAndCategoryCubit>().getProductAndCateg();
   }
 
+  Helper helper = Helper();
   @override
   Widget build(BuildContext context) {
     var getProdCateg = context.read<GetProductAndCategoryCubit>();
@@ -60,78 +63,80 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    await getLocation();
-                    Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => GetLocationScreen(
-                          position: position,
-                          placemark: placemark,
-                        ),
-                      ),
-                    );
-                    // showModalBottomSheet(
-                    //   context: context,
-                    //   shape: RoundedRectangleBorder(
-                    //     borderRadius: BorderRadius.only(
-                    //       topLeft: Radius.circular(10),
-                    //       topRight: Radius.circular(10),
-                    //     ),
-                    //   ),
-                    //   builder: (context) => Column(
-                    //     mainAxisSize: MainAxisSize.min,
-                    //     children: [
-                    //       Center(
-                    //         child: Text(
-                    //           "Мои адреса",
-                    //           style: PloffTextStyle.w600
-                    //               .copyWith(fontSize: 20),
-                    //         ),
-                    //       ),
-                    //       Expanded(
-                    //         child: ListView(
-                    //           physics: BouncingScrollPhysics(),
-                    //           shrinkWrap: true,
-                    //           children: [
-                    //             ...List.generate(
-                    //               5,
-                    //                   (index) => RadioListTile(
-                    //                 subtitle: Text("qwerty"),
-                    //                 value: numbers[index],
-                    //                 title: Text("Qwerty"),
-                    //                 groupValue: _address,
-                    //                 onChanged: (value) {
-                    //                   setState(
-                    //                         () => {
-                    //                       _address = value,
-                    //                     },
-                    //                   );
-                    //                 },
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //       Container(
-                    //         padding: EdgeInsets.all(16),
-                    //         child: GlobalButton(
-                    //           buttonText: "Add address",
-                    //           onTap: () {
-                    //             Navigator.push(
-                    //               context,
-                    //               CupertinoPageRoute(
-                    //                 builder: (context) => GetLocationScreen(
-                    //                   position: position,
-                    //                   placemark: placemark,
-                    //                 ),
-                    //               ),
-                    //             );
-                    //           },
-                    //         ),
-                    //       )
-                    //     ],
-                    //   ),
-                    // );
+                    await helper.getLocation();
+                    HiveService.instance.userLocations.isEmpty
+                        ? Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => GetLocationScreen(),
+                            ),
+                          )
+                        : showModalBottomSheet(
+                            context: context,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                              ),
+                            ),
+                            builder: (context) => Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Center(
+                                  child: Text(
+                                    "Мои адреса",
+                                    style: PloffTextStyle.w600
+                                        .copyWith(fontSize: 20),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: ListView(
+                                    physics: BouncingScrollPhysics(),
+                                    shrinkWrap: true,
+                                    children: [
+                                      ...List.generate(
+                                        HiveService
+                                            .instance.userLocations.length,
+                                        (index) => RadioListTile(
+                                          subtitle: Text(
+                                            HiveService.instance.userLocations
+                                                .getAt(index)!
+                                                .address,
+                                          ),
+                                          value: 0,
+                                          title: Text(HiveService
+                                              .instance.userLocations
+                                              .getAt(index)!
+                                              .nameLocation),
+                                          groupValue: 0,
+                                          onChanged: (value) {
+                                            setState(
+                                              () => {},
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(16),
+                                  child: GlobalButton(
+                                    buttonText: "Add address",
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(
+                                          builder: (context) =>
+                                              GetLocationScreen(),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
                   },
                   child: Row(
                     children: [
@@ -142,13 +147,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         width: 5,
                       ),
-                      Expanded(
-                        child: Text(
-                          "Массив Бешягач 19/30",
-                          style: PloffTextStyle.w400.copyWith(fontSize: 15),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                      Text(
+                        HiveService.instance.userLocations
+                                .getAt(0)
+                                ?.nameLocation ??
+                            "Add location",
+                        style: PloffTextStyle.w400.copyWith(fontSize: 15),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       Image.asset(
                         Plofficons.arrowDown,
@@ -211,8 +217,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               setState(
                                 () => {},
                               ),
+                              isTapped = !isTapped,
                             },
-                            category: state.categories,
+                            category: state.products,
+                            state: state,
                           ),
                         ),
                         SliverToBoxAdapter(
@@ -235,7 +243,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           delegate: SliverChildListDelegate(
                             [
                               ...List.generate(
-                                state.categories.length,
+                                getProdCateg.products2.isEmpty
+                                    ? state.products.length
+                                    : getProdCateg.products2.length,
                                 (categoryIndex) {
                                   return Container(
                                     margin: EdgeInsets.only(bottom: 12),
@@ -250,44 +260,71 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Container(
                                           margin: EdgeInsets.only(left: 16),
                                           child: Text(
-                                            state.categories[categoryIndex]
-                                                .title1.uz,
+                                            getProdCateg.products2.isEmpty
+                                                ? state.products[categoryIndex]
+                                                    .title1.uz
+                                                : getProdCateg
+                                                    .products2[categoryIndex]
+                                                    .title1
+                                                    .uz,
                                             style: PloffTextStyle.w600
                                                 .copyWith(fontSize: 22),
                                           ),
                                         ),
                                         ...List.generate(
-                                          state.categories[categoryIndex]
-                                              .products.length,
+                                          getProdCateg.products2.isEmpty
+                                              ? state.products[categoryIndex]
+                                                  .products.length
+                                              : getProdCateg
+                                                  .products2[categoryIndex]
+                                                  .products
+                                                  .length,
                                           (index) {
-                                            var product = state
-                                                .categories[categoryIndex]
-                                                .products;
+                                            var product = getProdCateg
+                                                    .products2.isEmpty
+                                                ? state.products
+                                                : context
+                                                    .read<
+                                                        GetProductAndCategoryCubit>()
+                                                    .products2;
                                             return MealItem(
                                               mealDescription:
-                                                  product[index].description.uz,
-                                              mealName: product[index].title.uz,
-                                              mealPrice: product[index]
+                                                  product[categoryIndex]
+                                                      .products[index]
+                                                      .description
+                                                      .uz,
+                                              mealName: product[categoryIndex]
+                                                  .products[index]
+                                                  .title
+                                                  .uz,
+                                              mealPrice: product[categoryIndex]
+                                                  .products[index]
                                                   .out_price
                                                   .toString(),
                                               index: index,
-                                              length: state.categories.length,
+                                              length: product[categoryIndex]
+                                                  .products
+                                                  .length,
                                               onTap: () {
                                                 Navigator.push(
                                                   context,
                                                   CupertinoPageRoute(
                                                     builder: (context) =>
                                                         MealDetailScreen(
-                                                      aboutMeal: product[index],
+                                                      aboutMeal:
+                                                          product[categoryIndex]
+                                                              .products[index],
                                                       price: double.parse(
-                                                          product[index]
+                                                          product[categoryIndex]
+                                                              .products[index]
                                                               .out_price
                                                               .toString()),
                                                       firstlyPrice:
-                                                          double.parse(
-                                                              product[index]
-                                                                  .out_price
-                                                                  .toString()),
+                                                          double.parse(product[
+                                                                  categoryIndex]
+                                                              .products[index]
+                                                              .out_price
+                                                              .toString()),
                                                     ),
                                                   ),
                                                 );
@@ -314,14 +351,6 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-    );
-  }
-
-  Future<void> getLocation() async {
-    position = await getCurrentLocation();
-    placemark = await placemarkFromCoordinates(
-      position.latitude,
-      position.longitude,
     );
   }
 }

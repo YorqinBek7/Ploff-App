@@ -27,7 +27,7 @@ class CategProducts {
 
   @JsonKey(name: "title")
   @HiveField(4)
-  final Title title1;
+  final TitleModel title1;
 
   @JsonKey(defaultValue: "", name: "order_no")
   @HiveField(5)

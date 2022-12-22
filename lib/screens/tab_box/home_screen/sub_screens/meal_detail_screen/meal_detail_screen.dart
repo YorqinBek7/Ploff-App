@@ -8,7 +8,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
-import 'package:ploff/data/models/category_with_products/categ_with_product.dart';
+import 'package:ploff/data/models/modifier/variants.dart';
+import 'package:ploff/data/service/api_service/api_service.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/appbar_bottom.dart';
@@ -35,6 +36,22 @@ class MealDetailScreen extends StatefulWidget {
 
 class _MealDetailScreenState extends State<MealDetailScreen> {
   int count = 1;
+  int modifierindex = 0;
+  ApiService apiService = ApiService();
+  List<VariantsModel> variants = [];
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  init() async {
+    ApiService apiService = ApiService();
+    variants =
+        await apiService.getModifiers('ec0db30d-a935-4ef7-b1d5-6c4649ff18ca');
+    log(variants.length.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,7 +129,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                           style: PloffTextStyle.w500,
                         ),
                         Text(
-                          "Ba'tafsil: ${widget.aboutMeal.description}",
+                          "Ba'tafsil: ${widget.aboutMeal.description.uz}",
                           style: PloffTextStyle.w400.copyWith(
                             fontSize: 15.0,
                             color: PloffColors.black.withOpacity(.5),
@@ -135,7 +152,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                     child: Column(
                       children: [
                         ...List.generate(
-                          3,
+                          variants.length,
                           (index) => Container(
                             decoration: BoxDecoration(
                               border: Border(
@@ -147,14 +164,23 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                                     : BorderSide.none,
                               ),
                             ),
-                            child: RadioListTile(
-                              activeColor: PloffColors.C_FFCC00,
-                              title: const Text("Select"),
-                              groupValue: "k",
-                              onChanged: (value) => {
-                                setState(() => {}),
+                            child: ListTile(
+                              leading: modifierindex == index
+                                  ? const Icon(
+                                      Icons.radio_button_checked,
+                                      color: PloffColors.C_FFCC00,
+                                    )
+                                  : const Icon(Icons.radio_button_off),
+                              title: Text(variants[index].title.uz),
+                              trailing: Text(Helper.formatSumm(
+                                  variants[index].out_price.toString())),
+                              onTap: () {
+                                setState(() {
+                                  modifierindex = index;
+                                  widget.price = widget.firstlyPrice;
+                                  widget.price += variants[index].out_price;
+                                });
                               },
-                              value: null,
                             ),
                           ),
                         ),
@@ -233,7 +259,9 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Product added to cart")),
                     );
-                    await HiveService.instance.addData(widget.aboutMeal);
+                    await HiveService.instance
+                        .addProductToStorage(widget.aboutMeal);
+                    log(HiveService.instance.dataBox.length.toString());
                     context
                         .read<BottomNavigationCubit>()
                         .changeBottomNavigationPages(1);

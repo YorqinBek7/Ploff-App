@@ -22,28 +22,30 @@ class GetProductAndCategoryCubit extends Cubit<GetProductAndCategoryState> {
       : super(
           const GetProductAndCategoryState(
             errorText: '',
-            categories: [],
             status: FormzStatus.pure,
             banners: [],
             states: HomeScreenStates.initialState,
             searchedProducts: [],
+            products: [],
           ),
         );
-  List<CategProducts> categories = [];
+
   ApiService apiService = ApiService();
+  List<CategProducts> products = [];
+  List<CategProducts> products2 = [];
   Future<void> getProductAndCateg({String? searchText}) async {
     try {
       List<SearchedProducts> searchedProducts = [];
       if (searchText != null) {
+        emit(state.copyWith(states: HomeScreenStates.searchState));
         searchedProducts =
             await apiService.getSearchedProduct(searchText: searchText);
-        emit(state.copyWith(states: HomeScreenStates.searchState));
       }
       if (searchText?.isEmpty ?? true) {
         emit(state.copyWith(states: HomeScreenStates.initialState));
       }
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
-      List<CategProducts> products = await apiService.getMeals();
+      products = await apiService.getMeals();
       List<Banners> banners = await apiService.getBanners();
 
       emit(
@@ -57,6 +59,18 @@ class GetProductAndCategoryCubit extends Cubit<GetProductAndCategoryState> {
     } catch (e) {
       emit(state.copyWith(
           status: FormzStatus.submissionFailure, errorText: e.toString()));
+    }
+  }
+
+  void getProduct({required String id}) {
+    for (var element in products) {
+      if (element.id == id) {
+        if (!products2.remove(element)) {
+          products2.add(element);
+        }
+        Set<CategProducts> set = products2.toSet();
+        products2 = set.toList();
+      }
     }
   }
 }
