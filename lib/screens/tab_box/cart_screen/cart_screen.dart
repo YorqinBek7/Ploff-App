@@ -145,14 +145,20 @@ class _CartScreenState extends State<CartScreen> {
                       height: 15,
                     ),
                     GlobalButton(
-                      buttonText: "Mahsulot qo'shing",
+                      buttonText: HiveService.instance.dataBox.isEmpty
+                          ? "Mahsulot qo'shing"
+                          : "Buyurtma qilish",
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const CheckOutScreen(),
-                          ),
-                        );
+                        HiveService.instance.dataBox.isNotEmpty
+                            ? Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) => const CheckOutScreen(),
+                                ),
+                              )
+                            : context
+                                .read<BottomNavigationCubit>()
+                                .changeBottomNavigationPages(0);
                       },
                     ),
                   ],

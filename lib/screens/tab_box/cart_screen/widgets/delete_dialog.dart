@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -52,8 +53,9 @@ Future<dynamic> deleteAllDialog(BuildContext context) {
                   onTap: () async {
                     context
                         .read<BottomNavigationCubit>()
-                        .changeBottomNavigationPages(1);
-
+                        .changeBottomNavigationPages(0);
+                    context.read<BottomNavigationCubit>().sum = 0;
+                    await HiveService.instance.dataBox.clear();
                     Navigator.pop(context);
                   },
                   child: const DialogButtons(
