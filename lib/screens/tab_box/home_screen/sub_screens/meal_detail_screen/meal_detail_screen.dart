@@ -49,7 +49,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
     ApiService apiService = ApiService();
     variants =
         await apiService.getModifiers('ec0db30d-a935-4ef7-b1d5-6c4649ff18ca');
-    log(variants.length.toString());
+    setState(() {});
   }
 
   @override

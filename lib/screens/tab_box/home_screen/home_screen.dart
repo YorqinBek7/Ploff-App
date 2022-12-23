@@ -6,8 +6,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:ploff/cubits/current_loc/current_location_cubit.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
+import 'package:ploff/data/service/storage_service/shared_preferences.dart';
+import 'package:ploff/main.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/get_location_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/banner_widget.dart';
@@ -63,7 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    int radioIndex = 0;
                     await helper.getLocation();
                     HiveService.instance.userLocations.isEmpty
                         ? Navigator.push(
@@ -101,7 +103,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                           HiveService
                                               .instance.userLocations.length,
                                           (index) => ListTile(
-                                            leading: radioIndex == index
+                                            leading: SharedPreferencesService
+                                                        .instance
+                                                        .sharedPreferences
+                                                        .getInt(
+                                                            "current_loc_index") ==
+                                                    index
                                                 ? Icon(
                                                     Icons.radio_button_checked,
                                                     color: PloffColors.C_FFCC00,
@@ -120,7 +127,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                             onTap: () => {
                                               setState(
                                                 () => {
-                                                  radioIndex = index,
+                                                  SharedPreferencesService
+                                                      .instance
+                                                      .sharedPreferences
+                                                      .setInt(
+                                                          "current_loc_index",
+                                                          index),
+                                                  context
+                                                      .read<
+                                                          CurrentLocationCubit>()
+                                                      .changeLocationName(
+                                                          index: index)
                                                 },
                                               )
                                             },
@@ -158,15 +175,25 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         width: 5,
                       ),
-                      Text(
-                        HiveService.instance.userLocations
-                                .getAt(0)
-                                ?.nameLocation ??
-                            "Add location",
-                        style: PloffTextStyle.w400.copyWith(fontSize: 15),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      HiveService.instance.userLocations.isNotEmpty
+                          ? BlocBuilder<CurrentLocationCubit,
+                              CurrentLocationState>(
+                              builder: (context, state) {
+                                return Text(
+                                  state.locationName,
+                                  style: PloffTextStyle.w400
+                                      .copyWith(fontSize: 15),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                );
+                              },
+                            )
+                          : Text(
+                              "Add location",
+                              style: PloffTextStyle.w400.copyWith(fontSize: 15),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                       Image.asset(
                         Plofficons.arrowDown,
                         width: 16,

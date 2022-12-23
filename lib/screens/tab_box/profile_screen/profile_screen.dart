@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/main.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/about_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/branches_screen/branches_screen.dart';
@@ -48,7 +49,9 @@ class ProfileScreen extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      sharedPreferences!.getString("numberPhone").toString(),
+                      SharedPreferencesService.instance.sharedPreferences
+                          .getString("numberPhone")
+                          .toString(),
                       style: PloffTextStyle.w400.copyWith(
                         color: PloffColors.black.withOpacity(.5),
                       ),

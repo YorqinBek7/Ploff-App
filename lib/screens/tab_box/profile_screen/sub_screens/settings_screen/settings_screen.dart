@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/main.dart';
 import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -89,7 +90,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const Spacer(),
             GestureDetector(
               onTap: () {
-                sharedPreferences!.setString("numberPhone", "");
+                SharedPreferencesService.instance.sharedPreferences
+                    .setString("numberPhone", "");
                 context
                     .read<BottomNavigationCubit>()
                     .changeBottomNavigationPages(0);

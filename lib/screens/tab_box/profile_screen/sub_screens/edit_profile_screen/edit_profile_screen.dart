@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/main.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/widgets/edit_fields.dart';
@@ -22,8 +23,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController dateController = TextEditingController();
   @override
   void initState() {
-    numberController.text =
-        sharedPreferences!.getString("numberPhone").toString();
+    numberController.text = SharedPreferencesService.instance.sharedPreferences
+        .getString("numberPhone")
+        .toString();
     controller.text = "Yorqin";
     dateController.text = "";
     super.initState();

@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:ploff/cubits/sign_up/sign_up_cubit.dart';
-import 'package:ploff/main.dart';
+import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -61,7 +59,7 @@ class OtpPage extends StatelessWidget {
                       .read<SignUpCubit>()
                       .errorCheckInOtp(errorText: "Please enter correct code!");
                 } else {
-                  sharedPreferences!.setString(
+                  SharedPreferencesService.instance.sharedPreferences.setString(
                       "numberPhone", context.read<SignUpCubit>().numberPhone);
                   Navigator.pushReplacement(
                     context,

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
+import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/main.dart';
 import 'package:ploff/screens/auth/sign_up_screen/enter_phone_number_page.dart';
 import 'package:ploff/screens/tab_box/cart_screen/cart_screen.dart';
@@ -48,8 +49,12 @@ class _HomeTabState extends State<HomeTab> {
             type: BottomNavigationBarType.fixed,
             onTap: (value) async {
               if ((value == 2 || value == 3) &&
-                  (sharedPreferences?.getString("numberPhone") == null ||
-                      sharedPreferences?.getString("numberPhone") == "")) {
+                  (SharedPreferencesService.instance.sharedPreferences
+                              .getString("numberPhone") ==
+                          null ||
+                      SharedPreferencesService.instance.sharedPreferences
+                              .getString("numberPhone") ==
+                          "")) {
                 await Navigator.push(
                   context,
                   CupertinoPageRoute(
