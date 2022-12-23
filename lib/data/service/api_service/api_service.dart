@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:ploff/data/models/banners/banners.dart';
 import 'package:ploff/data/models/category_with_products/categ_with_product.dart';

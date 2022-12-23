@@ -8,9 +8,9 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:ploff/cubits/current_loc/current_location_cubit.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
+import 'package:ploff/cubits/modifiers/modifiers_cubit.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
-import 'package:ploff/main.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/get_location_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/banner_widget.dart';
@@ -337,7 +337,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   .uz,
                                               mealPrice: product[categoryIndex]
                                                   .products[index]
-                                                  .out_price
+                                                  .outPrice
                                                   .toString(),
                                               index: index,
                                               length: product[categoryIndex]
@@ -347,23 +347,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 Navigator.push(
                                                   context,
                                                   CupertinoPageRoute(
-                                                    builder: (context) =>
-                                                        MealDetailScreen(
-                                                      aboutMeal:
-                                                          product[categoryIndex]
-                                                              .products[index],
-                                                      price: double.parse(
-                                                          product[categoryIndex]
-                                                              .products[index]
-                                                              .out_price
-                                                              .toString()),
-                                                      firstlyPrice:
-                                                          double.parse(product[
-                                                                  categoryIndex]
-                                                              .products[index]
-                                                              .out_price
-                                                              .toString()),
-                                                    ),
+                                                    builder: (context) {
+                                                      context
+                                                          .read<
+                                                              ModifiersCubit>()
+                                                          .getModifiers();
+                                                      return MealDetailScreen(
+                                                        aboutMeal: product[
+                                                                categoryIndex]
+                                                            .products[index],
+                                                        price: double.parse(
+                                                            product[categoryIndex]
+                                                                .products[index]
+                                                                .outPrice
+                                                                .toString()),
+                                                        firstlyPrice: double
+                                                            .parse(product[
+                                                                    categoryIndex]
+                                                                .products[index]
+                                                                .outPrice
+                                                                .toString()),
+                                                      );
+                                                    },
                                                   ),
                                                 );
                                               },

@@ -5,13 +5,13 @@ class SelectOptions extends StatelessWidget {
   final String title;
   final String firstSelect;
   final String secondSelect;
-  Object? firstValue;
-  Object? firstGroupValue;
-  Object? secondValue;
-  Object? secondGroupValue;
+  final Object? firstValue;
+  final Object? firstGroupValue;
+  final Object? secondValue;
+  final Object? secondGroupValue;
   final ValueChanged firstOnTap;
   final ValueChanged secondOnTap;
-  SelectOptions({
+  const SelectOptions({
     super.key,
     required this.firstGroupValue,
     required this.firstOnTap,

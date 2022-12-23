@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/helper/helper.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -42,7 +41,7 @@ class MealItem extends StatelessWidget {
             ),
             child: Row(
               children: [
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

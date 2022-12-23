@@ -17,7 +17,6 @@ class CheckItem extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: 6,
           child: Text(
             item,
             style: PloffTextStyle.w500.copyWith(
@@ -26,6 +25,7 @@ class CheckItem extends StatelessWidget {
             ),
           ),
         ),
+        const Spacer(),
         Expanded(
           child: Text(
             Helper.formatSumm(price),

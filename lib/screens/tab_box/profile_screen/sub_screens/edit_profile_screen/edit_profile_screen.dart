@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
-import 'package:ploff/main.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/widgets/edit_fields.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -69,8 +68,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) => Container(
-                          padding: EdgeInsets.all(40),
-                          decoration: BoxDecoration(color: Colors.white),
+                          padding: const EdgeInsets.all(40),
+                          decoration: const BoxDecoration(color: Colors.white),
                           child: Column(
                             children: [
                               const Text("Select Date"),

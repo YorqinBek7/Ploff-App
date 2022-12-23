@@ -45,6 +45,7 @@ class EnterPhoneNumberPage extends StatelessWidget {
                         return TextFormField(
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           controller: phoneController,
+                          keyboardType: TextInputType.phone,
                           style: PloffTextStyle.w500.copyWith(fontSize: 15),
                           decoration: InputDecoration(
                             errorText: state.errorText,

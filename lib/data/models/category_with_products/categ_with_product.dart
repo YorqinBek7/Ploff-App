@@ -19,7 +19,7 @@ class CategProducts {
 
   @JsonKey(defaultValue: "", name: "parent_id")
   @HiveField(2)
-  final String parent_id;
+  final String parentId;
 
   @JsonKey(name: "description")
   @HiveField(3)
@@ -31,7 +31,7 @@ class CategProducts {
 
   @JsonKey(defaultValue: "", name: "order_no")
   @HiveField(5)
-  final String order_no;
+  final String orderNo;
 
   @JsonKey(defaultValue: false, name: "active")
   @HiveField(6)
@@ -44,10 +44,10 @@ class CategProducts {
   CategProducts({
     required this.id,
     required this.slug,
-    required this.parent_id,
+    required this.parentId,
     required this.description,
     required this.title1,
-    required this.order_no,
+    required this.orderNo,
     required this.active,
     required this.products,
   });

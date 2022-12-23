@@ -8,12 +8,12 @@ part of 'searched_products.dart';
 
 SearchedProducts _$SearchedProductsFromJson(Map<String, dynamic> json) =>
     SearchedProducts(
-      out_price: json['out_price'] as int? ?? 0,
+      outPrice: json['out_price'] as int? ?? 0,
       title: TitleModel.fromJson(json['title'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SearchedProductsToJson(SearchedProducts instance) =>
     <String, dynamic>{
       'title': instance.title,
-      'out_price': instance.out_price,
+      'out_price': instance.outPrice,
     };

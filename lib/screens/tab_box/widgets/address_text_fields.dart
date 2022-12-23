@@ -3,10 +3,10 @@ import 'package:ploff/utils/colors/colors.dart';
 
 class AddressTextFields extends StatelessWidget {
   final bool isEnabled;
-  const AddressTextFields({
-    Key? key,
-    required this.isEnabled,
-  }) : super(key: key);
+  final TextEditingController addressController;
+  const AddressTextFields(
+      {Key? key, required this.isEnabled, required this.addressController})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +17,7 @@ class AddressTextFields extends StatelessWidget {
         color: PloffColors.C_F0F0F0,
       ),
       child: TextField(
+        controller: addressController,
         enabled: isEnabled,
         decoration: const InputDecoration(
           hintText: "Address",

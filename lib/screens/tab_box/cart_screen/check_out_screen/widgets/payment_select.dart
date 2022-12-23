@@ -4,9 +4,9 @@ import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class TypePayment extends StatelessWidget {
-  ValueChanged valueChanged;
-  Object? paymentType;
-  TypePayment({
+  final ValueChanged valueChanged;
+  final Object? paymentType;
+  const TypePayment({
     super.key,
     required this.valueChanged,
     required this.paymentType,

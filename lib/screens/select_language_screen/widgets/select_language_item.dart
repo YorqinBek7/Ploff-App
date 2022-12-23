@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -34,7 +32,7 @@ class SelectLanguageItem extends StatelessWidget {
               width: 32.0,
               height: 32.0,
             ),
-            SizedBox(width: 12.0),
+            const SizedBox(width: 12.0),
             Text(
               languageText,
               style: PloffTextStyle.w500.copyWith(

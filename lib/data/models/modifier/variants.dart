@@ -6,12 +6,12 @@ part 'variants.g.dart';
 @JsonSerializable()
 class VariantsModel {
   @JsonKey(defaultValue: 0, name: "out_price")
-  final int out_price;
+  final int outPrice;
 
   @JsonKey(name: "title")
   final TitleModel title;
 
-  VariantsModel({required this.out_price, required this.title});
+  VariantsModel({required this.outPrice, required this.title});
 
   factory VariantsModel.fromJson(Map<String, dynamic> json) {
     return _$VariantsModelFromJson(json);

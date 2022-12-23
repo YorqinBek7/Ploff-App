@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ploff/utils/colors/colors.dart';
 
 class CheckOutBottomBar extends StatelessWidget implements PreferredSize {
-  bool isDeliver;
+  final bool isDeliver;
   final VoidCallback onTap;
-  CheckOutBottomBar({
+  const CheckOutBottomBar({
     required this.onTap,
     required this.isDeliver,
     super.key,
@@ -13,13 +13,13 @@ class CheckOutBottomBar extends StatelessWidget implements PreferredSize {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: PloffColors.white,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Container(
-        padding: EdgeInsets.all(4),
+        padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           color: PloffColors.C_F0F0F0,
           borderRadius: BorderRadius.circular(10),
@@ -33,7 +33,7 @@ class CheckOutBottomBar extends StatelessWidget implements PreferredSize {
                 isDeliver: !isDeliver,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             Expanded(
@@ -72,7 +72,7 @@ class SelectTypeOrderButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 8,
         ),

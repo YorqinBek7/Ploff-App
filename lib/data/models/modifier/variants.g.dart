@@ -8,12 +8,12 @@ part of 'variants.dart';
 
 VariantsModel _$VariantsModelFromJson(Map<String, dynamic> json) =>
     VariantsModel(
-      out_price: json['out_price'] as int? ?? 0,
+      outPrice: json['out_price'] as int? ?? 0,
       title: TitleModel.fromJson(json['title'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$VariantsModelToJson(VariantsModel instance) =>
     <String, dynamic>{
-      'out_price': instance.out_price,
+      'out_price': instance.outPrice,
       'title': instance.title,
     };

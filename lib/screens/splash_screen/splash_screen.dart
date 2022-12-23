@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         CupertinoPageRoute(
-          builder: (context) => SelectLanguageScreen(),
+          builder: (context) => const SelectLanguageScreen(),
         ),
       );
     });

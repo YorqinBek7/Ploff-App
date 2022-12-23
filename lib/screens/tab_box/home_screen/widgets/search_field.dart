@@ -26,7 +26,7 @@ class SearchField extends StatelessWidget {
         decoration: InputDecoration(
           border: InputBorder.none,
           enabledBorder: InputBorder.none,
-          prefixIcon: Icon(Icons.search_outlined),
+          prefixIcon: const Icon(Icons.search_outlined),
           hintText: "Поиск по всей еде",
           hintStyle: PloffTextStyle.w400.copyWith(color: PloffColors.C_858585),
         ),

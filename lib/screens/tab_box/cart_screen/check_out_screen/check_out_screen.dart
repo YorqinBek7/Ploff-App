@@ -1,6 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:ploff/data/models/category_with_products/categ_products.dart';
+import 'package:ploff/data/models/orders/orders.dart';
+import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/first_screen.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/second_screen.dart';
+import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/enum_classes/enum_classes.dart';
 import 'package:ploff/screens/tab_box/widgets/custom_tab_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -20,6 +25,8 @@ class _CheckOutScreenState extends State<CheckOutScreen>
   final TextEditingController etaj = TextEditingController();
 
   final TextEditingController kvartira = TextEditingController();
+
+  final TextEditingController addressController = TextEditingController();
 
   PaymentType? _paymentType = PaymentType.Cash;
   DeliveryMethod? _deliveryMethod = DeliveryMethod.Express;
@@ -49,41 +56,72 @@ class _CheckOutScreenState extends State<CheckOutScreen>
           secondTabText: 'Self order',
         ),
       ),
-      body: TabBarView(
-        controller: tabController,
+      body: Column(
         children: [
-          FirstPage(
-            entranceController: podezd,
-            floorController: etaj,
-            flatController: kvartira,
-            courierCall: _courierCall,
-            deliveryMethod: _deliveryMethod,
-            paymentType: _paymentType,
-            courierValueChanged: (value) {
-              setState(
-                () {
-                  _courierCall = value;
-                },
-              );
-            },
-            deliverValueChanged: (value) {
-              _deliveryMethod = value;
-              setState(() {});
-            },
-            isEnabled: true,
-            paymenValueChanged: (value) {
-              _paymentType = value;
-              setState(() {});
-            },
+          Expanded(
+            child: TabBarView(
+              controller: tabController,
+              children: [
+                FirstPage(
+                  entranceController: podezd,
+                  floorController: etaj,
+                  flatController: kvartira,
+                  courierCall: _courierCall,
+                  deliveryMethod: _deliveryMethod,
+                  paymentType: _paymentType,
+                  courierValueChanged: (value) {
+                    setState(
+                      () {
+                        _courierCall = value;
+                      },
+                    );
+                  },
+                  deliverValueChanged: (value) {
+                    _deliveryMethod = value;
+                    setState(() {});
+                  },
+                  isEnabled: true,
+                  paymenValueChanged: (value) {
+                    _paymentType = value;
+                    setState(() {});
+                  },
+                  addressController: addressController,
+                ),
+                SecondPage(
+                  paymentType: _paymentType,
+                  paymentValueChanged: (value) => {
+                    _paymentType = value,
+                    setState(
+                      () => {},
+                    ),
+                  },
+                ),
+              ],
+            ),
           ),
-          SecondPage(
-            paymentType: _paymentType,
-            paymentValueChanged: (value) => {
-              _paymentType = value,
-              setState(
-                () => {},
-              ),
-            },
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: PloffColors.white),
+            child: GlobalButton(
+              buttonText: "Order",
+              onTap: () {
+                List<CategWithProduct> prod = [];
+                for (var i = 0;
+                    i < HiveService.instance.cartProductsBox.length;
+                    i++) {
+                  prod.add(HiveService.instance.cartProductsBox.getAt(i)!);
+                }
+                HiveService.instance.orderProductsBox.add(Orders(
+                  orderedProducts: prod,
+                  address: addressController.text,
+                  date: DateFormat.yMd().format(DateTime.now()),
+                  paymentType: _paymentType.toString(),
+                  time: DateFormat.Hm().format(DateTime.now()),
+                ));
+              },
+            ),
           ),
         ],
       ),

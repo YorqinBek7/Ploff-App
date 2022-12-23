@@ -43,7 +43,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
                 Navigator.pushReplacement(
                   context,
                   CupertinoPageRoute(
-                    builder: (context) => HomeTab(),
+                    builder: (context) => const HomeTab(),
                   ),
                 );
               },

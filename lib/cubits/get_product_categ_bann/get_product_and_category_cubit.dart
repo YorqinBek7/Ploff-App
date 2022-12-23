@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:ploff/data/models/banners/banners.dart';
-import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/data/models/category_with_products/categ_with_product.dart';
 import 'package:ploff/data/models/searched_products/searched_products.dart';
 import 'package:ploff/data/service/api_service/api_service.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/check_item.dart';
 import 'package:ploff/screens/tab_box/my_orders_screen/sub_screens/widgets/order_detail_texts.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -7,7 +8,8 @@ import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class DetailOrderScreen extends StatelessWidget {
-  const DetailOrderScreen({super.key});
+  final int orderIndex;
+  const DetailOrderScreen({super.key, required this.orderIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -120,25 +122,33 @@ class DetailOrderScreen extends StatelessWidget {
                           child: SvgPicture.asset(Plofficons.flag)),
                     ],
                   ),
-                  const OrderDetailTexts(
-                    description: 'Massive',
+                  OrderDetailTexts(
+                    description: HiveService.instance.orderProductsBox
+                        .getAt(orderIndex)!
+                        .address,
                     icon: Icons.location_on,
                     title: 'Address',
                   ),
-                  const OrderDetailTexts(
-                    description: 'Massive',
+                  OrderDetailTexts(
+                    description: HiveService.instance.orderProductsBox
+                        .getAt(orderIndex)!
+                        .time,
                     icon: Icons.location_on,
-                    title: 'Address',
+                    title: 'Time',
                   ),
-                  const OrderDetailTexts(
-                    description: 'Massive',
+                  OrderDetailTexts(
+                    description: HiveService.instance.orderProductsBox
+                        .getAt(orderIndex)!
+                        .date,
                     icon: Icons.location_on,
-                    title: 'Address',
+                    title: 'Date',
                   ),
-                  const OrderDetailTexts(
-                    description: 'Massive',
+                  OrderDetailTexts(
+                    description: HiveService.instance.orderProductsBox
+                        .getAt(orderIndex)!
+                        .paymentType,
                     icon: Icons.location_on,
-                    title: 'Address',
+                    title: 'Payment type',
                   ),
                 ],
               ),
@@ -194,8 +204,26 @@ class DetailOrderScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ...List.generate(
-                    5,
-                    (index) => const CheckItem(item: "Osh", price: "23000"),
+                    HiveService.instance.orderProductsBox
+                        .getAt(orderIndex)!
+                        .orderedProducts
+                        .length,
+                    (index) => Column(
+                      children: [
+                        const SizedBox(height: 5),
+                        CheckItem(
+                            item: HiveService.instance.orderProductsBox
+                                .getAt(orderIndex)!
+                                .orderedProducts[index]
+                                .title
+                                .uz,
+                            price: HiveService.instance.orderProductsBox
+                                .getAt(orderIndex)!
+                                .orderedProducts[index]
+                                .outPrice
+                                .toString()),
+                      ],
+                    ),
                   )
                 ],
               ),

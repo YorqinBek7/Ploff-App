@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'package:ploff/data/models/category_with_products/title.dart';
 
 part 'banners.g.dart';
@@ -24,13 +25,13 @@ class Banners {
   final bool active;
 
   @JsonKey(defaultValue: "", name: "created_at")
-  final String created_at;
+  final String createdAt;
 
   @JsonKey(defaultValue: "", name: "updated_at")
-  final String updated_at;
+  final String updatedAt;
 
   @JsonKey(defaultValue: "", name: "shipper_id")
-  final String shipper_id;
+  final String shipperId;
 
   @JsonKey(defaultValue: "", name: "about")
   final String about;
@@ -40,10 +41,10 @@ class Banners {
     required this.title,
     required this.about,
     required this.active,
-    required this.created_at,
+    required this.createdAt,
     required this.position,
-    required this.shipper_id,
-    required this.updated_at,
+    required this.shipperId,
+    required this.updatedAt,
     required this.url,
     required this.image,
   });

@@ -6,7 +6,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
-import 'package:ploff/main.dart';
 import 'package:ploff/screens/auth/sign_up_screen/enter_phone_number_page.dart';
 import 'package:ploff/screens/tab_box/cart_screen/cart_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/home_screen.dart';
@@ -26,7 +25,7 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   List<Widget> screens = [
     const HomeScreen(),
-    const CartScreen(),
+    CartScreen(),
     const MyOrdersScreen(),
     const ProfileScreen()
   ];
@@ -81,7 +80,7 @@ class _HomeTabState extends State<HomeTab> {
               BottomNavigationBarItem(
                 icon: Badge(
                   badgeContent: Text(
-                    HiveService.instance.dataBox.length.toString(),
+                    HiveService.instance.cartProductsBox.length.toString(),
                     style: PloffTextStyle.w500
                         .copyWith(color: PloffColors.white, fontSize: 8.5),
                   ),
@@ -90,7 +89,7 @@ class _HomeTabState extends State<HomeTab> {
                 label: "Корзина",
                 activeIcon: Badge(
                   badgeContent: Text(
-                    HiveService.instance.dataBox.length.toString(),
+                    HiveService.instance.cartProductsBox.length.toString(),
                     style: PloffTextStyle.w500
                         .copyWith(color: PloffColors.white, fontSize: 8.5),
                   ),

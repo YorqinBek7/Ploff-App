@@ -12,15 +12,15 @@ class HistoryOrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(vertical: 6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: PloffColors.white,
       ),
       child: Row(
         children: [
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Column(
             children: [
               Text(
@@ -28,7 +28,7 @@ class HistoryOrderItem extends StatelessWidget {
                 style: PloffTextStyle.w600
                     .copyWith(fontSize: 17, color: PloffColors.black),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
@@ -38,7 +38,7 @@ class HistoryOrderItem extends StatelessWidget {
               ),
             ],
           ),
-          Spacer(),
+          const Spacer(),
           Column(
             children: [
               ElevatedButton(
@@ -59,13 +59,13 @@ class HistoryOrderItem extends StatelessWidget {
                     style: PloffTextStyle.w500
                         .copyWith(fontSize: 15, color: PloffColors.C_22C348),
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 children: [
                   SvgPicture.asset(Plofficons.calender),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Text(
                     "11.05.2022",
                     style: PloffTextStyle.w400.copyWith(fontSize: 15),
@@ -74,7 +74,7 @@ class HistoryOrderItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
         ],
       ),
     );

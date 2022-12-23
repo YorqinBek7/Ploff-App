@@ -9,9 +9,9 @@ class SearchedProducts {
   final TitleModel title;
 
   @JsonKey(defaultValue: 0, name: "out_price")
-  final int out_price;
+  final int outPrice;
 
-  SearchedProducts({required this.out_price, required this.title});
+  SearchedProducts({required this.outPrice, required this.title});
 
   factory SearchedProducts.fromJson(Map<String, dynamic> json) {
     return _$SearchedProductsFromJson(json);

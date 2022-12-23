@@ -18,25 +18,25 @@ class CategWithProductAdapter extends TypeAdapter<CategWithProduct> {
     };
     return CategWithProduct(
       id: fields[0] as String,
-      order_no: fields[5] as String,
+      orderNo: fields[5] as String,
       active: fields[17] as bool,
       categories: (fields[6] as List).cast<String>(),
-      out_price: fields[1] as int,
+      outPrice: fields[1] as int,
       currency: fields[2] as String,
       string: fields[3] as String,
       type: fields[4] as String,
-      brand_id: fields[7] as String,
-      rate_id: fields[8] as String,
+      brandId: fields[7] as String,
+      rateId: fields[8] as String,
       image: fields[9] as String,
-      active_in_menu: fields[10] as bool,
-      has_modifier: fields[11] as bool,
-      from_time: fields[12] as String,
-      to_time: fields[13] as String,
-      off_always: fields[14] as bool,
+      activeInMenu: fields[10] as bool,
+      hasModifier: fields[11] as bool,
+      fromTime: fields[12] as String,
+      toTime: fields[13] as String,
+      offAlways: fields[14] as bool,
       title: fields[15] as TitleModel,
       description: fields[16] as Description,
-      iiko_id: fields[18] as String,
-      jowi_id: fields[19] as String,
+      iikoId: fields[18] as String,
+      jowiId: fields[19] as String,
     );
   }
 
@@ -47,7 +47,7 @@ class CategWithProductAdapter extends TypeAdapter<CategWithProduct> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.out_price)
+      ..write(obj.outPrice)
       ..writeByte(2)
       ..write(obj.currency)
       ..writeByte(3)
@@ -55,25 +55,25 @@ class CategWithProductAdapter extends TypeAdapter<CategWithProduct> {
       ..writeByte(4)
       ..write(obj.type)
       ..writeByte(5)
-      ..write(obj.order_no)
+      ..write(obj.orderNo)
       ..writeByte(6)
       ..write(obj.categories)
       ..writeByte(7)
-      ..write(obj.brand_id)
+      ..write(obj.brandId)
       ..writeByte(8)
-      ..write(obj.rate_id)
+      ..write(obj.rateId)
       ..writeByte(9)
       ..write(obj.image)
       ..writeByte(10)
-      ..write(obj.active_in_menu)
+      ..write(obj.activeInMenu)
       ..writeByte(11)
-      ..write(obj.has_modifier)
+      ..write(obj.hasModifier)
       ..writeByte(12)
-      ..write(obj.from_time)
+      ..write(obj.fromTime)
       ..writeByte(13)
-      ..write(obj.to_time)
+      ..write(obj.toTime)
       ..writeByte(14)
-      ..write(obj.off_always)
+      ..write(obj.offAlways)
       ..writeByte(15)
       ..write(obj.title)
       ..writeByte(16)
@@ -81,9 +81,9 @@ class CategWithProductAdapter extends TypeAdapter<CategWithProduct> {
       ..writeByte(17)
       ..write(obj.active)
       ..writeByte(18)
-      ..write(obj.iiko_id)
+      ..write(obj.iikoId)
       ..writeByte(19)
-      ..write(obj.jowi_id);
+      ..write(obj.jowiId);
   }
 
   @override
@@ -104,51 +104,51 @@ class CategWithProductAdapter extends TypeAdapter<CategWithProduct> {
 CategWithProduct _$CategWithProductFromJson(Map<String, dynamic> json) =>
     CategWithProduct(
       id: json['id'] as String? ?? '',
-      order_no: json['order_no'] as String? ?? '',
+      orderNo: json['order_no'] as String? ?? '',
       active: json['active'] as bool? ?? false,
       categories: (json['categories'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
-      out_price: json['out_price'] as int? ?? 0,
+      outPrice: json['out_price'] as int? ?? 0,
       currency: json['currency'] as String? ?? '',
       string: json['string'] as String? ?? '',
       type: json['type'] as String? ?? '',
-      brand_id: json['brand_id'] as String? ?? '',
-      rate_id: json['rate_id'] as String? ?? '',
+      brandId: json['brand_id'] as String? ?? '',
+      rateId: json['rate_id'] as String? ?? '',
       image: json['image'] as String? ?? '',
-      active_in_menu: json['active_in_menu'] as bool? ?? false,
-      has_modifier: json['has_modifier'] as bool? ?? false,
-      from_time: json['from_time'] as String? ?? '',
-      to_time: json['to_time'] as String? ?? '',
-      off_always: json['off_always'] as bool? ?? false,
+      activeInMenu: json['active_in_menu'] as bool? ?? false,
+      hasModifier: json['has_modifier'] as bool? ?? false,
+      fromTime: json['from_time'] as String? ?? '',
+      toTime: json['to_time'] as String? ?? '',
+      offAlways: json['off_always'] as bool? ?? false,
       title: TitleModel.fromJson(json['title'] as Map<String, dynamic>),
       description:
           Description.fromJson(json['description'] as Map<String, dynamic>),
-      iiko_id: json['iiko_id'] as String? ?? '',
-      jowi_id: json['jowi_id'] as String? ?? '',
+      iikoId: json['iiko_id'] as String? ?? '',
+      jowiId: json['jowi_id'] as String? ?? '',
     );
 
 Map<String, dynamic> _$CategWithProductToJson(CategWithProduct instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'out_price': instance.out_price,
+      'out_price': instance.outPrice,
       'currency': instance.currency,
       'string': instance.string,
       'type': instance.type,
-      'order_no': instance.order_no,
+      'order_no': instance.orderNo,
       'categories': instance.categories,
-      'brand_id': instance.brand_id,
-      'rate_id': instance.rate_id,
+      'brand_id': instance.brandId,
+      'rate_id': instance.rateId,
       'image': instance.image,
-      'active_in_menu': instance.active_in_menu,
-      'has_modifier': instance.has_modifier,
-      'from_time': instance.from_time,
-      'to_time': instance.to_time,
-      'off_always': instance.off_always,
+      'active_in_menu': instance.activeInMenu,
+      'has_modifier': instance.hasModifier,
+      'from_time': instance.fromTime,
+      'to_time': instance.toTime,
+      'off_always': instance.offAlways,
       'title': instance.title,
       'description': instance.description,
       'active': instance.active,
-      'iiko_id': instance.iiko_id,
-      'jowi_id': instance.jowi_id,
+      'iiko_id': instance.iikoId,
+      'jowi_id': instance.jowiId,
     };

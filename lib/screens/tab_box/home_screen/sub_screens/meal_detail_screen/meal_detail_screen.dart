@@ -1,15 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
-
-import 'dart:developer';
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:formz/formz.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
+import 'package:ploff/cubits/modifiers/modifiers_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
-import 'package:ploff/data/models/modifier/variants.dart';
-import 'package:ploff/data/service/api_service/api_service.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/appbar_bottom.dart';
@@ -35,23 +33,7 @@ class MealDetailScreen extends StatefulWidget {
 }
 
 class _MealDetailScreenState extends State<MealDetailScreen> {
-  int count = 1;
   int modifierindex = 0;
-  ApiService apiService = ApiService();
-  List<VariantsModel> variants = [];
-  @override
-  void initState() {
-    init();
-    super.initState();
-  }
-
-  init() async {
-    ApiService apiService = ApiService();
-    variants =
-        await apiService.getModifiers('ec0db30d-a935-4ef7-b1d5-6c4649ff18ca');
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,9 +48,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                   leading: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
+                      onTap: () => Navigator.pop(context),
                       child: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
@@ -76,9 +56,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                         ),
                         child: Platform.isAndroid
                             ? const Icon(Icons.arrow_back)
-                            : const Icon(
-                                Icons.arrow_back_ios,
-                              ),
+                            : const Icon(Icons.arrow_back_ios),
                       ),
                     ),
                   ),
@@ -149,42 +127,59 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                       color: PloffColors.white,
                     ),
                     padding: const EdgeInsets.all(5),
-                    child: Column(
-                      children: [
-                        ...List.generate(
-                          variants.length,
-                          (index) => Container(
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: index != 3 - 1
-                                    ? BorderSide(
-                                        color:
-                                            PloffColors.black.withOpacity(.1),
-                                      )
-                                    : BorderSide.none,
+                    child: BlocBuilder<ModifiersCubit, ModifiersState>(
+                      builder: (context, state) {
+                        if (state.status == FormzStatus.submissionInProgress) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (state.status ==
+                            FormzStatus.submissionFailure) {
+                          return Center(
+                            child: Text(state.errorText),
+                          );
+                        } else {
+                          return Column(
+                            children: [
+                              ...List.generate(
+                                state.variants.length,
+                                (index) => Container(
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: index != 3 - 1
+                                          ? BorderSide(
+                                              color: PloffColors.black
+                                                  .withOpacity(.1),
+                                            )
+                                          : BorderSide.none,
+                                    ),
+                                  ),
+                                  child: ListTile(
+                                    leading: modifierindex == index
+                                        ? const Icon(
+                                            Icons.radio_button_checked,
+                                            color: PloffColors.C_FFCC00,
+                                          )
+                                        : const Icon(Icons.radio_button_off),
+                                    title: Text(state.variants[index].title.uz),
+                                    trailing: Text(Helper.formatSumm(state
+                                        .variants[index].outPrice
+                                        .toString())),
+                                    onTap: () {
+                                      setState(() {
+                                        modifierindex = index;
+                                        widget.price = widget.firstlyPrice;
+                                        widget.price +=
+                                            state.variants[index].outPrice;
+                                      });
+                                    },
+                                  ),
+                                ),
                               ),
-                            ),
-                            child: ListTile(
-                              leading: modifierindex == index
-                                  ? const Icon(
-                                      Icons.radio_button_checked,
-                                      color: PloffColors.C_FFCC00,
-                                    )
-                                  : const Icon(Icons.radio_button_off),
-                              title: Text(variants[index].title.uz),
-                              trailing: Text(Helper.formatSumm(
-                                  variants[index].out_price.toString())),
-                              onTap: () {
-                                setState(() {
-                                  modifierindex = index;
-                                  widget.price = widget.firstlyPrice;
-                                  widget.price += variants[index].out_price;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
+                            ],
+                          );
+                        }
+                      },
                     ),
                   ),
                 )
@@ -260,7 +255,6 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                         const SnackBar(content: Text("Product added to cart")));
                     await HiveService.instance
                         .addProductToStorage(widget.aboutMeal);
-                    context.read<BottomNavigationCubit>().getAllOrderPrice();
                     context
                         .read<BottomNavigationCubit>()
                         .changeBottomNavigationPages(1);

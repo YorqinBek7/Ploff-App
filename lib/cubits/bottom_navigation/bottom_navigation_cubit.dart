@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -9,20 +7,17 @@ part 'bottom_navigation_state.dart';
 
 class BottomNavigationCubit extends Cubit<int> {
   BottomNavigationCubit() : super(0);
-  Box<CategWithProduct> savedMeals = HiveService.instance.dataBox;
+  Box<CategWithProduct> savedMeals = HiveService.instance.cartProductsBox;
   int sum = 0;
   void changeBottomNavigationPages(int index) {
+    if (index == 1) getAllOrderPrice();
     emit(index);
   }
 
   void getAllOrderPrice() {
     sum = 0;
     for (var i = 0; i < savedMeals.length; i++) {
-      sum += savedMeals.getAt(i)?.out_price ?? 0;
+      sum += savedMeals.getAt(i)?.outPrice ?? 0;
     }
-  }
-
-  void addSum(int price) {
-    sum += price;
   }
 }

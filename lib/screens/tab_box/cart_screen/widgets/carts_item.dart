@@ -1,26 +1,30 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:ploff/cubits/count_meals/count_meals_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class CartsItem extends StatefulWidget {
-  CartsItem({
+  const CartsItem({
     Key? key,
     required this.aboutMeal,
   }) : super(key: key);
 
-  CategWithProduct aboutMeal;
+  final CategWithProduct aboutMeal;
 
   @override
   State<CartsItem> createState() => _CartsItemState();
 }
 
 class _CartsItemState extends State<CartsItem> {
-  int count = 0;
+  int count = 1;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,13 +84,18 @@ class _CartsItemState extends State<CartsItem> {
                     children: [
                       GestureDetector(
                         onTap: () => {
-                          if (count > 0)
-                            {
-                              count--,
-                            },
-                          setState(
-                            () => {},
-                          )
+                          setState(() => {
+                                if (count > 1)
+                                  {
+                                    count--,
+                                    context
+                                        .read<CountMealsCubit>()
+                                        .removeMeals(),
+                                    context.read<BottomNavigationCubit>().sum -=
+                                        widget.aboutMeal.outPrice,
+                                    log(widget.aboutMeal.outPrice.toString()),
+                                  }
+                              }),
                         },
                         child: Container(
                             margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -101,18 +110,10 @@ class _CartsItemState extends State<CartsItem> {
                       Text("$count"),
                       GestureDetector(
                         onTap: () {
-                          context
-                              .read<BottomNavigationCubit>()
-                              .addSum(widget.aboutMeal.out_price);
-                          context
-                              .read<BottomNavigationCubit>()
-                              .changeBottomNavigationPages(0);
-                          context
-                              .read<BottomNavigationCubit>()
-                              .changeBottomNavigationPages(1);
-                          setState(() {
-                            count++;
-                          });
+                          context.read<CountMealsCubit>().addMeals();
+                          context.read<BottomNavigationCubit>().sum +=
+                              widget.aboutMeal.outPrice;
+                          setState(() => {count++});
                         },
                         child: Container(
                             height: 32,

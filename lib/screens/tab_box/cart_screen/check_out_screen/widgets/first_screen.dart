@@ -7,7 +7,6 @@ import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/selec
 import 'package:ploff/utils/enum_classes/enum_classes.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/widgets/mini_text_fields.dart';
 import 'package:ploff/screens/tab_box/widgets/address_text_fields.dart';
-import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -18,14 +17,15 @@ class FirstPage extends StatelessWidget {
   final TextEditingController floorController;
 
   final TextEditingController flatController;
+  final TextEditingController addressController;
 
   PaymentType? paymentType = PaymentType.Cash;
   DeliveryMethod? deliveryMethod = DeliveryMethod.Express;
   CourierCall? courierCall = CourierCall.Yes;
   bool isEnabled = false;
-  ValueChanged courierValueChanged;
-  ValueChanged deliverValueChanged;
-  ValueChanged paymenValueChanged;
+  final ValueChanged courierValueChanged;
+  final ValueChanged deliverValueChanged;
+  final ValueChanged paymenValueChanged;
 
   FirstPage({
     super.key,
@@ -39,6 +39,7 @@ class FirstPage extends StatelessWidget {
     required this.deliverValueChanged,
     required this.isEnabled,
     required this.paymenValueChanged,
+    required this.addressController,
   });
 
   @override
@@ -73,8 +74,9 @@ class FirstPage extends StatelessWidget {
                           color: PloffColors.black.withOpacity(.5),
                         ),
                       ),
-                      const AddressTextFields(
+                      AddressTextFields(
                         isEnabled: true,
+                        addressController: addressController,
                       ),
                       Row(
                         children: [
@@ -122,8 +124,9 @@ class FirstPage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {},
-                        child: const AddressTextFields(
+                        child: AddressTextFields(
                           isEnabled: false,
+                          addressController: addressController,
                         ),
                       ),
                     ],
@@ -239,17 +242,6 @@ class FirstPage extends StatelessWidget {
                 ),
               )
             ],
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: PloffColors.white,
-          ),
-          child: GlobalButton(
-            buttonText: "Add",
-            onTap: () {},
           ),
         ),
       ],

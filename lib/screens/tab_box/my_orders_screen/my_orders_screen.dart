@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/my_orders_screen/sub_screens/detail_order_screen.dart';
+import 'package:ploff/screens/tab_box/my_orders_screen/widgets/active_order_item.dart';
 import 'package:ploff/screens/tab_box/my_orders_screen/widgets/history_order_item.dart';
 import 'package:ploff/screens/tab_box/widgets/custom_tab_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
-import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class MyOrdersScreen extends StatefulWidget {
@@ -52,112 +52,21 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
               const SizedBox(
                 height: 6,
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (context) => const DetailOrderScreen(),
-                    ),
-                  );
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 6),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: PloffColors.white,
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Order No:123321",
-                            style: PloffTextStyle.w600.copyWith(
-                              fontSize: 17,
-                            ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: HiveService.instance.orderProductsBox.length,
+                  itemBuilder: (context, index) => ActiveOrderItem(
+                    isVisible: isVisible,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => DetailOrderScreen(
+                            orderIndex: index,
                           ),
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                              shadowColor: MaterialStateProperty.all(
-                                Colors.transparent,
-                              ),
-                            ),
-                            onPressed: () {},
-                            child: const Text("Order is processed"),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(16),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: PloffColors.C_FFCC00,
-                            ),
-                            child: SvgPicture.asset(Plofficons.done),
-                          ),
-                          Expanded(
-                            child: Container(
-                              height: 2,
-                              color: !isVisible
-                                  ? PloffColors.C_FFCC00
-                                  : PloffColors.C_F0F0F0,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(13),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: PloffColors.C_FFCC00,
-                            ),
-                            child: SvgPicture.asset(Plofficons.chef),
-                          ),
-                          Expanded(
-                            child: Container(
-                              height: 2,
-                              color: !isVisible
-                                  ? PloffColors.C_FFCC00
-                                  : PloffColors.C_F0F0F0,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(16),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: PloffColors.C_FAFAFA,
-                            ),
-                            child: SvgPicture.asset(Plofficons.car),
-                          ),
-                          Expanded(
-                            child: Container(
-                              height: 2,
-                              color: isVisible
-                                  ? PloffColors.C_FFCC00
-                                  : PloffColors.C_F0F0F0,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(16),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: PloffColors.C_FAFAFA,
-                            ),
-                            child: SvgPicture.asset(Plofficons.flag),
-                          ),
-                        ],
-                      )
-                    ],
+                        ),
+                      );
+                    },
                   ),
                 ),
               )
