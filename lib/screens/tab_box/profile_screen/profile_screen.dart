@@ -5,6 +5,7 @@ import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/about_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/branches_screen/branches_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/edit_profile_screen.dart';
+import 'package:ploff/screens/tab_box/profile_screen/sub_screens/my_locations/my_locations.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/settings_screen/settings_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/widgets/profile_options_item.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -74,7 +75,16 @@ class ProfileScreen extends StatelessWidget {
           ProfileOptionsItem(
             icon: Plofficons.my_location,
             title: 'My locations',
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) {
+                    return const MyLocations();
+                  },
+                ),
+              );
+            },
             isDivider: true,
           ),
           ProfileOptionsItem(

@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
+import 'package:ploff/cubits/empty_cart/empty_cart_cubit.dart';
 import 'package:ploff/cubits/modifiers/modifiers_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
@@ -251,13 +252,13 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                 GlobalButton(
                   buttonText: "To Cart",
                   onTap: () async {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text("Product added to cart")));
+                    Helper.showSnackBar("Product added to cart", context);
                     await HiveService.instance
                         .addProductToStorage(widget.aboutMeal);
                     context
                         .read<BottomNavigationCubit>()
                         .changeBottomNavigationPages(1);
+                    context.read<EmptyCartCubit>().notEmpty();
                     Navigator.pop(context);
                   },
                 ),

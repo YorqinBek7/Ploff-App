@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class Helper {
   static final Helper instance = Helper._();
@@ -44,5 +47,12 @@ class Helper {
           'Location permission are permanetly denied, we cannot request permission');
     }
     return await Geolocator.getCurrentPosition();
+  }
+
+  static void showSnackBar(String text, BuildContext context) {
+    showTopSnackBar(
+      Overlay.of(context)!,
+      CustomSnackBar.success(message: text),
+    );
   }
 }

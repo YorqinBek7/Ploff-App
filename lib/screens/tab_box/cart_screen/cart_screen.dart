@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_meals/count_meals_cubit.dart';
 import 'package:ploff/cubits/count_meals/count_meals_state.dart';
+import 'package:ploff/cubits/empty_cart/empty_cart_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen.dart';
@@ -41,137 +42,163 @@ class CartScreen extends StatelessWidget {
           const SizedBox(width: 20)
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: BlocBuilder<BottomNavigationCubit, int>(
-              builder: (context, state) {
-                return BlocBuilder<CountMealsCubit, CountMealsState>(
-                  builder: (context, state) {
-                    return CustomScrollView(
-                      slivers: [
-                        const SliverToBoxAdapter(
-                          child: SizedBox(
-                            height: 15,
-                          ),
-                        ),
-                        ...List.generate(
-                          savedMeals.length,
-                          (index) => SliverToBoxAdapter(
-                            child: CartsItem(
-                              aboutMeal: savedMeals.getAt(index)!,
-                            ),
-                          ),
-                        ),
-                        const SliverToBoxAdapter(
-                          child: SizedBox(
-                            height: 15,
-                          ),
-                        ),
-                        SliverToBoxAdapter(
-                          child: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: PloffColors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Add comment",
-                                  style: PloffTextStyle.w600
-                                      .copyWith(fontSize: 15),
-                                ),
-                                Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: PloffColors.C_F0F0F0,
-                                  ),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Add comment to order",
-                                      hintStyle: PloffTextStyle.w400.copyWith(
-                                        fontSize: 15,
-                                        color: PloffColors.C_858585,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SliverToBoxAdapter(
-                          child: SizedBox(
-                            height: 12,
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-          Container(
-            decoration: const BoxDecoration(color: PloffColors.white),
-            padding: const EdgeInsets.all(10),
-            child: Column(
+      body: BlocBuilder<EmptyCartCubit, EmptyCartState>(
+        builder: (context, state) {
+          if (state is EmptyCartEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(Plofficons.emptyCart),
+                  const SizedBox(height: 5),
+                  Text(
+                    "Empty",
+                    style: PloffTextStyle.w500.copyWith(fontSize: 16),
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Order price",
-                      style: PloffTextStyle.w400.copyWith(fontSize: 18),
-                    ),
-                    BlocBuilder<BottomNavigationCubit, int>(
-                      builder: (context, state) {
-                        return BlocBuilder<CountMealsCubit, CountMealsState>(
-                          builder: (context, state) {
-                            return Text(
-                              Helper.formatSumm(context
+                Expanded(
+                  child: BlocBuilder<BottomNavigationCubit, int>(
+                    builder: (context, state) {
+                      return BlocBuilder<CountMealsCubit, CountMealsState>(
+                        builder: (context, state) {
+                          return CustomScrollView(
+                            slivers: [
+                              const SliverToBoxAdapter(
+                                child: SizedBox(
+                                  height: 15,
+                                ),
+                              ),
+                              ...List.generate(
+                                savedMeals.length,
+                                (index) => SliverToBoxAdapter(
+                                  child: CartsItem(
+                                    aboutMeal: savedMeals.getAt(index)!,
+                                  ),
+                                ),
+                              ),
+                              const SliverToBoxAdapter(
+                                child: SizedBox(
+                                  height: 15,
+                                ),
+                              ),
+                              SliverToBoxAdapter(
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: PloffColors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Add comment",
+                                        style: PloffTextStyle.w600
+                                            .copyWith(fontSize: 15),
+                                      ),
+                                      Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 10),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: PloffColors.C_F0F0F0,
+                                        ),
+                                        child: TextField(
+                                          decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: "Add comment to order",
+                                            hintStyle:
+                                                PloffTextStyle.w400.copyWith(
+                                              fontSize: 15,
+                                              color: PloffColors.C_858585,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SliverToBoxAdapter(
+                                child: SizedBox(
+                                  height: 12,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  decoration: const BoxDecoration(color: PloffColors.white),
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Order price",
+                            style: PloffTextStyle.w400.copyWith(fontSize: 18),
+                          ),
+                          BlocBuilder<BottomNavigationCubit, int>(
+                            builder: (context, state) {
+                              return BlocBuilder<CountMealsCubit,
+                                  CountMealsState>(
+                                builder: (context, state) {
+                                  return Text(
+                                    Helper.formatSumm(context
+                                        .read<BottomNavigationCubit>()
+                                        .sum
+                                        .toString()),
+                                    style: PloffTextStyle.w400
+                                        .copyWith(fontSize: 18),
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      GlobalButton(
+                        buttonText: HiveService.instance.cartProductsBox.isEmpty
+                            ? "Mahsulot qo'shing"
+                            : "Buyurtma qilish",
+                        onTap: () {
+                          HiveService.instance.cartProductsBox.isNotEmpty
+                              ? Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) =>
+                                        const CheckOutScreen(),
+                                  ),
+                                )
+                              : context
                                   .read<BottomNavigationCubit>()
-                                  .sum
-                                  .toString()),
-                              style: PloffTextStyle.w400.copyWith(fontSize: 18),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                GlobalButton(
-                  buttonText: HiveService.instance.cartProductsBox.isEmpty
-                      ? "Mahsulot qo'shing"
-                      : "Buyurtma qilish",
-                  onTap: () {
-                    HiveService.instance.cartProductsBox.isNotEmpty
-                        ? Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => const CheckOutScreen(),
-                            ),
-                          )
-                        : context
-                            .read<BottomNavigationCubit>()
-                            .changeBottomNavigationPages(0);
-                  },
+                                  .changeBottomNavigationPages(0);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ],
-            ),
-          ),
-        ],
+            );
+          }
+        },
       ),
     );
   }

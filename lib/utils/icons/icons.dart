@@ -43,4 +43,6 @@ class Plofficons {
   static const String korzina = "assets/svg/korzina.svg";
   static const String location_black = "assets/svg/location_black.svg";
   static const String location_center = "assets/svg/location_center.svg";
+  static const String emptyCart = "assets/images/empty_cart.png";
+  static const String noLocations = "assets/images/no_loc.png";
 }
