@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
@@ -9,7 +10,7 @@ import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class MyOrdersScreen extends StatefulWidget {
-  const MyOrdersScreen({super.key});
+  MyOrdersScreen({super.key});
 
   @override
   State<MyOrdersScreen> createState() => _MyOrdersScreenState();
@@ -35,12 +36,12 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'My Orders',
+          tr("my_orders"),
           style: PloffTextStyle.w600.copyWith(fontSize: 20),
         ),
         bottom: CustomTabBar(
-          firstTabText: 'Active order',
-          secondTabText: 'History Order',
+          firstTabText: tr("current_orders"),
+          secondTabText: tr("history_of_orders"),
           tabController: tabController,
         ),
       ),

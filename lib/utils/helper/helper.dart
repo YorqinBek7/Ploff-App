@@ -21,7 +21,6 @@ class Helper {
 
   Future<void> getLocation() async {
     position = await _determinePosition();
-    log(position?.latitude.toString() ?? "asdasda");
     placemark = await placemarkFromCoordinates(
       position!.latitude,
       position!.longitude,
@@ -49,10 +48,17 @@ class Helper {
     return await Geolocator.getCurrentPosition();
   }
 
-  static void showSnackBar(String text, BuildContext context) {
+  static void showSuccesSnackBar(String text, BuildContext context) {
     showTopSnackBar(
       Overlay.of(context)!,
       CustomSnackBar.success(message: text),
+    );
+  }
+
+  static void showFailedSnackBar(String text, BuildContext context) {
+    showTopSnackBar(
+      Overlay.of(context)!,
+      CustomSnackBar.error(message: text),
     );
   }
 }

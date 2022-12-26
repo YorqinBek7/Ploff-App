@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ploff/utils/colors/colors.dart';
 
@@ -19,8 +20,8 @@ class AddressTextFields extends StatelessWidget {
       child: TextField(
         controller: addressController,
         enabled: isEnabled,
-        decoration: const InputDecoration(
-          hintText: "Address",
+        decoration: InputDecoration(
+          hintText: tr('address'),
           border: InputBorder.none,
         ),
       ),

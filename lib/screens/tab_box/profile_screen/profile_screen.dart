@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,15 +14,15 @@ import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
-        title:
-            Text("Profile", style: PloffTextStyle.w600.copyWith(fontSize: 20)),
+        title: Text(tr("profil"),
+            style: PloffTextStyle.w600.copyWith(fontSize: 20)),
         automaticallyImplyLeading: false,
       ),
       body: Column(
@@ -63,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       CupertinoPageRoute(
-                        builder: (context) => const EditProfileScreen(),
+                        builder: (context) => EditProfileScreen(),
                       ),
                     );
                   },
@@ -74,13 +75,13 @@ class ProfileScreen extends StatelessWidget {
           ),
           ProfileOptionsItem(
             icon: Plofficons.my_location,
-            title: 'My locations',
+            title: tr("my_locations"),
             onTap: () {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
                   builder: (context) {
-                    return const MyLocations();
+                    return MyLocations();
                   },
                 ),
               );
@@ -89,13 +90,13 @@ class ProfileScreen extends StatelessWidget {
           ),
           ProfileOptionsItem(
             icon: Plofficons.location_black,
-            title: "Branches",
+            title: tr("branches"),
             onTap: () {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
                   builder: (context) {
-                    return const BranchesScreen();
+                    return BranchesScreen();
                   },
                 ),
               );
@@ -104,13 +105,13 @@ class ProfileScreen extends StatelessWidget {
           ),
           ProfileOptionsItem(
             icon: Plofficons.settings,
-            title: "Settings",
+            title: tr("settings"),
             onTap: () {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
                   builder: (context) {
-                    return const SettingsScreen();
+                    return SettingsScreen();
                   },
                 ),
               );
@@ -119,12 +120,12 @@ class ProfileScreen extends StatelessWidget {
           ),
           ProfileOptionsItem(
             icon: Plofficons.about,
-            title: "About the service",
+            title: tr("about_the_service"),
             onTap: () {
               Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => const AboutScreen(),
+                  builder: (context) => AboutScreen(),
                 ),
               );
             },

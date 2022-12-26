@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
         title: Text(
-          'Settings',
+          tr("settings"),
           style: PloffTextStyle.w600.copyWith(fontSize: 20),
         ),
       ),
@@ -43,7 +44,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   ListTile(
                     leading: SvgPicture.asset(Plofficons.globus),
-                    title: const Text("Language"),
+                    title: Text(tr("language")),
                     tileColor: PloffColors.C_F0F0F0,
                     onTap: () {
                       languageBottomDialog(context);
@@ -61,7 +62,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   const Divider(),
                   ListTile(
                     leading: SvgPicture.asset(Plofficons.notification),
-                    title: const Text("Notification"),
+                    title: Text(tr("notification")),
                     tileColor: PloffColors.C_F0F0F0,
                     trailing: Platform.isIOS
                         ? CupertinoSwitch(
@@ -112,7 +113,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    "Log out",
+                    tr("log_out"),
                     style: PloffTextStyle.w500.copyWith(
                       color: PloffColors.red,
                     ),
@@ -144,7 +145,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
               child: Text(
-                "Language",
+                tr("language"),
                 style: PloffTextStyle.w600.copyWith(fontSize: 20),
               ),
             ),
@@ -159,15 +160,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Icons.done,
                 color: PloffColors.C_FFCC00,
               ),
+              onTap: () async {
+                await context.setLocale(
+                  const Locale("uz", "UZ"),
+                );
+              },
             ),
             const Divider(),
             ListTile(
-                leading: Image.asset(Plofficons.russiaFlag),
-                title: Text(
-                  "Русский",
-                  style: PloffTextStyle.w600.copyWith(fontSize: 15),
-                ),
-                trailing: null),
+              leading: Image.asset(Plofficons.russiaFlag),
+              title: Text(
+                "Русский",
+                style: PloffTextStyle.w600.copyWith(fontSize: 15),
+              ),
+              trailing: null,
+              onTap: () => {
+                Navigator.pop(context),
+              },
+            ),
             const Divider(),
             ListTile(
               leading: Image.asset(Plofficons.englishFlag),
@@ -176,6 +186,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 style: PloffTextStyle.w600.copyWith(fontSize: 15),
               ),
               trailing: null,
+              onTap: () async {
+                await context.setLocale(
+                  const Locale("en", "EN"),
+                );
+              },
             ),
             const Divider(),
           ],

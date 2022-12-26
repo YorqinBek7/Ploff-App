@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,12 +19,13 @@ import 'package:ploff/data/models/orders/orders.dart';
 import 'package:ploff/data/models/user_locations/user_locations.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
-import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
+import 'package:ploff/screens/splash_screen/splash_screen.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   SharedPreferencesService.instance.sharedPreferences =
       await SharedPreferences.getInstance();
   Hive.registerAdapter<CategProducts>(CategProductsAdapter());
@@ -34,13 +36,22 @@ void main() async {
   Hive.registerAdapter<Orders>(OrdersAdapter());
   await Hive.initFlutter();
   await HiveService.instance.createBox();
-
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarBrightness: Brightness.light,
     statusBarColor: PloffColors.white,
     statusBarIconBrightness: Brightness.dark,
   ));
-  runApp(const PloffApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [
+        Locale("uz", "UZ"),
+        Locale("en", "EN"),
+      ],
+      fallbackLocale: const Locale('uz', 'UZ'),
+      path: 'assets/translations',
+      child: const PloffApp(),
+    ),
+  );
 }
 
 class PloffApp extends StatelessWidget {
@@ -75,20 +86,32 @@ class PloffApp extends StatelessWidget {
           create: (context) => EmptyCartCubit(),
         ),
       ],
-      child: MaterialApp(
-        theme: ThemeData(
-          useMaterial3: true,
-          primarySwatch: null,
-          radioTheme: RadioThemeData(
-            fillColor: MaterialStateProperty.all(
-              PloffColors.C_FFCC00,
-            ),
+      child: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      locale: context.locale,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      theme: ThemeData(
+        useMaterial3: true,
+        primarySwatch: null,
+        radioTheme: RadioThemeData(
+          fillColor: MaterialStateProperty.all(
+            PloffColors.C_FFCC00,
           ),
         ),
-        debugShowCheckedModeBanner: false,
-        title: 'Ploff app',
-        home: const HomeTab(),
       ),
+      debugShowCheckedModeBanner: false,
+      title: 'Ploff app',
+      home: SplashScreen(),
     );
   }
 }

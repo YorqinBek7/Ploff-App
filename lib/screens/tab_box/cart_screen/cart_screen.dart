@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +28,7 @@ class CartScreen extends StatelessWidget {
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
         title: Text(
-          "Savatcha",
+          tr("cart"),
           style: PloffTextStyle.w600.copyWith(fontSize: 20),
         ),
         automaticallyImplyLeading: false,
@@ -52,7 +53,7 @@ class CartScreen extends StatelessWidget {
                   Image.asset(Plofficons.emptyCart),
                   const SizedBox(height: 5),
                   Text(
-                    "Empty",
+                    tr('empty'),
                     style: PloffTextStyle.w500.copyWith(fontSize: 16),
                   ),
                 ],
@@ -183,8 +184,7 @@ class CartScreen extends StatelessWidget {
                               ? Navigator.push(
                                   context,
                                   CupertinoPageRoute(
-                                    builder: (context) =>
-                                        const CheckOutScreen(),
+                                    builder: (context) => CheckOutScreen(),
                                   ),
                                 )
                               : context

@@ -64,7 +64,7 @@ class OtpPage extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     CupertinoPageRoute(
-                      builder: (context) => const HomeTab(),
+                      builder: (context) => HomeTab(),
                     ),
                   );
                 }

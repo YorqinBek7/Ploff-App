@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ploff/screens/select_language_screen/widgets/select_language_item.dart';
@@ -33,7 +34,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
               height: 46,
             ),
             Text(
-              "Выберите язык:",
+              tr("select_language"),
               style: PloffTextStyle.w600.copyWith(fontSize: 17.0),
             ),
             SelectLanguageItem(
@@ -43,7 +44,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
                 Navigator.pushReplacement(
                   context,
                   CupertinoPageRoute(
-                    builder: (context) => const HomeTab(),
+                    builder: (context) => HomeTab(),
                   ),
                 );
               },

@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,12 +24,17 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  List<Widget> screens = [
-    const HomeScreen(),
-    CartScreen(),
-    const MyOrdersScreen(),
-    const ProfileScreen()
-  ];
+  List<Widget> screens = [];
+  @override
+  void initState() {
+    screens = [
+      HomeScreen(),
+      CartScreen(),
+      MyOrdersScreen(),
+      ProfileScreen(),
+    ];
+    super.initState();
+  }
 
   int index = 0;
   @override
@@ -36,6 +42,7 @@ class _HomeTabState extends State<HomeTab> {
     return BlocBuilder<BottomNavigationCubit, int>(
       builder: (context, state) {
         return Scaffold(
+          key: GlobalKey<ScaffoldState>(),
           body: IndexedStack(
             index: state,
             children: screens,
@@ -71,7 +78,7 @@ class _HomeTabState extends State<HomeTab> {
             items: [
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(Plofficons.home),
-                label: "Главная",
+                label: tr("main"),
                 activeIcon: SvgPicture.asset(
                   Plofficons.home,
                   color: PloffColors.C_FFCC00,
@@ -86,7 +93,7 @@ class _HomeTabState extends State<HomeTab> {
                   ),
                   child: SvgPicture.asset(Plofficons.cart),
                 ),
-                label: "Корзина",
+                label: tr("cart"),
                 activeIcon: Badge(
                   badgeContent: Text(
                     HiveService.instance.cartProductsBox.length.toString(),
@@ -101,7 +108,7 @@ class _HomeTabState extends State<HomeTab> {
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(Plofficons.shopping_bag),
-                label: "Мои заказы",
+                label: tr("my_orders"),
                 activeIcon: SvgPicture.asset(
                   Plofficons.shopping_bag,
                   color: PloffColors.C_FFCC00,
@@ -109,7 +116,7 @@ class _HomeTabState extends State<HomeTab> {
               ),
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(Plofficons.user),
-                label: "Профиль",
+                label: tr("profil"),
                 activeIcon: SvgPicture.asset(
                   Plofficons.user,
                   color: PloffColors.C_FFCC00,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoding/geocoding.dart';
@@ -91,7 +92,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                     ),
                   ),
                   Text(
-                    "Delivery Address",
+                    tr("delivery_address"),
                     style: PloffTextStyle.w600.copyWith(fontSize: 20),
                   ),
                   const SizedBox(height: 15),
@@ -115,15 +116,15 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                   Row(
                     children: [
                       MiniTextaFields(
-                        hintText: "Entrance",
+                        hintText: tr("entrance"),
                         controller: entranceController,
                       ),
                       MiniTextaFields(
-                        hintText: "Floor",
+                        hintText: tr("floor"),
                         controller: floorController,
                       ),
                       MiniTextaFields(
-                        hintText: "Flat",
+                        hintText: tr("flat"),
                         controller: flatController,
                       ),
                     ],
@@ -137,23 +138,21 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                     ),
                     child: TextField(
                       controller: addressController,
-                      decoration: const InputDecoration(
-                        hintText: "Adress name",
+                      decoration: InputDecoration(
+                        hintText: tr("address_name"),
                         border: InputBorder.none,
                       ),
                     ),
                   ),
                   const Spacer(),
                   GlobalButton(
-                    buttonText: "Confirm",
+                    buttonText: tr("confirm"),
                     onTap: () {
                       if (addressController.text.isEmpty ||
                           (helper.placemark?[0].administrativeArea) == null &&
                               (helper.placemark?[0].locality) == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text("Please fill all fields")),
-                        );
+                        Helper.showFailedSnackBar(
+                            tr("please_fill_fields"), context);
                       } else {
                         HiveService.instance.addLocationToStorage(
                           UserLocations(
@@ -163,6 +162,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                             nameLocation: addressController.text,
                           ),
                         );
+                        Navigator.pop(context);
                         Navigator.pop(context);
                       }
                     },

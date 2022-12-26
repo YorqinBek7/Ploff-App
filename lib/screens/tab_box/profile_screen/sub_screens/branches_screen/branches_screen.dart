@@ -34,7 +34,7 @@ class BranchesScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     CupertinoPageRoute(
-                      builder: (context) => const DetailBranchScreen(),
+                      builder: (context) => DetailBranchScreen(),
                     ),
                   );
                 },

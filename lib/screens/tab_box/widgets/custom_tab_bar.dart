@@ -38,6 +38,8 @@ class CustomTabBar extends StatelessWidget implements PreferredSize {
             child: Text(
               firstTabText,
               style: PloffTextStyle.w500.copyWith(fontSize: 15),
+              maxLines: 1,
+              overflow: TextOverflow.fade,
             ),
           ),
           Tab(
@@ -45,6 +47,8 @@ class CustomTabBar extends StatelessWidget implements PreferredSize {
             child: Text(
               secondTabText,
               style: PloffTextStyle.w500.copyWith(fontSize: 15),
+              maxLines: 1,
+              overflow: TextOverflow.fade,
             ),
           )
         ],

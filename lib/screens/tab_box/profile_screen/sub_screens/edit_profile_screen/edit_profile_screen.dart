@@ -36,7 +36,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
         title: Text(
-          'Edit profile',
+          tr("edit_profile"),
           style: PloffTextStyle.w600.copyWith(fontSize: 20),
         ),
       ),
@@ -52,17 +52,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Name"),
+                  Text(tr("name")),
                   EditFields(
                     controller: controller,
                     isDisable: true,
                   ),
-                  const Text("Phone number"),
+                  Text(tr("phone_number")),
                   EditFields(
                     controller: numberController,
                     isDisable: false,
                   ),
-                  const Text("Date of birth"),
+                  Text(tr("date_of_birth")),
                   GestureDetector(
                     onTap: () => {
                       showModalBottomSheet(
@@ -101,7 +101,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: GlobalButton(
-                buttonText: "Confirm",
+                buttonText: tr("confirm"),
                 onTap: () {},
               ),
             )

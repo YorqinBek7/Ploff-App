@@ -38,8 +38,7 @@ class AboutScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) =>
-                              const CondensationPolicyScreen(),
+                          builder: (context) => CondensationPolicyScreen(),
                         ),
                       );
                     },
@@ -52,7 +51,7 @@ class AboutScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) => const LicenceScreen(),
+                          builder: (context) => LicenceScreen(),
                         ),
                       );
                     },

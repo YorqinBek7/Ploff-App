@@ -252,7 +252,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                 GlobalButton(
                   buttonText: "To Cart",
                   onTap: () async {
-                    Helper.showSnackBar("Product added to cart", context);
+                    Helper.showSuccesSnackBar("Product added to cart", context);
                     await HiveService.instance
                         .addProductToStorage(widget.aboutMeal);
                     context

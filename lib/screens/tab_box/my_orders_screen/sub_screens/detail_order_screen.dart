@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
@@ -17,7 +18,7 @@ class DetailOrderScreen extends StatelessWidget {
       backgroundColor: PloffColors.C_F0F0F0,
       appBar: AppBar(
         title: Text(
-          "Order No:1232131",
+          "${tr("orderNo")} No:1232131",
           style: PloffTextStyle.w600.copyWith(fontSize: 20),
         ),
       ),
@@ -38,7 +39,7 @@ class DetailOrderScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Order No:123321",
+                        "${tr("orderNo")} No:123321",
                         style: PloffTextStyle.w600.copyWith(
                           fontSize: 17,
                         ),
@@ -55,7 +56,9 @@ class DetailOrderScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {},
-                        child: const Text("Order is processed"),
+                        child: Text(
+                          tr("order_in_process"),
+                        ),
                       ),
                     ],
                   ),
@@ -127,28 +130,28 @@ class DetailOrderScreen extends StatelessWidget {
                         .getAt(orderIndex)!
                         .address,
                     icon: Icons.location_on,
-                    title: 'Address',
+                    title: tr("address"),
                   ),
                   OrderDetailTexts(
                     description: HiveService.instance.orderProductsBox
                         .getAt(orderIndex)!
                         .time,
                     icon: Icons.location_on,
-                    title: 'Time',
+                    title: tr('time'),
                   ),
                   OrderDetailTexts(
                     description: HiveService.instance.orderProductsBox
                         .getAt(orderIndex)!
                         .date,
                     icon: Icons.location_on,
-                    title: 'Date',
+                    title: tr('date'),
                   ),
                   OrderDetailTexts(
                     description: HiveService.instance.orderProductsBox
                         .getAt(orderIndex)!
                         .paymentType,
                     icon: Icons.location_on,
-                    title: 'Payment type',
+                    title: tr('payment_type'),
                   ),
                 ],
               ),
@@ -167,7 +170,7 @@ class DetailOrderScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Courier",
+                        tr('courier'),
                         style: PloffTextStyle.w600.copyWith(
                           fontSize: 17,
                         ),
