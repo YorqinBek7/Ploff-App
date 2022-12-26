@@ -12,7 +12,7 @@
   "add_comment_to_order": "Add comment to order",
   "orderNo": "Order",
   "order_in_process": "Order is processed",
-  "current_orders": "Current order",
+  "active_orders": "Active orders",
   "history_of_orders": "History of orders",
   "branches": "Branches",
   "settings": "Settings",

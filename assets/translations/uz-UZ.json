@@ -12,7 +12,7 @@
     "add_comment_to_order": "Buyurtmaga izoh yozing",
     "orderNo": "Buyurtma",
     "order_in_process": "Buyurtma jarayonda",
-    "current_orders": "Hozirgi buyurtmalar",
+    "active_orders": "Hozirgi buyurtmalar",
     "history_of_orders": "Buyurtmalar tarixi",
     "branches": "Filiallar",
     "settings": "Sozlamalar",

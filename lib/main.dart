@@ -46,8 +46,8 @@ void main() async {
       supportedLocales: const [
         Locale("uz", "UZ"),
         Locale("en", "EN"),
+        Locale("ru", "RU"),
       ],
-      fallbackLocale: const Locale('uz', 'UZ'),
       path: 'assets/translations',
       child: const PloffApp(),
     ),

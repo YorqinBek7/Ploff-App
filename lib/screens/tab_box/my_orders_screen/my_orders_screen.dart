@@ -40,7 +40,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
           style: PloffTextStyle.w600.copyWith(fontSize: 20),
         ),
         bottom: CustomTabBar(
-          firstTabText: tr("current_orders"),
+          firstTabText: tr("active_orders"),
           secondTabText: tr("history_of_orders"),
           tabController: tabController,
         ),

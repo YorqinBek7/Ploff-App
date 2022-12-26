@@ -20,7 +20,6 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool isNotificationOn = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,14 +155,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 "O'zbekcha",
                 style: PloffTextStyle.w600.copyWith(fontSize: 15),
               ),
-              trailing: const Icon(
-                Icons.done,
-                color: PloffColors.C_FFCC00,
-              ),
+              trailing: context.locale.languageCode == "uz"
+                  ? const Icon(
+                      Icons.done,
+                      color: PloffColors.C_FFCC00,
+                    )
+                  : null,
               onTap: () async {
-                await context.setLocale(
-                  const Locale("uz", "UZ"),
-                );
+                if (context.locale.languageCode != "uz") {
+                  await context.setLocale(const Locale("uz", "UZ"));
+                  await SharedPreferencesService.instance.sharedPreferences
+                      .setString("lan", "uz");
+                }
+                Navigator.pop(context);
               },
             ),
             const Divider(),
@@ -173,9 +177,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 "Русский",
                 style: PloffTextStyle.w600.copyWith(fontSize: 15),
               ),
-              trailing: null,
-              onTap: () => {
-                Navigator.pop(context),
+              trailing: context.locale.languageCode == "ru"
+                  ? const Icon(
+                      Icons.done,
+                      color: PloffColors.C_FFCC00,
+                    )
+                  : null,
+              onTap: () async {
+                if (context.locale.languageCode != "ru") {
+                  await context.setLocale(const Locale("ru", "RU"));
+                  await SharedPreferencesService.instance.sharedPreferences
+                      .setString("lan", "ru");
+                }
+                Navigator.pop(context);
               },
             ),
             const Divider(),
@@ -185,11 +199,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 "English",
                 style: PloffTextStyle.w600.copyWith(fontSize: 15),
               ),
-              trailing: null,
+              trailing: context.locale.languageCode == "en"
+                  ? const Icon(
+                      Icons.done,
+                      color: PloffColors.C_FFCC00,
+                    )
+                  : null,
               onTap: () async {
-                await context.setLocale(
-                  const Locale("en", "EN"),
-                );
+                if (context.locale.languageCode != "en") {
+                  await context.setLocale(const Locale("en", "EN"));
+                  await SharedPreferencesService.instance.sharedPreferences
+                      .setString("lan", "en");
+                }
+                Navigator.pop(context);
               },
             ),
             const Divider(),
