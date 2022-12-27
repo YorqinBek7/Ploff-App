@@ -11,7 +11,7 @@ class ApiService {
   Future<List<CategProducts>> getMeals() async {
     try {
       Response response = await dio.get(
-        "$BASE_URL/v2/category-with-products",
+        "${Constants.BASE_URL}/v2/category-with-products",
         options: Options(
           headers: {
             "Shipper": "d4b1658f-3271-4973-8591-98a82939a664",
@@ -35,7 +35,7 @@ class ApiService {
       {required String searchText}) async {
     try {
       Response response = await dio.get(
-        "$BASE_URL/v2/product-non-variant-modifier",
+        "${Constants.BASE_URL}/v2/product-non-variant-modifier",
         queryParameters: {"search": searchText},
         options: Options(
           headers: {
@@ -59,7 +59,7 @@ class ApiService {
   Future<List<Banners>> getBanners() async {
     try {
       Response response = await dio.get(
-        "$BASE_URL/v1/banner",
+        "${Constants.BASE_URL}/v1/banner",
         options: Options(
           headers: {
             "Shipper": "d4b1658f-3271-4973-8591-98a82939a664",
@@ -82,7 +82,7 @@ class ApiService {
   Future<List<VariantsModel>> getModifiers(String productId) async {
     try {
       Response response = await dio.get(
-        "$BASE_URL/v2/modifier",
+        "${Constants.BASE_URL}/v2/modifier",
         options: Options(
           headers: {
             "Shipper": "d4b1658f-3271-4973-8591-98a82939a664",
