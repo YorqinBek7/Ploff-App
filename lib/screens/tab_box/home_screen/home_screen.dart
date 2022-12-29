@@ -21,6 +21,7 @@ import 'package:ploff/screens/tab_box/home_screen/widgets/meal_item.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/search_field.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/search_state_ui.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/helper/helper.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -69,12 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () async {
                     await helper.getLocation();
                     HiveService.instance.userLocations.isEmpty
-                        ? Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => GetLocationScreen(),
-                            ),
-                          )
+                        ? Navigator.pushNamed(
+                            context, Constants.getLocationScreen)
                         : await chooseLocation(context);
                   },
                   child: Row(
@@ -255,33 +252,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   .products
                                                   .length,
                                               onTap: () {
-                                                Navigator.push(
-                                                  context,
-                                                  CupertinoPageRoute(
-                                                    builder: (context) {
-                                                      context
-                                                          .read<
-                                                              ModifiersCubit>()
-                                                          .getModifiers();
-                                                      return MealDetailScreen(
-                                                        aboutMeal: product[
-                                                                categoryIndex]
-                                                            .products[index],
-                                                        price: double.parse(
-                                                            product[categoryIndex]
-                                                                .products[index]
-                                                                .outPrice
-                                                                .toString()),
-                                                        firstlyPrice: double
-                                                            .parse(product[
-                                                                    categoryIndex]
-                                                                .products[index]
-                                                                .outPrice
-                                                                .toString()),
-                                                      );
-                                                    },
-                                                  ),
-                                                );
+                                                context
+                                                    .read<ModifiersCubit>()
+                                                    .getModifiers();
+                                                Navigator.pushNamed(context,
+                                                    Constants.mealDetailScreen,
+                                                    arguments: [
+                                                      product[categoryIndex]
+                                                          .products[index],
+                                                      double.parse(
+                                                          product[categoryIndex]
+                                                              .products[index]
+                                                              .outPrice
+                                                              .toString()),
+                                                      double.parse(
+                                                          product[categoryIndex]
+                                                              .products[index]
+                                                              .outPrice
+                                                              .toString()),
+                                                    ]);
                                               },
                                             );
                                           },

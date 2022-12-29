@@ -7,6 +7,7 @@ import 'package:ploff/screens/tab_box/my_orders_screen/widgets/active_order_item
 import 'package:ploff/screens/tab_box/my_orders_screen/widgets/history_order_item.dart';
 import 'package:ploff/screens/tab_box/widgets/custom_tab_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class MyOrdersScreen extends StatefulWidget {
@@ -59,14 +60,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                   itemBuilder: (context, index) => ActiveOrderItem(
                     isVisible: isVisible,
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => DetailOrderScreen(
-                            orderIndex: index,
-                          ),
-                        ),
-                      );
+                      Navigator.pushNamed(context, Constants.orderDetail);
                     },
                   ),
                 ),

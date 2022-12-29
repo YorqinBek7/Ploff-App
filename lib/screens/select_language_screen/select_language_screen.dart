@@ -5,6 +5,7 @@ import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/screens/select_language_screen/widgets/select_language_item.dart';
 import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -42,12 +43,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
               flagImage: Plofficons.uzbFlag,
               languageText: "O'zbekcha",
               onTap: () async {
-                Navigator.pushReplacement(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => HomeTab(),
-                  ),
-                );
+                Navigator.pushReplacementNamed(context, Constants.homeTab);
                 await SharedPreferencesService.instance.sharedPreferences
                     .setString("lan", 'uz');
                 await context.setLocale(const Locale("uz", "UZ"));
@@ -57,12 +53,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
               flagImage: Plofficons.russiaFlag,
               languageText: "Русский",
               onTap: () async {
-                Navigator.pushReplacement(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => HomeTab(),
-                  ),
-                );
+                Navigator.pushReplacementNamed(context, Constants.homeTab);
                 await SharedPreferencesService.instance.sharedPreferences
                     .setString("lan", 'ru');
                 await context.setLocale(const Locale("ru", "RU"));
@@ -72,12 +63,7 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
               flagImage: Plofficons.englishFlag,
               languageText: "English",
               onTap: () async {
-                Navigator.pushReplacement(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => HomeTab(),
-                  ),
-                );
+                Navigator.pushReplacementNamed(context, Constants.homeTab);
                 await SharedPreferencesService.instance.sharedPreferences
                     .setString("lan", 'en');
                 await context.setLocale(const Locale("en", "EN"));

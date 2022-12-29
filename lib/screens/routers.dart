@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:ploff/data/models/category_with_products/categ_products.dart';
+import 'package:ploff/screens/auth/sign_up_screen/enter_phone_number_page.dart';
+import 'package:ploff/screens/auth/sign_up_screen/otp_page.dart';
 import 'package:ploff/screens/select_language_screen/select_language_screen.dart';
 import 'package:ploff/screens/splash_screen/splash_screen.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen.dart';
@@ -11,6 +12,7 @@ import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/su
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/sub_screens/license_agreements.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/branches_screen/branches_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/branches_screen/detail_branch_screen/detail_branch_screen.dart';
+import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/edit_profile_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/my_locations/my_locations.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/settings_screen/settings_screen.dart';
 import 'package:ploff/utils/constants/const.dart';
@@ -40,9 +42,9 @@ class Routers {
       case Constants.mealDetailScreen:
         return CupertinoPageRoute(
           builder: (context) => MealDetailScreen(
-            aboutMeal: settings.arguments as CategWithProduct,
-            firstlyPrice: settings.arguments as double,
-            price: settings.arguments as double,
+            aboutMeal: (settings.arguments as List)[0],
+            firstlyPrice: (settings.arguments as List)[1],
+            price: (settings.arguments as List)[2],
           ),
         );
       case Constants.checkoutScreen:
@@ -80,6 +82,18 @@ class Routers {
       case Constants.licenseScreeen:
         return CupertinoPageRoute(
           builder: (context) => LicenceScreen(),
+        );
+      case Constants.otpScreen:
+        return CupertinoPageRoute(
+          builder: (context) => OtpPage(),
+        );
+      case Constants.editProfileScreen:
+        return CupertinoPageRoute(
+          builder: (context) => EditProfileScreen(),
+        );
+      case Constants.enterPhoneNumber:
+        return CupertinoPageRoute(
+          builder: (context) => EnterPhoneNumberPage(),
         );
     }
   }

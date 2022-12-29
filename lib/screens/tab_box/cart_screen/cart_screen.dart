@@ -15,6 +15,7 @@ import 'package:ploff/screens/tab_box/cart_screen/widgets/delete_dialog.dart';
 import 'package:ploff/screens/tab_box/cart_screen/widgets/carts_item.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/helper/helper.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -181,12 +182,8 @@ class CartScreen extends StatelessWidget {
                             : "Buyurtma qilish",
                         onTap: () {
                           HiveService.instance.cartProductsBox.isNotEmpty
-                              ? Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                    builder: (context) => CheckOutScreen(),
-                                  ),
-                                )
+                              ? Navigator.pushNamed(
+                                  context, Constants.checkoutScreen)
                               : context
                                   .read<BottomNavigationCubit>()
                                   .changeBottomNavigationPages(0);

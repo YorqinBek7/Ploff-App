@@ -8,6 +8,7 @@ import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/get_location_screen.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 Future<dynamic> chooseLocation(BuildContext context) {
@@ -72,12 +73,7 @@ Future<dynamic> chooseLocation(BuildContext context) {
             child: GlobalButton(
               buttonText: tr("add_location"),
               onTap: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => GetLocationScreen(),
-                  ),
-                );
+                Navigator.pushNamed(context, Constants.getLocationScreen);
               },
             ),
           )

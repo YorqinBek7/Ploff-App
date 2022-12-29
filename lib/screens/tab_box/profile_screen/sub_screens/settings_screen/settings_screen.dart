@@ -7,6 +7,7 @@ import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 import 'dart:io' show Platform;
@@ -94,11 +95,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 context
                     .read<BottomNavigationCubit>()
                     .changeBottomNavigationPages(0);
-                Navigator.pushAndRemoveUntil(
+                Navigator.pushNamedAndRemoveUntil(
                   context,
-                  CupertinoPageRoute(
-                    builder: (context) => const HomeTab(),
-                  ),
+                  Constants.homeTab,
                   (route) => false,
                 );
               },

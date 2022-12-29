@@ -10,6 +10,7 @@ import 'package:ploff/screens/tab_box/profile_screen/sub_screens/my_locations/my
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/settings_screen/settings_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/widgets/profile_options_item.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -61,12 +62,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => EditProfileScreen(),
-                      ),
-                    );
+                    Navigator.pushNamed(context, Constants.editProfileScreen);
                   },
                   icon: SvgPicture.asset(Plofficons.edit),
                 )
@@ -77,14 +73,7 @@ class ProfileScreen extends StatelessWidget {
             icon: Plofficons.my_location,
             title: tr("my_locations"),
             onTap: () {
-              Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) {
-                    return MyLocations();
-                  },
-                ),
-              );
+              Navigator.pushNamed(context, Constants.myAddressesScreen);
             },
             isDivider: true,
           ),
@@ -92,14 +81,7 @@ class ProfileScreen extends StatelessWidget {
             icon: Plofficons.location_black,
             title: tr("branches"),
             onTap: () {
-              Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) {
-                    return BranchesScreen();
-                  },
-                ),
-              );
+              Navigator.pushNamed(context, Constants.branchesScreeen);
             },
             isDivider: true,
           ),
@@ -107,14 +89,7 @@ class ProfileScreen extends StatelessWidget {
             icon: Plofficons.settings,
             title: tr("settings"),
             onTap: () {
-              Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) {
-                    return SettingsScreen();
-                  },
-                ),
-              );
+              Navigator.pushNamed(context, Constants.settingsScreen);
             },
             isDivider: true,
           ),
@@ -122,12 +97,7 @@ class ProfileScreen extends StatelessWidget {
             icon: Plofficons.about,
             title: tr("about_the_service"),
             onTap: () {
-              Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => AboutScreen(),
-                ),
-              );
+              Navigator.pushNamed(context, Constants.aboutScreen);
             },
             isDivider: false,
           ),

@@ -6,6 +6,7 @@ import 'package:ploff/cubits/sign_up/sign_up_cubit.dart';
 import 'package:ploff/screens/auth/sign_up_screen/otp_page.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class EnterPhoneNumberPage extends StatelessWidget {
@@ -93,12 +94,8 @@ class EnterPhoneNumberPage extends StatelessWidget {
                   } else {
                     context.read<SignUpCubit>().numberPhone =
                         phoneController.text;
-                    Navigator.pushReplacement(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => OtpPage(),
-                      ),
-                    );
+                    Navigator.pushReplacementNamed(
+                        context, Constants.otpScreen);
                   }
                 },
               )

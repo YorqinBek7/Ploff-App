@@ -1,18 +1,17 @@
 import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
-import 'package:ploff/screens/auth/sign_up_screen/enter_phone_number_page.dart';
 import 'package:ploff/screens/tab_box/cart_screen/cart_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/home_screen.dart';
 import 'package:ploff/screens/tab_box/my_orders_screen/my_orders_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/profile_screen.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -25,10 +24,11 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   List<Widget> screens = [];
+  final GlobalKey<ScaffoldState> key = GlobalKey();
   @override
   void initState() {
     screens = [
-      HomeScreen(),
+      const HomeScreen(),
       CartScreen(),
       MyOrdersScreen(),
       ProfileScreen(),
@@ -42,7 +42,7 @@ class _HomeTabState extends State<HomeTab> {
     return BlocBuilder<BottomNavigationCubit, int>(
       builder: (context, state) {
         return Scaffold(
-          key: GlobalKey<ScaffoldState>(),
+          key: key,
           body: IndexedStack(
             index: state,
             children: screens,
@@ -61,15 +61,8 @@ class _HomeTabState extends State<HomeTab> {
                       SharedPreferencesService.instance.sharedPreferences
                               .getString("numberPhone") ==
                           "")) {
-                await Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) {
-                      value = index;
-                      return EnterPhoneNumberPage();
-                    },
-                  ),
-                );
+                value = index;
+                await Navigator.pushNamed(context, Constants.enterPhoneNumber);
               }
               context
                   .read<BottomNavigationCubit>()

@@ -14,4 +14,7 @@ class Constants {
   static const String detailBranchesScreeen = "/detail_branches";
   static const String condesationPolicyScreen = "/condesation_policy";
   static const String licenseScreeen = "/license";
+  static const String otpScreen = "/otp_screen";
+  static const String editProfileScreen = "/edit_profile_screen";
+  static const String enterPhoneNumber = "/enter_phone_number";
 }

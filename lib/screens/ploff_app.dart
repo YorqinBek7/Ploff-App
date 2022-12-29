@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:ploff/screens/splash_screen/splash_screen.dart';
+import 'package:ploff/screens/routers.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/constants/const.dart';
 
 class PloffApp extends StatelessWidget {
   const PloffApp({super.key});
@@ -23,7 +24,8 @@ class PloffApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'Ploff app',
-      home: SplashScreen(),
+      onGenerateRoute: Routers.generateRoute,
+      initialRoute: Constants.splashScreen,
     );
   }
 }

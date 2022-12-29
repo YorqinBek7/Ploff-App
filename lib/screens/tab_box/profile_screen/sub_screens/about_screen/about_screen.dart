@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/sub_screens/condensation_policy_screen.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/sub_screens/license_agreements.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -35,12 +36,8 @@ class AboutScreen extends StatelessWidget {
                     title: const Text("Condensation policy"),
                     trailing: SvgPicture.asset(Plofficons.arrow_right),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => CondensationPolicyScreen(),
-                        ),
-                      );
+                      Navigator.pushNamed(
+                          context, Constants.condesationPolicyScreen);
                     },
                   ),
                   const Divider(),
@@ -48,12 +45,7 @@ class AboutScreen extends StatelessWidget {
                     title: const Text("License agreements"),
                     trailing: SvgPicture.asset(Plofficons.arrow_right),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => LicenceScreen(),
-                        ),
-                      );
+                      Navigator.pushNamed(context, Constants.licenseScreeen);
                     },
                   )
                 ],
