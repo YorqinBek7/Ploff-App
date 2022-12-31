@@ -163,7 +163,6 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                           ),
                         );
                         Navigator.pop(context);
-                        Navigator.pop(context);
                       }
                     },
                   ),

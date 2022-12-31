@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,9 +11,6 @@ import 'package:ploff/cubits/current_loc/current_location_cubit.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
 import 'package:ploff/cubits/modifiers/modifiers_cubit.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
-import 'package:ploff/data/service/storage_service/shared_preferences.dart';
-import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/get_location_screen.dart';
-import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/meal_detail_screen.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/banner_widget.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/category.dart';
 import 'package:ploff/screens/tab_box/home_screen/widgets/choose_language.dart';
