@@ -24,9 +24,9 @@ class HiveService {
     }
   }
 
-  Future<void> deleteBox() async {
+  Future<void> clearCarts() async {
     try {
-      cartProductsBox.deleteFromDisk();
+      cartProductsBox.clear();
     } catch (e) {
       log("Error delete Box");
     }

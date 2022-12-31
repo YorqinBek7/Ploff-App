@@ -40,5 +40,6 @@
   "phone_number": "Phone number",
   "date_of_birth": "Date of Birth",
   "name": "Name",
-  "select_date": "Select date"
+  "select_date": "Select date",
+  "no_orders":"You don't have active orders"
 }

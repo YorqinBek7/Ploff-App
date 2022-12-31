@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/screens/auth/sign_up_screen/enter_phone_number_page.dart';
 import 'package:ploff/screens/auth/sign_up_screen/otp_page.dart';
 import 'package:ploff/screens/select_language_screen/select_language_screen.dart';
@@ -42,9 +43,7 @@ class Routers {
       case Constants.mealDetailScreen:
         return CupertinoPageRoute(
           builder: (context) => MealDetailScreen(
-            aboutMeal: (settings.arguments as List)[0],
-            firstlyPrice: (settings.arguments as List)[1],
-            price: (settings.arguments as List)[2],
+            aboutMeal: settings.arguments as CategWithProduct,
           ),
         );
       case Constants.checkoutScreen:
@@ -95,6 +94,7 @@ class Routers {
         return CupertinoPageRoute(
           builder: (context) => EnterPhoneNumberPage(),
         );
+      default:
     }
   }
 }

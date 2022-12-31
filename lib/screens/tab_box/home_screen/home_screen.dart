@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:ploff/cubits/change_language/change_language_cubit.dart';
 import 'package:ploff/cubits/current_loc/current_location_cubit.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
 import 'package:ploff/cubits/modifiers/modifiers_cubit.dart';
@@ -53,247 +54,242 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var getProdCateg = context.read<GetProductAndCategoryCubit>();
-    return Scaffold(
-      backgroundColor: PloffColors.C_F0F0F0,
-      appBar: AppBar(
-        toolbarHeight: 0,
-        scrolledUnderElevation: 0.0,
-      ),
-      body: Column(
-        children: [
-          Container(
-            color: PloffColors.white,
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: Column(
-              children: [
-                GestureDetector(
-                  onTap: () async {
-                    await helper.getLocation();
-                    HiveService.instance.userLocations.isEmpty
-                        ? Navigator.pushNamed(
-                            context, Constants.getLocationScreen)
-                        : await chooseLocation(context);
-                  },
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 10,
-                      ),
-                      SvgPicture.asset(Plofficons.location),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      HiveService.instance.userLocations.isNotEmpty
-                          ? BlocBuilder<CurrentLocationCubit,
-                              CurrentLocationState>(
-                              builder: (context, state) {
-                                return Text(
-                                  state.locationName,
+    return BlocBuilder<ChangeLanguageCubit, ChangeLanguageState>(
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: PloffColors.C_F0F0F0,
+          appBar: AppBar(
+            toolbarHeight: 0,
+            scrolledUnderElevation: 0.0,
+          ),
+          body: Column(
+            children: [
+              Container(
+                color: PloffColors.white,
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        await helper.getLocation();
+                        HiveService.instance.userLocations.isEmpty
+                            ? Navigator.pushNamed(
+                                context, Constants.getLocationScreen)
+                            : await chooseLocation(context);
+                      },
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 10,
+                          ),
+                          SvgPicture.asset(Plofficons.location),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          HiveService.instance.userLocations.isNotEmpty
+                              ? BlocBuilder<CurrentLocationCubit,
+                                  CurrentLocationState>(
+                                  builder: (context, state) {
+                                    return Text(
+                                      state.locationName,
+                                      style: PloffTextStyle.w400
+                                          .copyWith(fontSize: 15),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    );
+                                  },
+                                )
+                              : Text(
+                                  tr("add_location"),
                                   style: PloffTextStyle.w400
                                       .copyWith(fontSize: 15),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
-                                );
-                              },
-                            )
-                          : Text(
-                              tr("add_location"),
-                              style: PloffTextStyle.w400.copyWith(fontSize: 15),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                      Image.asset(
-                        Plofficons.arrowDown,
-                        width: 16,
-                        height: 16,
+                                ),
+                          Image.asset(
+                            Plofficons.arrowDown,
+                            width: 16,
+                            height: 16,
+                          ),
+                          Spacer()
+                        ],
                       ),
-                      Spacer()
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 12),
+                    SearchField(
+                        textEditingController: searchController,
+                        onChanged: (value) async {
+                          if (value.length > 2) {
+                            if (length < value.length) {
+                              await getProdCateg.getProductAndCateg(
+                                searchText: value,
+                              );
+                            }
+                            length = value.length;
+                          }
+                          if (value.length == 0) {
+                            await getProdCateg.getProductAndCateg();
+                          }
+                        }),
+                    SizedBox(height: 5),
+                  ],
                 ),
-                SizedBox(height: 12),
-                SearchField(
-                    textEditingController: searchController,
-                    onChanged: (value) async {
-                      if (value.length > 2) {
-                        if (length < value.length) {
-                          await getProdCateg.getProductAndCateg(
-                            searchText: value,
-                          );
-                        }
-                        length = value.length;
-                      }
-                      if (value.length == 0) {
-                        await getProdCateg.getProductAndCateg();
-                      }
-                    }),
-                SizedBox(height: 5),
-              ],
-            ),
-          ),
-          BlocBuilder<GetProductAndCategoryCubit, GetProductAndCategoryState>(
-            builder: (context, state) {
-              if (state.status == FormzStatus.submissionInProgress) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state.status == FormzStatus.submissionFailure) {
-                return Center(
-                  child: Text(state.errorText),
-                );
-              } else if (state.states == HomeScreenStates.searchState &&
-                  state.status == FormzStatus.submissionSuccess) {
-                return SearchStateUi(
-                  state: state,
-                );
-              } else if (state.states == HomeScreenStates.initialState &&
-                  FormzStatus.submissionSuccess == state.status) {
-                return Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: () async {
-                      await init();
-                    },
-                    child: CustomScrollView(
-                      physics: BouncingScrollPhysics(),
-                      slivers: [
-                        SliverPersistentHeader(
-                          pinned: true,
-                          delegate: CategoryItem(
-                            setter: (fn) => {
-                              setState(
-                                () => {},
-                              ),
-                              isTapped = !isTapped,
-                            },
-                            category: state.products,
-                            state: state,
-                          ),
-                        ),
-                        SliverToBoxAdapter(
-                          child: SizedBox(height: 15),
-                        ),
-                        SliverToBoxAdapter(
-                          child: Container(
-                            margin: EdgeInsets.only(bottom: 15),
-                            height: 170,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: state.banners.length,
-                              itemBuilder: (context, index) => BannerWidget(
-                                imagePath: state.banners[index].image,
+              ),
+              BlocBuilder<GetProductAndCategoryCubit,
+                  GetProductAndCategoryState>(
+                builder: (context, state) {
+                  if (state.status == FormzStatus.submissionInProgress) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state.status == FormzStatus.submissionFailure) {
+                    return Center(
+                      child: Text(state.errorText),
+                    );
+                  } else if (state.states == HomeScreenStates.searchState &&
+                      state.status == FormzStatus.submissionSuccess) {
+                    return SearchStateUi(
+                      state: state,
+                    );
+                  } else if (state.states == HomeScreenStates.initialState &&
+                      FormzStatus.submissionSuccess == state.status) {
+                    return Expanded(
+                      child: RefreshIndicator(
+                        onRefresh: () async {
+                          await init();
+                        },
+                        child: CustomScrollView(
+                          physics: BouncingScrollPhysics(),
+                          slivers: [
+                            SliverPersistentHeader(
+                              pinned: true,
+                              delegate: CategoryItem(
+                                setter: (fn) => {
+                                  setState(
+                                    () => {
+                                      isTapped = !isTapped,
+                                    },
+                                  ),
+                                },
+                                category: state.products,
+                                state: state,
                               ),
                             ),
-                          ),
-                        ),
-                        SliverList(
-                          delegate: SliverChildListDelegate(
-                            [
-                              ...List.generate(
-                                getProdCateg.products2.isEmpty
-                                    ? state.products.length
-                                    : getProdCateg.products2.length,
-                                (categoryIndex) {
-                                  return Container(
-                                    margin: EdgeInsets.only(bottom: 12),
-                                    decoration: BoxDecoration(
-                                      color: PloffColors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(left: 16),
-                                          child: Text(
-                                            getProdCateg.products2.isEmpty
-                                                ? state.products[categoryIndex]
-                                                    .title1.uz
-                                                : getProdCateg
-                                                    .products2[categoryIndex]
-                                                    .title1
-                                                    .uz,
-                                            style: PloffTextStyle.w600
-                                                .copyWith(fontSize: 22),
-                                          ),
+                            SliverToBoxAdapter(
+                              child: SizedBox(height: 15),
+                            ),
+                            SliverToBoxAdapter(
+                              child: Container(
+                                margin: EdgeInsets.only(bottom: 15),
+                                height: 170,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: state.banners.length,
+                                  itemBuilder: (context, index) => BannerWidget(
+                                    imagePath: state.banners[index].image,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SliverList(
+                              delegate: SliverChildListDelegate(
+                                [
+                                  ...List.generate(
+                                    getProdCateg.products2.isEmpty
+                                        ? state.products.length
+                                        : getProdCateg.products2.length,
+                                    (categoryIndex) {
+                                      return Container(
+                                        margin: EdgeInsets.only(bottom: 12),
+                                        decoration: BoxDecoration(
+                                          color: PloffColors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
-                                        ...List.generate(
-                                          getProdCateg.products2.isEmpty
-                                              ? state.products[categoryIndex]
-                                                  .products.length
-                                              : getProdCateg
-                                                  .products2[categoryIndex]
-                                                  .products
-                                                  .length,
-                                          (index) {
-                                            var product = getProdCateg
-                                                    .products2.isEmpty
-                                                ? state.products
-                                                : context
-                                                    .read<
-                                                        GetProductAndCategoryCubit>()
-                                                    .products2;
-                                            return MealItem(
-                                              mealDescription:
-                                                  product[categoryIndex]
-                                                      .products[index]
-                                                      .description
-                                                      .uz,
-                                              mealName: product[categoryIndex]
-                                                  .products[index]
-                                                  .title
-                                                  .uz,
-                                              mealPrice: product[categoryIndex]
-                                                  .products[index]
-                                                  .outPrice
-                                                  .toString(),
-                                              index: index,
-                                              length: product[categoryIndex]
-                                                  .products
-                                                  .length,
-                                              onTap: () {
-                                                context
-                                                    .read<ModifiersCubit>()
-                                                    .getModifiers();
-                                                Navigator.pushNamed(context,
-                                                    Constants.mealDetailScreen,
-                                                    arguments: [
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(left: 16),
+                                              child: Text(
+                                                getProdCateg.products2.isEmpty
+                                                    ? state
+                                                        .products[categoryIndex]
+                                                        .title1
+                                                        .uz
+                                                    : getProdCateg
+                                                        .products2[
+                                                            categoryIndex]
+                                                        .title1
+                                                        .uz,
+                                                style: PloffTextStyle.w600
+                                                    .copyWith(fontSize: 22),
+                                              ),
+                                            ),
+                                            ...List.generate(
+                                              getProdCateg.products2.isEmpty
+                                                  ? state
+                                                      .products[categoryIndex]
+                                                      .products
+                                                      .length
+                                                  : getProdCateg
+                                                      .products2[categoryIndex]
+                                                      .products
+                                                      .length,
+                                              (index) {
+                                                var product = getProdCateg
+                                                        .products2.isEmpty
+                                                    ? state.products
+                                                    : context
+                                                        .read<
+                                                            GetProductAndCategoryCubit>()
+                                                        .products2;
+                                                return MealItem(
+                                                  product:
                                                       product[categoryIndex]
                                                           .products[index],
-                                                      double.parse(
+                                                  index: index,
+                                                  length: product[categoryIndex]
+                                                      .products
+                                                      .length,
+                                                  onTap: () {
+                                                    context
+                                                        .read<ModifiersCubit>()
+                                                        .getModifiers();
+                                                    Navigator.pushNamed(
+                                                      context,
+                                                      Constants
+                                                          .mealDetailScreen,
+                                                      arguments:
                                                           product[categoryIndex]
-                                                              .products[index]
-                                                              .outPrice
-                                                              .toString()),
-                                                      double.parse(
-                                                          product[categoryIndex]
-                                                              .products[index]
-                                                              .outPrice
-                                                              .toString()),
-                                                    ]);
+                                                              .products[index],
+                                                    );
+                                                  },
+                                                );
                                               },
-                                            );
-                                          },
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  );
-                                },
+                                      );
+                                    },
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              } else {
-                return SizedBox();
-              }
-            },
-          )
-        ],
-      ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                },
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

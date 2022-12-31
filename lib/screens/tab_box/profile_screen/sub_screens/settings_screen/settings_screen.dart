@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:ploff/cubits/change_language/change_language_cubit.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -162,6 +163,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   : null,
               onTap: () async {
                 if (context.locale.languageCode != "uz") {
+                  context.read<ChangeLanguageCubit>().changeLanguage(
+                      languageCode: context.locale.languageCode);
                   await context.setLocale(const Locale("uz", "UZ"));
                   await SharedPreferencesService.instance.sharedPreferences
                       .setString("lan", "uz");
@@ -184,6 +187,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   : null,
               onTap: () async {
                 if (context.locale.languageCode != "ru") {
+                  context.read<ChangeLanguageCubit>().changeLanguage(
+                      languageCode: context.locale.languageCode);
                   await context.setLocale(const Locale("ru", "RU"));
                   await SharedPreferencesService.instance.sharedPreferences
                       .setString("lan", "ru");
@@ -205,6 +210,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     )
                   : null,
               onTap: () async {
+                context
+                    .read<ChangeLanguageCubit>()
+                    .changeLanguage(languageCode: context.locale.languageCode);
                 if (context.locale.languageCode != "en") {
                   await context.setLocale(const Locale("en", "EN"));
                   await SharedPreferencesService.instance.sharedPreferences

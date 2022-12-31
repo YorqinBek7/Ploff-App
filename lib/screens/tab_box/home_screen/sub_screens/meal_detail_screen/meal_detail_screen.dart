@@ -1,11 +1,9 @@
-// ignore_for_file: use_build_context_synchronously
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
-import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
 import 'package:ploff/cubits/empty_cart/empty_cart_cubit.dart';
 import 'package:ploff/cubits/modifiers/modifiers_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
@@ -19,22 +17,17 @@ import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class MealDetailScreen extends StatefulWidget {
-  MealDetailScreen({
-    super.key,
-    required this.aboutMeal,
-    required this.price,
-    required this.firstlyPrice,
-  });
+  const MealDetailScreen({super.key, required this.aboutMeal});
   final CategWithProduct aboutMeal;
-  double price;
-  double firstlyPrice;
-
   @override
   State<MealDetailScreen> createState() => _MealDetailScreenState();
 }
 
 class _MealDetailScreenState extends State<MealDetailScreen> {
-  int modifierindex = 0;
+  int modifierindex = -1;
+  int modifierPrice = 0;
+  int countPrice = 1;
+  int count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,8 +162,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                                     onTap: () {
                                       setState(() {
                                         modifierindex = index;
-                                        widget.price = widget.firstlyPrice;
-                                        widget.price +=
+                                        modifierPrice =
                                             state.variants[index].outPrice;
                                       });
                                     },
@@ -194,59 +186,59 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
             padding: const EdgeInsets.all(10),
             child: Column(
               children: [
-                BlocBuilder<CountSelectedMealCubit, int>(
-                  builder: (context, state) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: PloffColors.white,
-                            borderRadius: BorderRadius.circular(6),
-                            border: Border.all(
-                              color: PloffColors.black.withOpacity(.1),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: PloffColors.white,
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(
+                          color: PloffColors.black.withOpacity(.1),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          IncDecButtons(
+                            imagePath: Plofficons.minus,
+                            onTap: () {
+                              setState(() {
+                                if (count > 1) count--;
+                                countPrice = count * widget.aboutMeal.outPrice;
+                              });
+                            },
+                          ),
+                          Text(
+                            "$count",
+                            style: PloffTextStyle.w500.copyWith(
+                              fontSize: 15,
                             ),
                           ),
-                          child: Row(
-                            children: [
-                              IncDecButtons(
-                                imagePath: Plofficons.minus,
-                                onTap: () {
-                                  if (state > 1) {
-                                    context
-                                        .read<CountSelectedMealCubit>()
-                                        .removeCountMeal();
-                                    widget.price = state * widget.firstlyPrice;
-                                  }
-                                },
-                              ),
-                              Text(
-                                "$state",
-                                style: PloffTextStyle.w500.copyWith(
-                                  fontSize: 15,
-                                ),
-                              ),
-                              IncDecButtons(
-                                onTap: () {
-                                  widget.price = state * widget.firstlyPrice;
-                                  context
-                                      .read<CountSelectedMealCubit>()
-                                      .addCountMeal();
-                                },
-                                imagePath: Plofficons.plus,
-                              )
-                            ],
-                          ),
+                          IncDecButtons(
+                            onTap: () {
+                              setState(() {
+                                count++;
+                                countPrice = count * widget.aboutMeal.outPrice;
+                              });
+                            },
+                            imagePath: Plofficons.plus,
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        Helper.formatSumm(
+                            (modifierPrice + countPrice).toString()),
+                        textAlign: TextAlign.end,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: PloffTextStyle.w600.copyWith(
+                          fontSize: 18,
                         ),
-                        Text(
-                          Helper.formatSumm(widget.price.toInt().toString()),
-                          style: PloffTextStyle.w600.copyWith(
-                            fontSize: 18,
-                          ),
-                        ),
-                      ],
-                    );
-                  },
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 15),
                 GlobalButton(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:ploff/cubits/change_language/change_language_cubit.dart';
 import 'package:ploff/cubits/count_meals/count_meals_cubit.dart';
-import 'package:ploff/cubits/count_selected_meal/count_selected_meal_cubit.dart';
 import 'package:ploff/cubits/current_loc/current_location_cubit.dart';
 import 'package:ploff/cubits/empty_cart/empty_cart_cubit.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
@@ -21,9 +21,6 @@ class App extends StatelessWidget {
           create: (context) => BottomNavigationCubit(),
         ),
         BlocProvider(
-          create: (context) => CountSelectedMealCubit(),
-        ),
-        BlocProvider(
           create: (context) => SignUpCubit(),
         ),
         BlocProvider(
@@ -40,6 +37,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => EmptyCartCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ChangeLanguageCubit(),
         ),
       ],
       child: PloffApp(),

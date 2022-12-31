@@ -24,14 +24,13 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   List<Widget> screens = [];
-  final GlobalKey<ScaffoldState> key = GlobalKey();
   @override
   void initState() {
     screens = [
       const HomeScreen(),
       CartScreen(),
-      MyOrdersScreen(),
-      ProfileScreen(),
+      const MyOrdersScreen(),
+      const ProfileScreen(),
     ];
     super.initState();
   }
@@ -42,7 +41,6 @@ class _HomeTabState extends State<HomeTab> {
     return BlocBuilder<BottomNavigationCubit, int>(
       builder: (context, state) {
         return Scaffold(
-          key: key,
           body: IndexedStack(
             index: state,
             children: screens,

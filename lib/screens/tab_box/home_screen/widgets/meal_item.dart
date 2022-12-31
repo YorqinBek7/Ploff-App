@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/helper/helper.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class MealItem extends StatelessWidget {
-  final String mealName;
-  final String mealDescription;
-  final String mealPrice;
+  final CategWithProduct product;
   final int index;
   final int length;
   final VoidCallback onTap;
   const MealItem({
     Key? key,
-    required this.mealName,
-    required this.mealDescription,
-    required this.mealPrice,
+    required this.product,
     required this.index,
     required this.length,
     required this.onTap,
@@ -48,7 +45,7 @@ class MealItem extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * .5,
                       child: Text(
-                        mealName,
+                        product.title.uz,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: PloffTextStyle.w500.copyWith(fontSize: 15),
@@ -60,7 +57,7 @@ class MealItem extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * .5,
                       child: Text(
-                        mealDescription,
+                        product.description.uz,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: PloffTextStyle.w400.copyWith(
@@ -72,7 +69,7 @@ class MealItem extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      Helper.formatSumm(mealPrice),
+                      Helper.formatSumm(product.outPrice.toString()),
                       style: PloffTextStyle.w600.copyWith(fontSize: 16),
                     )
                   ],

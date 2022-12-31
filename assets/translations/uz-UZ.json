@@ -40,5 +40,6 @@
     "phone_number": "Telefon raqam",
     "date_of_birth": "Tug'ilgan sana",
     "name": "Ism",
-    "select_date": "Sanani tanlash"
+    "select_date": "Sanani tanlash",
+    "no_orders":"Sizda aktiv buyurtmalar yo'q"
 }

@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ploff/cubits/empty_cart/empty_cart_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/data/models/orders/orders.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
@@ -9,6 +11,7 @@ import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/enum_classes/enum_classes.dart';
 import 'package:ploff/screens/tab_box/widgets/custom_tab_bar.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/helper/helper.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class CheckOutScreen extends StatefulWidget {
@@ -106,20 +109,26 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                 color: PloffColors.white),
             child: GlobalButton(
               buttonText: "Order",
-              onTap: () {
+              onTap: () async {
                 List<CategWithProduct> prod = [];
                 for (var i = 0;
                     i < HiveService.instance.cartProductsBox.length;
                     i++) {
                   prod.add(HiveService.instance.cartProductsBox.getAt(i)!);
                 }
-                HiveService.instance.orderProductsBox.add(Orders(
-                  orderedProducts: prod,
-                  address: addressController.text,
-                  date: DateFormat.yMd().format(DateTime.now()),
-                  paymentType: _paymentType.toString(),
-                  time: DateFormat.Hm().format(DateTime.now()),
-                ));
+                HiveService.instance.orderProductsBox.add(
+                  Orders(
+                    orderedProducts: prod,
+                    address: addressController.text,
+                    date: DateFormat.yMd().format(DateTime.now()),
+                    paymentType: _paymentType.toString(),
+                    time: DateFormat.Hm().format(DateTime.now()),
+                  ),
+                );
+                context.read<EmptyCartCubit>().empty();
+                Helper.showSuccesSnackBar(
+                    "Buyurtmangiz qabul qilindi!", context);
+                Navigator.pop(context);
               },
             ),
           ),
