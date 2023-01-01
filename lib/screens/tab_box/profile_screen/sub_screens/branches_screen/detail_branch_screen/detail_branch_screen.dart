@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/branches_screen/detail_branch_screen/widgets/detail_branch_item.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -14,36 +15,36 @@ class DetailBranchScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Branches",
-          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+          style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 10,
+        padding: EdgeInsets.symmetric(
+          vertical: 10.0.h,
         ),
         child: Column(
           children: [
             Container(
               decoration: BoxDecoration(
                 color: PloffColors.white,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.0.r),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0.r),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
                       child: Image.asset(
                         Plofficons.ploffLogo,
-                        width: 140,
-                        height: 150,
+                        width: 140.0.w,
+                        height: 150.0.h,
                       ),
                     ),
                     Text(
                       "TEST",
                       style: PloffTextStyle.w500.copyWith(
-                        fontSize: 16,
+                        fontSize: 16.0.sp,
                       ),
                     ),
                     const BranchesInfoItem(

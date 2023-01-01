@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/sub_screens/condensation_policy_screen.dart';
-import 'package:ploff/screens/tab_box/profile_screen/sub_screens/about_screen/sub_screens/license_agreements.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -17,17 +15,17 @@ class AboutScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "About the service",
-          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+          style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: EdgeInsets.symmetric(vertical: 10.0.h),
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(10.0.r),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.0.r),
                 color: PloffColors.white,
               ),
               child: Column(

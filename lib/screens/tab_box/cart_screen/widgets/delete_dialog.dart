@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/count_meals/count_meals_cubit.dart';
 import 'package:ploff/cubits/empty_cart/empty_cart_cubit.dart';
@@ -11,27 +12,28 @@ Future<dynamic> deleteAllDialog(BuildContext context) {
   return showDialog(
     context: context,
     builder: (context) => AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0.r)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
             "Очистить корзину?",
-            style: PloffTextStyle.w600.copyWith(fontSize: 20),
+            style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp),
           ),
-          const SizedBox(
-            height: 12,
+          SizedBox(
+            height: 12.h,
           ),
           Text(
             "Вы уверены, что хотите очистить корзину?",
             style: PloffTextStyle.w400.copyWith(
-              fontSize: 15,
+              fontSize: 15.0.sp,
               color: PloffColors.C_858585,
             ),
           ),
-          const SizedBox(
-            height: 16,
+          SizedBox(
+            height: 16.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,8 +49,8 @@ Future<dynamic> deleteAllDialog(BuildContext context) {
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 5,
+              SizedBox(
+                width: 5.0.w,
               ),
               Expanded(
                 child: GestureDetector(
@@ -86,15 +88,15 @@ class DialogButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 48,
+      height: 48.0.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.r),
         color: color,
       ),
       child: Center(
         child: Text(
           text,
-          style: PloffTextStyle.w600.copyWith(fontSize: 15),
+          style: PloffTextStyle.w600.copyWith(fontSize: 15.sp),
         ),
       ),
     );

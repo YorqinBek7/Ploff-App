@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -16,17 +17,17 @@ class BranchesInfoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.0.r),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.0.r),
       ),
       child: Row(
         children: [
           Icon(
             icon,
           ),
-          const SizedBox(
-            width: 10,
+          SizedBox(
+            width: 10.0.w,
           ),
           Text(
             title,
@@ -41,7 +42,7 @@ class BranchesInfoItem extends StatelessWidget {
               info,
               textAlign: TextAlign.end,
               style: PloffTextStyle.w500.copyWith(
-                fontSize: 16,
+                fontSize: 16.0.sp,
               ),
             ),
           ),

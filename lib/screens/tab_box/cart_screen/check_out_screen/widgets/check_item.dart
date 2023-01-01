@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/helper/helper.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -21,7 +22,7 @@ class CheckItem extends StatelessWidget {
             item,
             style: PloffTextStyle.w500.copyWith(
               color: PloffColors.C_858585,
-              fontSize: 15,
+              fontSize: 15.0.sp,
             ),
           ),
         ),
@@ -31,7 +32,7 @@ class CheckItem extends StatelessWidget {
             Helper.formatSumm(price),
             style: PloffTextStyle.w600.copyWith(
               color: PloffColors.C_858585,
-              fontSize: 15,
+              fontSize: 15.0.sp,
             ),
           ),
         ),

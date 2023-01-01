@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
 import 'package:ploff/cubits/sign_up/sign_up_cubit.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
-import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/constants/const.dart';
@@ -23,12 +22,12 @@ class OtpPage extends StatelessWidget {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16.0.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Регистрация",
-                style: PloffTextStyle.w600.copyWith(fontSize: 26)),
+                style: PloffTextStyle.w600.copyWith(fontSize: 26.0.sp)),
             BlocBuilder<SignUpCubit, SignUpState>(
               builder: (context, state) {
                 if (state is SignUpInOtpError) {
@@ -46,7 +45,7 @@ class OtpPage extends StatelessWidget {
                 }
               },
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: 15.h),
             GlobalButton(
               buttonText: "Продолжить",
               onTap: () async {

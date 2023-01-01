@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -19,10 +20,10 @@ class ActiveOrderItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 6),
-        padding: const EdgeInsets.all(16),
+        margin: EdgeInsets.symmetric(vertical: 6.0.h),
+        padding: EdgeInsets.all(16.0.r),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.0.r),
           color: PloffColors.white,
         ),
         child: Column(
@@ -33,14 +34,14 @@ class ActiveOrderItem extends StatelessWidget {
                 Text(
                   "Order No:123321",
                   style: PloffTextStyle.w600.copyWith(
-                    fontSize: 17,
+                    fontSize: 17.0.sp,
                   ),
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(8.0.r),
                       ),
                     ),
                     shadowColor: MaterialStateProperty.all(
@@ -52,7 +53,7 @@ class ActiveOrderItem extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.0.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -66,7 +67,7 @@ class ActiveOrderItem extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                    height: 2,
+                    height: 2.0.h,
                     color: !isVisible
                         ? PloffColors.C_FFCC00
                         : PloffColors.C_F0F0F0,
@@ -82,7 +83,7 @@ class ActiveOrderItem extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                    height: 2,
+                    height: 2.0.h,
                     color: !isVisible
                         ? PloffColors.C_FFCC00
                         : PloffColors.C_F0F0F0,
@@ -98,7 +99,7 @@ class ActiveOrderItem extends StatelessWidget {
                 ),
                 Expanded(
                   child: Container(
-                    height: 2,
+                    height: 2.0.h,
                     color:
                         isVisible ? PloffColors.C_FFCC00 : PloffColors.C_F0F0F0,
                   ),

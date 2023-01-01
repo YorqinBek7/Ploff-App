@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/check_item.dart';
@@ -53,24 +54,24 @@ class FirstPage extends StatelessWidget {
             slivers: [
               SliverToBoxAdapter(
                 child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 16),
+                  margin: EdgeInsets.symmetric(vertical: 16.0.h),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.0.r),
                     color: PloffColors.white,
                   ),
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16.0.r),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Адрес доставки",
-                        style: PloffTextStyle.w600.copyWith(fontSize: 16),
+                        style: PloffTextStyle.w600.copyWith(fontSize: 16.0.sp),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
                       Text(
                         "Текущий адрес",
                         style: PloffTextStyle.w400.copyWith(
-                          fontSize: 15,
+                          fontSize: 15.0.sp,
                           color: PloffColors.black.withOpacity(.5),
                         ),
                       ),
@@ -95,9 +96,9 @@ class FirstPage extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: 180,
+                        height: 180.h,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(10.r),
                           child: Stack(
                             children: [
                               const GoogleMap(
@@ -115,12 +116,12 @@ class FirstPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 16,
+                      SizedBox(
+                        height: 16.h,
                       ),
                       Text(
                         "My address",
-                        style: PloffTextStyle.w400.copyWith(fontSize: 15),
+                        style: PloffTextStyle.w400.copyWith(fontSize: 15.sp),
                       ),
                       GestureDetector(
                         onTap: () {},
@@ -135,10 +136,10 @@ class FirstPage extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                 child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  padding: const EdgeInsets.all(16),
+                  margin: EdgeInsets.symmetric(vertical: 5.0.h),
+                  padding: EdgeInsets.all(16.0.r),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.0.r),
                     color: PloffColors.white,
                   ),
                   child: SelectOptions(
@@ -156,10 +157,10 @@ class FirstPage extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                 child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  padding: const EdgeInsets.all(16),
+                  margin: EdgeInsets.symmetric(vertical: 5.0.h),
+                  padding: EdgeInsets.all(16.0.r),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.0.r),
                     color: PloffColors.white,
                   ),
                   child: SelectOptions(
@@ -182,10 +183,10 @@ class FirstPage extends StatelessWidget {
               )),
               SliverToBoxAdapter(
                 child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  padding: const EdgeInsets.all(16),
+                  margin: EdgeInsets.symmetric(vertical: 5.0.h),
+                  padding: EdgeInsets.all(16.0.r),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.0.r),
                     color: PloffColors.white,
                   ),
                   child: Column(
@@ -194,22 +195,22 @@ class FirstPage extends StatelessWidget {
                       Text(
                         "Check",
                         style: PloffTextStyle.w600.copyWith(
-                          fontSize: 17,
+                          fontSize: 17.0.sp,
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
+                      SizedBox(
+                        height: 20.h,
                       ),
                       ...List.generate(
                         5,
                         (index) => Column(
-                          children: const [
-                            CheckItem(
+                          children: [
+                            const CheckItem(
                               item: 'Хотели бы что бы вам позвонил курьер?',
                               price: '2300',
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 20.h,
                             ),
                           ],
                         ),
@@ -222,7 +223,7 @@ class FirstPage extends StatelessWidget {
                               "Общая сумма",
                               style: PloffTextStyle.w600.copyWith(
                                 color: PloffColors.black,
-                                fontSize: 17,
+                                fontSize: 17.0.sp,
                               ),
                             ),
                           ),
@@ -231,7 +232,7 @@ class FirstPage extends StatelessWidget {
                               "95000",
                               style: PloffTextStyle.w600.copyWith(
                                 color: PloffColors.black,
-                                fontSize: 17,
+                                fontSize: 17.0.sp,
                               ),
                             ),
                           ),

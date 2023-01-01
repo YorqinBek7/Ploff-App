@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/cubits/sign_up/sign_up_cubit.dart';
-import 'package:ploff/screens/auth/sign_up_screen/otp_page.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/constants/const.dart';
@@ -30,20 +29,20 @@ class EnterPhoneNumberPage extends StatelessWidget {
           }
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16.0.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Регистрация",
-                style: PloffTextStyle.w600.copyWith(fontSize: 26),
+                style: PloffTextStyle.w600.copyWith(fontSize: 26.0.sp),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Номер телефона",
-                    style: PloffTextStyle.w400.copyWith(fontSize: 15),
+                    style: PloffTextStyle.w400.copyWith(fontSize: 15.0.sp),
                   ),
                   Form(
                     key: _formKey,
@@ -65,14 +64,15 @@ class EnterPhoneNumberPage extends StatelessWidget {
                           focusColor: PloffColors.C_FFCC00,
                           prefixIcon: Text(
                             " +998 ",
-                            style: PloffTextStyle.w500.copyWith(fontSize: 15),
+                            style:
+                                PloffTextStyle.w500.copyWith(fontSize: 15.0.sp),
                           ),
-                          prefixIconConstraints: const BoxConstraints(
-                            maxHeight: 60,
-                            maxWidth: 60,
+                          prefixIconConstraints: BoxConstraints(
+                            maxHeight: 60.0.h,
+                            maxWidth: 60.0.w,
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(8.0.r),
                           ),
                         ),
                       );
@@ -80,7 +80,7 @@ class EnterPhoneNumberPage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10.0.h),
               GlobalButton(
                 buttonText: "Продолжить",
                 onTap: () async {

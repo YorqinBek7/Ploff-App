@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/cubits/change_language/change_language_cubit.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/screens/select_language_screen/widgets/select_language_item.dart';
@@ -22,22 +23,22 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
     return Scaffold(
       backgroundColor: PloffColors.white,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16.0.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               Plofficons.ploffLogo,
-              width: 148.0,
-              height: 132.0,
+              width: 148.0.w,
+              height: 132.0.h,
             ),
-            const SizedBox(
-              height: 46,
+            SizedBox(
+              height: 46.h,
             ),
             Text(
               tr("select_language"),
-              style: PloffTextStyle.w600.copyWith(fontSize: 17.0),
+              style: PloffTextStyle.w600.copyWith(fontSize: 17.0.sp),
             ),
             SelectLanguageItem(
               flagImage: Plofficons.uzbFlag,

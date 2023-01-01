@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/screens/auth/sign_up_screen/enter_phone_number_page.dart';
 import 'package:ploff/screens/auth/sign_up_screen/otp_page.dart';
+import 'package:ploff/screens/no_router_screen.dart';
 import 'package:ploff/screens/select_language_screen/select_language_screen.dart';
 import 'package:ploff/screens/splash_screen/splash_screen.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen.dart';
@@ -26,19 +27,19 @@ class Routers {
     switch (settings.name) {
       case Constants.splashScreen:
         return CupertinoPageRoute(
-          builder: (context) => SplashScreen(),
+          builder: (context) => const SplashScreen(),
         );
       case Constants.selectLanguageScreeen:
         return CupertinoPageRoute(
-          builder: (context) => SelectLanguageScreen(),
+          builder: (context) => const SelectLanguageScreen(),
         );
       case Constants.getLocationScreen:
         return CupertinoPageRoute(
-          builder: (context) => GetLocationScreen(),
+          builder: (context) => const GetLocationScreen(),
         );
       case Constants.homeTab:
         return CupertinoPageRoute(
-          builder: (context) => HomeTab(),
+          builder: (context) => const HomeTab(),
         );
       case Constants.mealDetailScreen:
         return CupertinoPageRoute(
@@ -48,39 +49,39 @@ class Routers {
         );
       case Constants.checkoutScreen:
         return CupertinoPageRoute(
-          builder: (context) => CheckOutScreen(),
+          builder: (context) => const CheckOutScreen(),
         );
       case Constants.orderDetail:
         return CupertinoPageRoute(
-          builder: (context) => DetailBranchScreen(),
+          builder: (context) => const DetailBranchScreen(),
         );
       case Constants.myAddressesScreen:
         return CupertinoPageRoute(
-          builder: (context) => MyLocations(),
+          builder: (context) => const MyLocations(),
         );
       case Constants.branchesScreeen:
         return CupertinoPageRoute(
-          builder: (context) => BranchesScreen(),
+          builder: (context) => const BranchesScreen(),
         );
       case Constants.settingsScreen:
         return CupertinoPageRoute(
-          builder: (context) => SettingsScreen(),
+          builder: (context) => const SettingsScreen(),
         );
       case Constants.aboutScreen:
         return CupertinoPageRoute(
-          builder: (context) => AboutScreen(),
+          builder: (context) => const AboutScreen(),
         );
       case Constants.detailBranchesScreeen:
         return CupertinoPageRoute(
-          builder: (context) => DetailBranchScreen(),
+          builder: (context) => const DetailBranchScreen(),
         );
       case Constants.condesationPolicyScreen:
         return CupertinoPageRoute(
-          builder: (context) => CondensationPolicyScreen(),
+          builder: (context) => const CondensationPolicyScreen(),
         );
       case Constants.licenseScreeen:
         return CupertinoPageRoute(
-          builder: (context) => LicenceScreen(),
+          builder: (context) => const LicenceScreen(),
         );
       case Constants.otpScreen:
         return CupertinoPageRoute(
@@ -88,13 +89,16 @@ class Routers {
         );
       case Constants.editProfileScreen:
         return CupertinoPageRoute(
-          builder: (context) => EditProfileScreen(),
+          builder: (context) => const EditProfileScreen(),
         );
       case Constants.enterPhoneNumberScreen:
         return CupertinoPageRoute(
           builder: (context) => EnterPhoneNumberPage(),
         );
       default:
+        return CupertinoPageRoute(
+          builder: (context) => const NoRouterScreen(),
+        );
     }
   }
 }

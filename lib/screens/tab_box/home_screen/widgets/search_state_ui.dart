@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -18,20 +19,20 @@ class SearchStateUi extends StatelessWidget {
 
           return Column(
             children: [
-              const SizedBox(height: 10),
+              SizedBox(height: 10.0.h),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                padding: const EdgeInsets.all(10),
+                margin: EdgeInsets.symmetric(horizontal: 12.0.w),
+                padding: EdgeInsets.all(10.0.r),
                 decoration: BoxDecoration(
                   color: PloffColors.white,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.0.r),
                 ),
                 child: Row(
                   children: [
                     Image.asset(
                       Plofficons.meal,
-                      width: 80,
-                      height: 80,
+                      width: 80.0.w,
+                      height: 80.h,
                     ),
                     Expanded(
                       flex: 3,

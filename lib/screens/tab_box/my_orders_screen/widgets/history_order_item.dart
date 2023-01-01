@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -12,29 +13,29 @@ class HistoryOrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.symmetric(vertical: 6),
+      padding: EdgeInsets.all(10.0.r),
+      margin: EdgeInsets.symmetric(vertical: 6.0.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.0.r),
         color: PloffColors.white,
       ),
       child: Row(
         children: [
-          const SizedBox(width: 10),
+          SizedBox(width: 10.0.w),
           Column(
             children: [
               Text(
                 "Заказ №341",
                 style: PloffTextStyle.w600
-                    .copyWith(fontSize: 17, color: PloffColors.black),
+                    .copyWith(fontSize: 17.0.sp, color: PloffColors.black),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.0.h,
               ),
               Text(
                 "85 000 сум",
                 style: PloffTextStyle.w600
-                    .copyWith(fontSize: 17, color: PloffColors.C_858585),
+                    .copyWith(fontSize: 17.0.sp, color: PloffColors.C_858585),
               ),
             ],
           ),
@@ -49,7 +50,7 @@ class HistoryOrderItem extends StatelessWidget {
                     shadowColor: MaterialStateProperty.all(Colors.transparent),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10.0.r),
                       ),
                     ),
                   ),
@@ -57,24 +58,24 @@ class HistoryOrderItem extends StatelessWidget {
                   child: Text(
                     "Ordered",
                     style: PloffTextStyle.w500
-                        .copyWith(fontSize: 15, color: PloffColors.C_22C348),
+                        .copyWith(fontSize: 15.sp, color: PloffColors.C_22C348),
                   )),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.0.h,
               ),
               Row(
                 children: [
                   SvgPicture.asset(Plofficons.calender),
-                  const SizedBox(width: 5),
+                  SizedBox(width: 5.0.w),
                   Text(
                     "11.05.2022",
-                    style: PloffTextStyle.w400.copyWith(fontSize: 15),
+                    style: PloffTextStyle.w400.copyWith(fontSize: 15.0.sp),
                   ),
                 ],
               ),
             ],
           ),
-          const SizedBox(width: 10),
+          SizedBox(width: 10.0.w),
         ],
       ),
     );

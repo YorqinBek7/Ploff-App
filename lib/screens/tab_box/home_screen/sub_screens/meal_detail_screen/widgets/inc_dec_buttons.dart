@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class IncDecButtons extends StatelessWidget {
@@ -16,11 +17,11 @@ class IncDecButtons extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.all(10.0.r),
+        margin: EdgeInsets.symmetric(horizontal: 10.0.w),
         child: SvgPicture.asset(
           imagePath,
-          width: 20,
+          width: 20.0.w,
         ),
       ),
     );

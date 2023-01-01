@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/change_language/change_language_cubit.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
@@ -21,18 +22,18 @@ class ProfileScreen extends StatelessWidget {
           backgroundColor: PloffColors.C_F0F0F0,
           appBar: AppBar(
             title: Text(tr("profil"),
-                style: PloffTextStyle.w600.copyWith(fontSize: 20)),
+                style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp)),
             automaticallyImplyLeading: false,
           ),
           body: Column(
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: 10,
+                margin: EdgeInsets.symmetric(
+                  vertical: 10.0.h,
                 ),
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16.0.r),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.0.r),
                   color: PloffColors.white,
                 ),
                 child: Row(
@@ -43,10 +44,10 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         Text(
                           "Yorqin",
-                          style: PloffTextStyle.w500.copyWith(fontSize: 18),
+                          style: PloffTextStyle.w500.copyWith(fontSize: 18.sp),
                         ),
-                        const SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 10.0.h,
                         ),
                         Text(
                           SharedPreferencesService.instance.sharedPreferences
@@ -107,7 +108,7 @@ class ProfileScreen extends StatelessWidget {
                   color: PloffColors.black.withOpacity(.5),
                 ),
               ),
-              const SizedBox(height: 5),
+              SizedBox(height: 5.0.h),
             ],
           ),
         );

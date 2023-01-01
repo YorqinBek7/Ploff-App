@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -73,7 +74,7 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
             alignment: Alignment.bottomCenter,
             child: Container(
               height: MediaQuery.of(context).size.height * .45,
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(10.0.r),
               decoration: const BoxDecoration(
                 color: PloffColors.white,
               ),
@@ -83,26 +84,26 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                 children: [
                   Center(
                     child: Container(
-                      height: 5,
-                      width: 40,
+                      height: 5.0.h,
+                      width: 40.0.w,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10.r),
                         color: PloffColors.C_F0F0F0,
                       ),
                     ),
                   ),
                   Text(
                     tr("delivery_address"),
-                    style: PloffTextStyle.w600.copyWith(fontSize: 20),
+                    style: PloffTextStyle.w600.copyWith(fontSize: 20.sp),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15.h),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10.0.r),
                     decoration: BoxDecoration(
                       color: PloffColors.C_F0F0F0,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.0.r),
                     ),
-                    margin: const EdgeInsets.symmetric(vertical: 5),
+                    margin: EdgeInsets.symmetric(vertical: 5.h),
                     child: TextField(
                       maxLines: null,
                       maxLength: null,
@@ -129,12 +130,12 @@ class _GetLocationScreenState extends State<GetLocationScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 5),
+                  SizedBox(height: 5.h),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10.0.r),
                     decoration: BoxDecoration(
                       color: PloffColors.C_F0F0F0,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.0.r),
                     ),
                     child: TextField(
                       controller: addressController,

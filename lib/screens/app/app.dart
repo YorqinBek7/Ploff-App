@@ -42,7 +42,7 @@ class App extends StatelessWidget {
           create: (context) => ChangeLanguageCubit(),
         ),
       ],
-      child: PloffApp(),
+      child: const PloffApp(),
     );
   }
 }

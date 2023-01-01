@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -18,35 +19,35 @@ class CustomTabBar extends StatelessWidget implements PreferredSize {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(3),
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.all(3.0.r),
+      margin: EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 10.0.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.0.r),
         color: PloffColors.C_F0F0F0,
       ),
       child: TabBar(
         controller: tabController,
         labelColor: PloffColors.black,
         indicator: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.0.r),
           color: PloffColors.white,
         ),
         onTap: (value) {},
         tabs: [
           Tab(
-            height: 40,
+            height: 40.0.h,
             child: Text(
               firstTabText,
-              style: PloffTextStyle.w500.copyWith(fontSize: 15),
+              style: PloffTextStyle.w500.copyWith(fontSize: 15.sp),
               maxLines: 1,
               overflow: TextOverflow.fade,
             ),
           ),
           Tab(
-            height: 40,
+            height: 40.0.h,
             child: Text(
               secondTabText,
-              style: PloffTextStyle.w500.copyWith(fontSize: 15),
+              style: PloffTextStyle.w500.copyWith(fontSize: 15.sp),
               maxLines: 1,
               overflow: TextOverflow.fade,
             ),

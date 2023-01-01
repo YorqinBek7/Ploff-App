@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/utils/colors/colors.dart';
 
 class AppBarBottom extends StatelessWidget implements PreferredSize {
@@ -7,13 +8,13 @@ class AppBarBottom extends StatelessWidget implements PreferredSize {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(10.0.r),
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: PloffColors.white,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
+          topLeft: Radius.circular(10.0.r),
+          topRight: Radius.circular(10.0.r),
         ),
       ),
     );

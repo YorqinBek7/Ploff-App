@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/cubits/empty_cart/empty_cart_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/data/models/orders/orders.dart';
@@ -51,7 +52,7 @@ class _CheckOutScreenState extends State<CheckOutScreen>
       appBar: AppBar(
         title: Text(
           "Оформить заказ",
-          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+          style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp),
         ),
         bottom: CustomTabBar(
           tabController: tabController,
@@ -103,9 +104,9 @@ class _CheckOutScreenState extends State<CheckOutScreen>
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            padding: EdgeInsets.symmetric(vertical: 10.0.h, horizontal: 10.0.w),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.0.r),
                 color: PloffColors.white),
             child: GlobalButton(
               buttonText: "Order",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/utils/colors/colors.dart';
@@ -14,22 +15,22 @@ class MyLocations extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "My Locations",
-          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+          style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp),
         ),
       ),
       backgroundColor: PloffColors.C_F0F0F0,
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: EdgeInsets.symmetric(vertical: 10.0.h),
         child: Column(
           children: [
             Flexible(
               child: ListView.builder(
                 itemCount: HiveService.instance.userLocations.length,
                 itemBuilder: (context, index) => Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  margin: const EdgeInsets.symmetric(vertical: 4),
+                  padding: EdgeInsets.symmetric(vertical: 10.0.h),
+                  margin: EdgeInsets.symmetric(vertical: 4.0.h),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.0.r),
                     color: PloffColors.white,
                   ),
                   child: ListTile(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/utils/colors/colors.dart';
 
 class CheckOutBottomBar extends StatelessWidget implements PreferredSize {
@@ -13,16 +14,16 @@ class CheckOutBottomBar extends StatelessWidget implements PreferredSize {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(10.0.r),
       decoration: BoxDecoration(
         color: PloffColors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.0.r),
       ),
       child: Container(
-        padding: const EdgeInsets.all(4),
+        padding: EdgeInsets.all(4.0.r),
         decoration: BoxDecoration(
           color: PloffColors.C_F0F0F0,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.0.r),
         ),
         child: Row(
           children: [
@@ -33,8 +34,8 @@ class CheckOutBottomBar extends StatelessWidget implements PreferredSize {
                 isDeliver: !isDeliver,
               ),
             ),
-            const SizedBox(
-              width: 5,
+            SizedBox(
+              width: 5.0.w,
             ),
             Expanded(
               child: SelectTypeOrderButton(
@@ -72,13 +73,13 @@ class SelectTypeOrderButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 8,
+        padding: EdgeInsets.symmetric(
+          horizontal: 16.0.w,
+          vertical: 8.0.h,
         ),
         width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.0.r),
           color: isDeliver ? PloffColors.white : PloffColors.C_F0F0F0,
         ),
         child: Center(

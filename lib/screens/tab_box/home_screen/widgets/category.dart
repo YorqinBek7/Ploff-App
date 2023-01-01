@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/cubits/get_product_categ_bann/get_product_and_category_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_with_product.dart';
 
@@ -50,14 +51,14 @@ class CategoryItem extends SliverPersistentHeaderDelegate {
                 },
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      EdgeInsets.symmetric(vertical: 10.0.h, horizontal: 10.w),
                   margin: EdgeInsets.only(
-                    left: index == 0 ? 10 : 5,
-                    right: index == category.length - 1 ? 10 : 5,
-                    bottom: 10,
+                    left: index == 0 ? 10.0.w : 5.0.w,
+                    right: index == category.length.w - 1 ? 10.0.w : 5.0.w,
+                    bottom: 10.0.w,
                   ),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.0.r),
                     color: selectedCategories(index: index, context: context) ==
                             index
                         ? PloffColors.C_FFCC00

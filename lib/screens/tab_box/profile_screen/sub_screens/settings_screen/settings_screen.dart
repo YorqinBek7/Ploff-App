@@ -2,11 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/change_language/change_language_cubit.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
-import 'package:ploff/screens/tab_box/home_tab/home_tab.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -29,17 +29,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: Text(
           tr("settings"),
-          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+          style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: EdgeInsets.symmetric(vertical: 10.0.h),
         child: Column(
           children: [
             Container(
               decoration: BoxDecoration(
                 color: PloffColors.white,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.0.r),
               ),
               child: Column(
                 children: [
@@ -101,11 +101,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               },
               child: Container(
                 width: double.infinity,
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                padding: const EdgeInsets.symmetric(vertical: 15),
+                margin: EdgeInsets.symmetric(horizontal: 10.0.w),
+                padding: EdgeInsets.symmetric(vertical: 15.0.h),
                 decoration: BoxDecoration(
                   color: PloffColors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.0.r),
                 ),
                 child: Center(
                   child: Text(
@@ -126,101 +126,101 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<dynamic> languageBottomDialog(BuildContext context) {
     return showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
+          topLeft: Radius.circular(10.0.r),
+          topRight: Radius.circular(10.0.r),
         ),
       ),
-      builder: (context) => Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 10),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              child: Text(
-                tr("language"),
-                style: PloffTextStyle.w600.copyWith(fontSize: 20),
-              ),
+      builder: (context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(height: 10.0.h),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 15.0.w, vertical: 5.0.h),
+            child: Text(
+              tr("language"),
+              style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp),
             ),
-            const Divider(),
-            ListTile(
-              leading: Image.asset(Plofficons.uzbFlag),
-              title: Text(
-                "O'zbekcha",
-                style: PloffTextStyle.w600.copyWith(fontSize: 15),
-              ),
-              trailing: context.locale.languageCode == "uz"
-                  ? const Icon(
-                      Icons.done,
-                      color: PloffColors.C_FFCC00,
-                    )
-                  : null,
-              onTap: () async {
-                if (context.locale.languageCode != "uz") {
-                  context.read<ChangeLanguageCubit>().changeLanguage(
-                      languageCode: context.locale.languageCode);
-                  await context.setLocale(const Locale("uz", "UZ"));
-                  await SharedPreferencesService.instance.sharedPreferences
-                      .setString("lan", "uz");
-                }
-                Navigator.pop(context);
-              },
+          ),
+          const Divider(),
+          ListTile(
+            leading: Image.asset(Plofficons.uzbFlag),
+            title: Text(
+              "O'zbekcha",
+              style: PloffTextStyle.w600.copyWith(fontSize: 15.0.sp),
             ),
-            const Divider(),
-            ListTile(
-              leading: Image.asset(Plofficons.russiaFlag),
-              title: Text(
-                "Русский",
-                style: PloffTextStyle.w600.copyWith(fontSize: 15),
-              ),
-              trailing: context.locale.languageCode == "ru"
-                  ? const Icon(
-                      Icons.done,
-                      color: PloffColors.C_FFCC00,
-                    )
-                  : null,
-              onTap: () async {
-                if (context.locale.languageCode != "ru") {
-                  context.read<ChangeLanguageCubit>().changeLanguage(
-                      languageCode: context.locale.languageCode);
-                  await context.setLocale(const Locale("ru", "RU"));
-                  await SharedPreferencesService.instance.sharedPreferences
-                      .setString("lan", "ru");
-                }
-                Navigator.pop(context);
-              },
-            ),
-            const Divider(),
-            ListTile(
-              leading: Image.asset(Plofficons.englishFlag),
-              title: Text(
-                "English",
-                style: PloffTextStyle.w600.copyWith(fontSize: 15),
-              ),
-              trailing: context.locale.languageCode == "en"
-                  ? const Icon(
-                      Icons.done,
-                      color: PloffColors.C_FFCC00,
-                    )
-                  : null,
-              onTap: () async {
+            trailing: context.locale.languageCode == "uz"
+                ? const Icon(
+                    Icons.done,
+                    color: PloffColors.C_FFCC00,
+                  )
+                : null,
+            onTap: () async {
+              if (context.locale.languageCode != "uz") {
                 context
                     .read<ChangeLanguageCubit>()
                     .changeLanguage(languageCode: context.locale.languageCode);
-                if (context.locale.languageCode != "en") {
-                  await context.setLocale(const Locale("en", "EN"));
-                  await SharedPreferencesService.instance.sharedPreferences
-                      .setString("lan", "en");
-                }
-                Navigator.pop(context);
-              },
+                await context.setLocale(const Locale("uz", "UZ"));
+                await SharedPreferencesService.instance.sharedPreferences
+                    .setString("lan", "uz");
+              }
+              Navigator.pop(context);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: Image.asset(Plofficons.russiaFlag),
+            title: Text(
+              "Русский",
+              style: PloffTextStyle.w600.copyWith(fontSize: 15.0.sp),
             ),
-            const Divider(),
-          ],
-        ),
+            trailing: context.locale.languageCode == "ru"
+                ? const Icon(
+                    Icons.done,
+                    color: PloffColors.C_FFCC00,
+                  )
+                : null,
+            onTap: () async {
+              if (context.locale.languageCode != "ru") {
+                context
+                    .read<ChangeLanguageCubit>()
+                    .changeLanguage(languageCode: context.locale.languageCode);
+                await context.setLocale(const Locale("ru", "RU"));
+                await SharedPreferencesService.instance.sharedPreferences
+                    .setString("lan", "ru");
+              }
+              Navigator.pop(context);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: Image.asset(Plofficons.englishFlag),
+            title: Text(
+              "English",
+              style: PloffTextStyle.w600.copyWith(fontSize: 15.0.sp),
+            ),
+            trailing: context.locale.languageCode == "en"
+                ? const Icon(
+                    Icons.done,
+                    color: PloffColors.C_FFCC00,
+                  )
+                : null,
+            onTap: () async {
+              context
+                  .read<ChangeLanguageCubit>()
+                  .changeLanguage(languageCode: context.locale.languageCode);
+              if (context.locale.languageCode != "en") {
+                await context.setLocale(const Locale("en", "EN"));
+                await SharedPreferencesService.instance.sharedPreferences
+                    .setString("lan", "en");
+              }
+              Navigator.pop(context);
+            },
+          ),
+          const Divider(),
+        ],
       ),
     );
   }

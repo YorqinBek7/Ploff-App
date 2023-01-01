@@ -2,6 +2,7 @@ import 'dart:io' show Platform;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
@@ -43,7 +44,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                 SliverAppBar(
                   bottom: const AppBarBottom(),
                   leading: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0.r),
                     child: GestureDetector(
                       onTap: () => Navigator.pop(context),
                       child: Container(
@@ -59,9 +60,9 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                   ),
                   actions: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0.r),
                       child: Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: EdgeInsets.all(10.0.r),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white.withOpacity(.8),
@@ -73,7 +74,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                     ),
                   ],
                   pinned: true,
-                  collapsedHeight: 200,
+                  collapsedHeight: 200.0.h,
                   flexibleSpace: FlexibleSpaceBar(
                     background: Image.asset(
                       Plofficons.banner,
@@ -83,17 +84,17 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                 ),
                 SliverToBoxAdapter(
                   child: Container(
-                    padding: const EdgeInsets.only(
-                      left: 10,
-                      right: 10,
-                      bottom: 10,
+                    padding: EdgeInsets.only(
+                      left: 10.0.w,
+                      right: 10.0.w,
+                      bottom: 10.0.h,
                     ),
                     width: double.infinity,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: PloffColors.white,
                       borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10.0.r),
+                        bottomRight: Radius.circular(10.0.r),
                       ),
                     ),
                     child: Column(
@@ -106,7 +107,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                         Text(
                           "Ba'tafsil: ${widget.aboutMeal.description.uz}",
                           style: PloffTextStyle.w400.copyWith(
-                            fontSize: 15.0,
+                            fontSize: 15.0.sp,
                             color: PloffColors.black.withOpacity(.5),
                           ),
                         ),
@@ -116,14 +117,14 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                 ),
                 SliverToBoxAdapter(
                   child: Container(
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 10,
+                    margin: EdgeInsets.symmetric(
+                      vertical: 10.0.h,
                     ),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.0.r),
                       color: PloffColors.white,
                     ),
-                    padding: const EdgeInsets.all(5),
+                    padding: EdgeInsets.all(5.0.r),
                     child: BlocBuilder<ModifiersCubit, ModifiersState>(
                       builder: (context, state) {
                         if (state.status == FormzStatus.submissionInProgress) {
@@ -186,7 +187,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
             decoration: const BoxDecoration(
               color: PloffColors.white,
             ),
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10.0.r),
             child: Column(
               children: [
                 Row(
@@ -195,7 +196,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                     Container(
                       decoration: BoxDecoration(
                         color: PloffColors.white,
-                        borderRadius: BorderRadius.circular(6),
+                        borderRadius: BorderRadius.circular(6.0.r),
                         border: Border.all(
                           color: PloffColors.black.withOpacity(.1),
                         ),
@@ -214,7 +215,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                           Text(
                             "$count",
                             style: PloffTextStyle.w500.copyWith(
-                              fontSize: 15,
+                              fontSize: 15.0.sp,
                             ),
                           ),
                           IncDecButtons(
@@ -236,13 +237,13 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: PloffTextStyle.w600.copyWith(
-                          fontSize: 18,
+                          fontSize: 18.0.sp,
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: 15.0.h),
                 GlobalButton(
                   buttonText: "To Cart",
                   onTap: () async {

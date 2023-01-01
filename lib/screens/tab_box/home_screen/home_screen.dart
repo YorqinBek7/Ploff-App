@@ -2,6 +2,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
 import 'package:geocoding/geocoding.dart';
@@ -62,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Container(
                 color: PloffColors.white,
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: EdgeInsets.symmetric(vertical: 10.0.h),
                 child: Column(
                   children: [
                     GestureDetector(
@@ -76,11 +77,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Row(
                         children: [
                           SizedBox(
-                            width: 10,
+                            width: 10.0.w,
                           ),
                           SvgPicture.asset(Plofficons.location),
                           SizedBox(
-                            width: 5,
+                            width: 5.0.w,
                           ),
                           HiveService.instance.userLocations.isNotEmpty
                               ? BlocBuilder<CurrentLocationCubit,
@@ -89,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     return Text(
                                       state.locationName,
                                       style: PloffTextStyle.w400
-                                          .copyWith(fontSize: 15),
+                                          .copyWith(fontSize: 15.0.sp),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     );
@@ -98,20 +99,20 @@ class _HomeScreenState extends State<HomeScreen> {
                               : Text(
                                   tr("add_location"),
                                   style: PloffTextStyle.w400
-                                      .copyWith(fontSize: 15),
+                                      .copyWith(fontSize: 15.0.sp),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                           Image.asset(
                             Plofficons.arrowDown,
-                            width: 16,
-                            height: 16,
+                            width: 16.0.w,
+                            height: 16.0.h,
                           ),
                           Spacer()
                         ],
                       ),
                     ),
-                    SizedBox(height: 12),
+                    SizedBox(height: 12.h),
                     SearchField(
                         textEditingController: searchController,
                         onChanged: (value) async {
@@ -127,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             await getProdCateg.getProductAndCateg();
                           }
                         }),
-                    SizedBox(height: 5),
+                    SizedBox(height: 5.h),
                   ],
                 ),
               ),
@@ -172,12 +173,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             SliverToBoxAdapter(
-                              child: SizedBox(height: 15),
+                              child: SizedBox(height: 15.0.h),
                             ),
                             SliverToBoxAdapter(
                               child: Container(
-                                margin: EdgeInsets.only(bottom: 15),
-                                height: 170,
+                                margin: EdgeInsets.only(bottom: 15.0.h),
+                                height: 170.0.h,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: state.banners.length,
@@ -196,18 +197,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                         : getProdCateg.products2.length,
                                     (categoryIndex) {
                                       return Container(
-                                        margin: EdgeInsets.only(bottom: 12),
+                                        margin: EdgeInsets.only(bottom: 12.h),
                                         decoration: BoxDecoration(
                                           color: PloffColors.white,
                                           borderRadius:
-                                              BorderRadius.circular(10),
+                                              BorderRadius.circular(10.0.r),
                                         ),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
                                             Container(
-                                              margin: EdgeInsets.only(left: 16),
+                                              margin:
+                                                  EdgeInsets.only(left: 16.w),
                                               child: Text(
                                                 getProdCateg.products2.isEmpty
                                                     ? state
@@ -220,7 +222,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         .title1
                                                         .uz,
                                                 style: PloffTextStyle.w600
-                                                    .copyWith(fontSize: 22),
+                                                    .copyWith(
+                                                        fontSize: 22.0.sp),
                                               ),
                                             ),
                                             ...List.generate(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
@@ -16,15 +17,15 @@ class OrderDetailTexts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(vertical: 10.0.h),
       child: Row(
         children: [
           Icon(icon),
-          const SizedBox(width: 5),
+          SizedBox(width: 5.w),
           Text(
             title,
             style: PloffTextStyle.w400.copyWith(
-              fontSize: 15,
+              fontSize: 15.sp,
               color: PloffColors.C_858585,
             ),
           ),
@@ -32,7 +33,7 @@ class OrderDetailTexts extends StatelessWidget {
           Text(
             description,
             style: PloffTextStyle.w500.copyWith(
-              fontSize: 15,
+              fontSize: 15.0.sp,
             ),
           ),
         ],

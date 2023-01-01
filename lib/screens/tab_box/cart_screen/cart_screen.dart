@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
@@ -11,7 +11,6 @@ import 'package:ploff/cubits/count_meals/count_meals_state.dart';
 import 'package:ploff/cubits/empty_cart/empty_cart_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
-import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/check_out_screen.dart';
 import 'package:ploff/screens/tab_box/cart_screen/widgets/delete_dialog.dart';
 import 'package:ploff/screens/tab_box/cart_screen/widgets/carts_item.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
@@ -33,7 +32,7 @@ class CartScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               tr("cart"),
-              style: PloffTextStyle.w600.copyWith(fontSize: 20),
+              style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp),
             ),
             automaticallyImplyLeading: false,
             scrolledUnderElevation: 0.0,
@@ -44,7 +43,7 @@ class CartScreen extends StatelessWidget {
                 },
                 child: SvgPicture.asset(Plofficons.korzina),
               ),
-              const SizedBox(width: 20)
+              SizedBox(width: 20.w)
             ],
           ),
           body: BlocBuilder<EmptyCartCubit, EmptyCartState>(
@@ -55,10 +54,10 @@ class CartScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(Plofficons.emptyCart),
-                      const SizedBox(height: 5),
+                      SizedBox(height: 5.h),
                       Text(
                         tr('empty'),
-                        style: PloffTextStyle.w500.copyWith(fontSize: 16),
+                        style: PloffTextStyle.w500.copyWith(fontSize: 16.0.sp),
                       ),
                     ],
                   ),
@@ -73,9 +72,9 @@ class CartScreen extends StatelessWidget {
                             builder: (context, state) {
                               return CustomScrollView(
                                 slivers: [
-                                  const SliverToBoxAdapter(
+                                  SliverToBoxAdapter(
                                     child: SizedBox(
-                                      height: 15,
+                                      height: 15.0.h,
                                     ),
                                   ),
                                   ...List.generate(
@@ -86,17 +85,18 @@ class CartScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  const SliverToBoxAdapter(
+                                  SliverToBoxAdapter(
                                     child: SizedBox(
-                                      height: 15,
+                                      height: 15.0.h,
                                     ),
                                   ),
                                   SliverToBoxAdapter(
                                     child: Container(
-                                      padding: const EdgeInsets.all(10),
+                                      padding: EdgeInsets.all(10.0.r),
                                       decoration: BoxDecoration(
                                         color: PloffColors.white,
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius:
+                                            BorderRadius.circular(10.0.r),
                                       ),
                                       child: Column(
                                         crossAxisAlignment:
@@ -105,16 +105,16 @@ class CartScreen extends StatelessWidget {
                                           Text(
                                             "Add comment",
                                             style: PloffTextStyle.w600
-                                                .copyWith(fontSize: 15),
+                                                .copyWith(fontSize: 15.0.sp),
                                           ),
                                           Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                vertical: 10),
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10),
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 10.0.h),
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10.0.w),
                                             decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                                  BorderRadius.circular(10.0.r),
                                               color: PloffColors.C_F0F0F0,
                                             ),
                                             child: TextField(
@@ -124,7 +124,7 @@ class CartScreen extends StatelessWidget {
                                                     "Add comment to order",
                                                 hintStyle: PloffTextStyle.w400
                                                     .copyWith(
-                                                  fontSize: 15,
+                                                  fontSize: 15.0.sp,
                                                   color: PloffColors.C_858585,
                                                 ),
                                               ),
@@ -134,9 +134,9 @@ class CartScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  const SliverToBoxAdapter(
+                                  SliverToBoxAdapter(
                                     child: SizedBox(
-                                      height: 12,
+                                      height: 12.h,
                                     ),
                                   ),
                                 ],
@@ -148,7 +148,7 @@ class CartScreen extends StatelessWidget {
                     ),
                     Container(
                       decoration: const BoxDecoration(color: PloffColors.white),
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10.0.r),
                       child: Column(
                         children: [
                           Row(
@@ -156,8 +156,8 @@ class CartScreen extends StatelessWidget {
                             children: [
                               Text(
                                 "Order price",
-                                style:
-                                    PloffTextStyle.w400.copyWith(fontSize: 18),
+                                style: PloffTextStyle.w400
+                                    .copyWith(fontSize: 18.0.sp),
                               ),
                               BlocBuilder<BottomNavigationCubit, int>(
                                 builder: (context, state) {
@@ -170,7 +170,7 @@ class CartScreen extends StatelessWidget {
                                             .sum
                                             .toString()),
                                         style: PloffTextStyle.w400
-                                            .copyWith(fontSize: 18),
+                                            .copyWith(fontSize: 18.0.sp),
                                       );
                                     },
                                   );
@@ -178,8 +178,8 @@ class CartScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            height: 15,
+                          SizedBox(
+                            height: 15.h,
                           ),
                           GlobalButton(
                             buttonText:

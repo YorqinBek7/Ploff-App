@@ -1,11 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/cubits/current_loc/current_location_cubit.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
-import 'package:ploff/screens/tab_box/home_screen/sub_screens/get_location_screen/get_location_screen.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/constants/const.dart';
@@ -16,8 +15,8 @@ Future<dynamic> chooseLocation(BuildContext context) {
     context: context,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(10),
-        topRight: Radius.circular(10),
+        topLeft: Radius.circular(10.0.r),
+        topRight: Radius.circular(10.0.r),
       ),
     ),
     builder: (context) => StatefulBuilder(builder: (context, setState) {
@@ -27,12 +26,12 @@ Future<dynamic> chooseLocation(BuildContext context) {
           Center(
             child: Text(
               tr("my_locations"),
-              style: PloffTextStyle.w600.copyWith(fontSize: 20),
+              style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp),
             ),
           ),
           Expanded(
             child: ListView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               children: [
                 ...List.generate(
@@ -41,11 +40,11 @@ Future<dynamic> chooseLocation(BuildContext context) {
                     leading: SharedPreferencesService.instance.sharedPreferences
                                 .getInt("current_loc_index") ==
                             index
-                        ? Icon(
+                        ? const Icon(
                             Icons.radio_button_checked,
                             color: PloffColors.C_FFCC00,
                           )
-                        : Icon(Icons.radio_button_off_outlined),
+                        : const Icon(Icons.radio_button_off_outlined),
                     subtitle: Text(
                       HiveService.instance.userLocations.getAt(index)!.address,
                     ),
@@ -69,7 +68,7 @@ Future<dynamic> chooseLocation(BuildContext context) {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.all(16.0.r),
             child: GlobalButton(
               buttonText: tr("add_location"),
               onTap: () {

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/screens/tab_box/profile_screen/sub_screens/edit_profile_screen/widgets/edit_fields.dart';
@@ -37,15 +38,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       appBar: AppBar(
         title: Text(
           tr("edit_profile"),
-          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+          style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: EdgeInsets.symmetric(vertical: 10.0.h),
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(10.0.r),
               decoration: const BoxDecoration(
                 color: PloffColors.white,
               ),
@@ -68,7 +69,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) => Container(
-                          padding: const EdgeInsets.all(40),
+                          padding: EdgeInsets.all(40.0.r),
                           decoration: const BoxDecoration(color: Colors.white),
                           child: Column(
                             children: [
@@ -99,7 +100,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
             const Spacer(),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: 10.0.w),
               child: GlobalButton(
                 buttonText: tr("confirm"),
                 onTap: () {},

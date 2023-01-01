@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/check_item.dart';
@@ -19,7 +20,7 @@ class DetailOrderScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "${tr("orderNo")} No:1232131",
-          style: PloffTextStyle.w600.copyWith(fontSize: 20),
+          style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp),
         ),
       ),
       body: CustomScrollView(
@@ -27,10 +28,10 @@ class DetailOrderScreen extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 16),
-              padding: const EdgeInsets.all(16.0),
+              margin: EdgeInsets.symmetric(vertical: 16.0.h),
+              padding: EdgeInsets.all(16.0.r),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.0.r),
                 color: PloffColors.white,
               ),
               child: Column(
@@ -41,14 +42,14 @@ class DetailOrderScreen extends StatelessWidget {
                       Text(
                         "${tr("orderNo")} No:123321",
                         style: PloffTextStyle.w600.copyWith(
-                          fontSize: 17,
+                          fontSize: 17.0.sp,
                         ),
                       ),
                       ElevatedButton(
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(8.0.r),
                             ),
                           ),
                           shadowColor: MaterialStateProperty.all(
@@ -62,12 +63,12 @@ class DetailOrderScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.0.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: EdgeInsets.all(16.0.r),
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: PloffColors.C_FFCC00,
@@ -78,13 +79,13 @@ class DetailOrderScreen extends StatelessWidget {
                         child: Visibility(
                           visible: true,
                           child: Container(
-                            height: 2,
+                            height: 2.0.h,
                             color: PloffColors.C_FFCC00,
                           ),
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: EdgeInsets.all(16.0.r),
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: PloffColors.C_FFCC00,
@@ -95,13 +96,13 @@ class DetailOrderScreen extends StatelessWidget {
                         child: Visibility(
                           visible: false,
                           child: Container(
-                            height: 2,
+                            height: 2.0.h,
                             color: PloffColors.C_FFCC00,
                           ),
                         ),
                       ),
                       Container(
-                          padding: const EdgeInsets.all(16),
+                          padding: EdgeInsets.all(16.0.r),
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: PloffColors.C_F0F0F0,
@@ -111,13 +112,13 @@ class DetailOrderScreen extends StatelessWidget {
                         child: Visibility(
                           visible: false,
                           child: Container(
-                            height: 2,
+                            height: 2.0.h,
                             color: PloffColors.C_FFCC00,
                           ),
                         ),
                       ),
                       Container(
-                          padding: const EdgeInsets.all(16),
+                          padding: EdgeInsets.all(16.0.r),
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: PloffColors.C_F0F0F0,
@@ -159,9 +160,9 @@ class DetailOrderScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16.0.r),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.0.r),
                 color: PloffColors.white,
               ),
               child: Row(
@@ -172,20 +173,20 @@ class DetailOrderScreen extends StatelessWidget {
                       Text(
                         tr('courier'),
                         style: PloffTextStyle.w600.copyWith(
-                          fontSize: 17,
+                          fontSize: 17.0.sp,
                         ),
                       ),
                       Text(
                         "YorqinBek Yuldashev",
                         style: PloffTextStyle.w400.copyWith(
-                          fontSize: 17,
+                          fontSize: 17.0.sp,
                         ),
                       ),
                     ],
                   ),
                   const Spacer(),
                   Container(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16.0.r),
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: PloffColors.C_F0F0F0,
@@ -198,10 +199,10 @@ class DetailOrderScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 16),
-              padding: const EdgeInsets.all(16),
+              margin: EdgeInsets.symmetric(vertical: 16.0.h),
+              padding: EdgeInsets.all(16.0.r),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10.0.r),
                 color: PloffColors.white,
               ),
               child: Column(

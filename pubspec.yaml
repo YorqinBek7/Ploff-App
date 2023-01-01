@@ -37,6 +37,7 @@ dependencies:
   badges: ^2.0.3
   flutter_multi_formatter: ^2.2.1
   top_snackbar_flutter: ^3.0.0
+  flutter_screenutil: ^5.6.0
 
 dev_dependencies:
   flutter_test:

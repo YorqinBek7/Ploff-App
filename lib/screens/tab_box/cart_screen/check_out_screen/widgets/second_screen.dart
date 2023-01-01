@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ploff/screens/tab_box/cart_screen/check_out_screen/widgets/check_item.dart';
@@ -34,23 +35,23 @@ class _SecondPageState extends State<SecondPage> {
             slivers: [
               SliverToBoxAdapter(
                 child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 8),
-                  padding: const EdgeInsets.all(16),
+                  margin: EdgeInsets.symmetric(vertical: 8.0.h),
+                  padding: EdgeInsets.all(16.0.r),
                   decoration: BoxDecoration(
                     color: PloffColors.white,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8.0.r),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Ближайший филиал",
-                        style: PloffTextStyle.w500.copyWith(fontSize: 18),
+                        style: PloffTextStyle.w500.copyWith(fontSize: 18.0.sp),
                       ),
                       SizedBox(
-                        height: 156,
+                        height: 156.h,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(10.0.r),
                           child: Stack(
                             children: [
                               const GoogleMap(
@@ -113,10 +114,10 @@ class _SecondPageState extends State<SecondPage> {
               ),
               SliverToBoxAdapter(
                 child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 5),
-                  padding: const EdgeInsets.all(10),
+                  margin: EdgeInsets.symmetric(vertical: 5.0.h),
+                  padding: EdgeInsets.all(10.0.r),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.0.r),
                     color: PloffColors.white,
                   ),
                   child: Column(

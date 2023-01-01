@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/icons/icons.dart';
@@ -34,7 +35,7 @@ class ProfileOptionsItem extends StatelessWidget {
         leading: SvgPicture.asset(icon),
         title: Text(
           title,
-          style: PloffTextStyle.w500.copyWith(fontSize: 16),
+          style: PloffTextStyle.w500.copyWith(fontSize: 16.0.sp),
         ),
         trailing: SvgPicture.asset(Plofficons.arrow_right),
       ),

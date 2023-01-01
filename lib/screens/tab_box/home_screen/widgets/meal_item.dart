@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/utils/colors/colors.dart';
 import 'package:ploff/utils/helper/helper.dart';
@@ -22,7 +23,7 @@ class MealItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.0.r),
         onTap: onTap,
         child: Ink(
           color: PloffColors.white,
@@ -38,7 +39,7 @@ class MealItem extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const SizedBox(width: 16),
+                SizedBox(width: 16.0.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -48,11 +49,11 @@ class MealItem extends StatelessWidget {
                         product.title.uz,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: PloffTextStyle.w500.copyWith(fontSize: 15),
+                        style: PloffTextStyle.w500.copyWith(fontSize: 15.0.sp),
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
+                    SizedBox(
+                      height: 5.0.h,
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * .5,
@@ -65,20 +66,20 @@ class MealItem extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
+                    SizedBox(
+                      height: 5.0.h,
                     ),
                     Text(
                       Helper.formatSumm(product.outPrice.toString()),
-                      style: PloffTextStyle.w600.copyWith(fontSize: 16),
+                      style: PloffTextStyle.w600.copyWith(fontSize: 16.0.sp),
                     )
                   ],
                 ),
                 const Spacer(),
                 Image.asset(
                   Plofficons.meal,
-                  width: 130.0,
-                  height: 130.0,
+                  width: 130.0.w,
+                  height: 130.0.h,
                 )
               ],
             ),

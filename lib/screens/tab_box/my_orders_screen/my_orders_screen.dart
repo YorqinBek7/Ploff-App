@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/cubits/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:ploff/cubits/change_language/change_language_cubit.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
@@ -42,7 +43,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
             automaticallyImplyLeading: false,
             title: Text(
               tr("my_orders"),
-              style: PloffTextStyle.w600.copyWith(fontSize: 20),
+              style: PloffTextStyle.w600.copyWith(fontSize: 20.0.sp),
             ),
             bottom: CustomTabBar(
               firstTabText: tr("active_orders"),
@@ -58,8 +59,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(
-                        height: 6,
+                      SizedBox(
+                        height: 6.0.h,
                       ),
                       HiveService.instance.orderProductsBox.isNotEmpty
                           ? Expanded(
@@ -78,7 +79,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                               children: [
                                 Image.asset(Plofficons.emptyOrders),
                                 SizedBox(
-                                  height: 6,
+                                  height: 6.0.h,
                                 ),
                                 Text(
                                   tr("no_orders"),
@@ -91,15 +92,15 @@ class _MyOrdersScreenState extends State<MyOrdersScreen>
                 },
               ),
               Column(
-                children: const [
+                children: [
                   SizedBox(
-                    height: 6,
+                    height: 6.0.h,
                   ),
-                  HistoryOrderItem(),
-                  HistoryOrderItem(),
-                  HistoryOrderItem(),
+                  const HistoryOrderItem(),
+                  const HistoryOrderItem(),
+                  const HistoryOrderItem(),
                   SizedBox(
-                    height: 6,
+                    height: 6.0.h,
                   ),
                 ],
               )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ploff/utils/style/text_style.dart';
 
 class SelectOptions extends StatelessWidget {
@@ -31,12 +32,12 @@ class SelectOptions extends StatelessWidget {
       children: [
         Text(
           title,
-          style: PloffTextStyle.w600.copyWith(fontSize: 17),
+          style: PloffTextStyle.w600.copyWith(fontSize: 17.0.sp),
         ),
         RadioListTile(
           title: Text(
             firstSelect,
-            style: PloffTextStyle.w600.copyWith(fontSize: 15),
+            style: PloffTextStyle.w600.copyWith(fontSize: 15.0.sp),
           ),
           value: firstValue,
           groupValue: firstGroupValue,
@@ -46,7 +47,7 @@ class SelectOptions extends StatelessWidget {
         RadioListTile(
           title: Text(
             secondSelect,
-            style: PloffTextStyle.w600.copyWith(fontSize: 15),
+            style: PloffTextStyle.w600.copyWith(fontSize: 15.0.sp),
           ),
           value: secondValue,
           groupValue: secondGroupValue,
