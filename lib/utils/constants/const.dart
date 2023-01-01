@@ -16,5 +16,5 @@ class Constants {
   static const String licenseScreeen = "/license";
   static const String otpScreen = "/otp_screen";
   static const String editProfileScreen = "/edit_profile_screen";
-  static const String enterPhoneNumber = "/enter_phone_number";
+  static const String enterPhoneNumberScreen = "/enter_phone_number";
 }

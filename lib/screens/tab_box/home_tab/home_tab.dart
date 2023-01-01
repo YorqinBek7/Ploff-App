@@ -60,7 +60,8 @@ class _HomeTabState extends State<HomeTab> {
                               .getString("numberPhone") ==
                           "")) {
                 value = index;
-                await Navigator.pushNamed(context, Constants.enterPhoneNumber);
+                await Navigator.pushNamed(
+                    context, Constants.enterPhoneNumberScreen);
               }
               context
                   .read<BottomNavigationCubit>()

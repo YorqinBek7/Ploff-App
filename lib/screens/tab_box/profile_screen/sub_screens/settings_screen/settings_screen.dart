@@ -52,10 +52,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     },
                     trailing: IconButton(
                       onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context) => Container(),
-                        );
+                        languageBottomDialog(context);
                       },
                       icon: SvgPicture.asset(Plofficons.arrow_right),
                     ),

@@ -1,4 +1,5 @@
 import 'dart:io' show Platform;
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,10 +9,12 @@ import 'package:ploff/cubits/empty_cart/empty_cart_cubit.dart';
 import 'package:ploff/cubits/modifiers/modifiers_cubit.dart';
 import 'package:ploff/data/models/category_with_products/categ_products.dart';
 import 'package:ploff/data/service/hive_service/hive_service.dart';
+import 'package:ploff/data/service/storage_service/shared_preferences.dart';
 import 'package:ploff/screens/tab_box/widgets/global_button.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/appbar_bottom.dart';
 import 'package:ploff/screens/tab_box/home_screen/sub_screens/meal_detail_screen/widgets/inc_dec_buttons.dart';
 import 'package:ploff/utils/colors/colors.dart';
+import 'package:ploff/utils/constants/const.dart';
 import 'package:ploff/utils/helper/helper.dart';
 import 'package:ploff/utils/icons/icons.dart';
 import 'package:ploff/utils/style/text_style.dart';
@@ -26,7 +29,7 @@ class MealDetailScreen extends StatefulWidget {
 class _MealDetailScreenState extends State<MealDetailScreen> {
   int modifierindex = -1;
   int modifierPrice = 0;
-  int countPrice = 1;
+  int price = 0;
   int count = 0;
   @override
   Widget build(BuildContext context) {
@@ -204,7 +207,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                             onTap: () {
                               setState(() {
                                 if (count > 1) count--;
-                                countPrice = count * widget.aboutMeal.outPrice;
+                                price = count * widget.aboutMeal.outPrice;
                               });
                             },
                           ),
@@ -218,7 +221,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                             onTap: () {
                               setState(() {
                                 count++;
-                                countPrice = count * widget.aboutMeal.outPrice;
+                                price = count * widget.aboutMeal.outPrice;
                               });
                             },
                             imagePath: Plofficons.plus,
@@ -228,8 +231,7 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                     ),
                     Expanded(
                       child: Text(
-                        Helper.formatSumm(
-                            (modifierPrice + countPrice).toString()),
+                        Helper.formatSumm((modifierPrice + price).toString()),
                         textAlign: TextAlign.end,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -244,14 +246,27 @@ class _MealDetailScreenState extends State<MealDetailScreen> {
                 GlobalButton(
                   buttonText: "To Cart",
                   onTap: () async {
-                    Helper.showSuccesSnackBar("Product added to cart", context);
-                    await HiveService.instance
-                        .addProductToStorage(widget.aboutMeal);
-                    context
-                        .read<BottomNavigationCubit>()
-                        .changeBottomNavigationPages(1);
-                    context.read<EmptyCartCubit>().notEmpty();
-                    Navigator.pop(context);
+                    if (count == 0) {
+                      Helper.showFailedSnackBar(
+                          tr("didnt_enter_product"), context);
+                      return;
+                    }
+                    if (SharedPreferencesService.instance.sharedPreferences
+                            .getString("numberPhone") ==
+                        null) {
+                      Navigator.pushReplacementNamed(
+                          context, Constants.enterPhoneNumberScreen);
+                    } else {
+                      Helper.showSuccesSnackBar(
+                          "Product added to cart", context);
+                      await HiveService.instance
+                          .addProductToStorage(widget.aboutMeal);
+                      context
+                          .read<BottomNavigationCubit>()
+                          .changeBottomNavigationPages(1);
+                      context.read<EmptyCartCubit>().notEmpty();
+                      Navigator.pop(context);
+                    }
                   },
                 ),
               ],

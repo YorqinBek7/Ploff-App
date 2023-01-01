@@ -90,7 +90,7 @@ class Routers {
         return CupertinoPageRoute(
           builder: (context) => EditProfileScreen(),
         );
-      case Constants.enterPhoneNumber:
+      case Constants.enterPhoneNumberScreen:
         return CupertinoPageRoute(
           builder: (context) => EnterPhoneNumberPage(),
         );
